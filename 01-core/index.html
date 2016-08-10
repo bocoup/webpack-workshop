@@ -11,9 +11,38 @@
   <div id="hangman">
     <div id="wrap">
       <h1>Meme generator</h1>
-      <div id="canvas"></div>
+      <canvas id="canvas" width="600" height="500"></canvas>
+
+      <section>
+        <h2>Write a text:</h2>
+        <input type="text" name="subtitle" class="edit-subtitle">
+      </section>
+
+      <section>
+        <h2>Select image:</h2>
+        <ul>
+          <li>
+            <a href="#1" class="select-image">
+              <img src="assets/bunny-725x544.jpg" width="120" height="90">
+            </a>
+          </li>
+          <li>
+            <a href="#2" class="select-image">
+              <img src="assets/funny-monkey-725x544.jpg" width="120" height="90">
+            </a>
+          </li>
+          <li>
+            <a href="#3" class="select-image">
+              <img src="assets/guinea-pigs-725x544.jpg" width="120" height="90">
+            </a>
+          </li>
+        </ul>
+      </section>
     </div>
   </div>
-  <script src="dist/main.js"></script>
+  <!-- Replace these with a bundle file -->
+  <script src="vendor/fabric.js"></script>
+  <script src="vendor/jquery-3.1.0.js"></script>
+  <script src="src/main.js"></script>
 </body>
 </html>

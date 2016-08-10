@@ -2,5 +2,7 @@
   "name": "webpack-workshop",
   "description": "Learn Webpack from the basics to the advanced.",
   "private": true,
-  "devDependencies": {}
+  "devDependencies": {
+    "fabric": "^1.6.3"
+  }
 }
