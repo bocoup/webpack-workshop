@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bocoup - Webpack Workshop</title>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=OFL+Sorts+Mill+Goudy+TT" type="text/css">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="nav">
+      <ul>
+        <li><a href="#intro">Home</a></li>
+        <li><a href="#setup">Setup</a></li>
+        <li><a href="#exercises">Exercises</a></li>
+        <li><a href="#objectives">Learning Objectives</a></li>
+      </ul>
+    </div>
+    <div id="intro" class="section">
+      <div id="bob"></div>
+      <h1>Bocoup - Webpack Workshop</h1>
+      <h2>Concepts Covered</h2>
+      <ul>
+        <li>Basic Core Use with HTML, JS, and CSS</li>
+        <li>Handle Incompatible Dependencies</li>
+        <li>Debugging / Testing</li>
+        <li>Convenience Modules</li>
+        <li>Hot Module Replacement (HMR)</li>
+        <li>Code Splitting</li>
+      </ul>
+    </div>
+    <div id="setup" class="section">
+      <h2>Setup Instructions</h2>
+      <ol>
+        <li>Clone this <a href="#git-link">workshop's repo</a> or download the <a href="#zip-link">class folder</a> and place it on your Desktop. <br/>Unzip the file by double-clickling it.</li>
+        <li>Open your terminal and navigate to inside the class folder.<br/> If you are on a Mac, type <code> cd ~/Desktop/class-folder</code></li>
+        <li>In your terminal, type <code>npm install</code>.</li>
+        <li>In your terminal, type <code>npm install -g webpack</code>.</li>
+      </ol>
+    </div>
+    <div id="exercises" class="section">
+      <h2>Exercises</h2>
+      <ul>
+        <li>
+          <h3>00- Core</h3><a class="download" href="#core-link">Download</a>
+          <p>Learn how to use webpack from just concatting an app to using common loaders.</p>
+        </li>
+      </ul>
+    </div>
+    <div id="objectives" class="section">
+      <h2>Learning Objectives</h2>
+
+      <h3>Basic Core Use with HTML, JS, and CSS</h3>
+
+      <p>Learn how to use webpack from just concatting an app to using common loaders like babel, style, css, and file and plugins like extract-text and uglify. Webpack helps produce smaller scripts, reduce the number of files a browser fetches by inlining files, and organize those files for distribution. This section will take an application with no build process and implement one with webpack.</p>
+
+      <ul>
+      <li>What loaders do</li>
+      <li>Style, css, file, and babel loaders</li>
+      <li>What plugins do</li>
+      <li>Extract text and uglify plugins</li>
+      <li>Webpack watch, dev middleware and dev server</li>
+      </ul>
+
+      <h3>Handle Incompatible Dependencies</h3>
+
+      <p>This is a small module to instruct on what tools can be used to interop with third party modules that don't immediately work with webpack.</p>
+
+      <ul>
+      <li>Import, export, script loaders</li>
+      <li>Provide plugin</li>
+      <li>Working with bower</li>
+      </ul>
+
+      <h3>Debugging / Testing</h3>
+
+      <p>Any complex enough project needs a way to make sure changes don't create regressions and when they do how to best find them. Webpack and other package loaders help get an application running in a browser but can make debugging more opaque than an army of script tags. Source maps, coverage testing, eslint and test runner integration can help building an environment to test in getting the benefits of webpack while reducing its impact to debugging.</p>
+
+      <ul>
+      <li>Karma</li>
+      <li>eslint-loader</li>
+      <li>Source Maps</li>
+      <li>Coverage testing</li>
+      </ul>
+
+      <h3>Convenience Modules</h3>
+
+      <p>The webpack community has built a lot of packages that add a lot of great tools to make working with webpack even better. Let's visit some of them and see what they can do for us.</p>
+
+      <ul>
+        <li>Baggage-loader (reduce the developer overhead for common companion files)</li>
+        <li>
+          Webpack visualization plugin (Get a easy to parse pie graph of what contributes to your webpack'd script size)
+          <ul>
+            <li>HTML Plugin</li>
+            <li>Easy custom index.html setup</li>
+            <li>Bake content into html for static pages</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>Hot Module Replacement (HMR)</h3>
+
+      <p>Hot Module Replacement is one of webpack's more touted features. It can bring an almost magical element to development as your a complex app quickly updates from source changes. We'll dig into how to use it in simple and powerful cases through loaders, and how it use in custom implementations and its implications.</p>
+
+      <ul>
+        <li>Hot Module Replacement</li>
+        <li>Webpack-dev-server with HMR</li>
+        <li>Webpack-hot-middleware</li>
+        <li>Hot loading style</li>
+        <li>Module.hot.accept API</li>
+      </ul>
+
+      <h3>Code Splitting</h3>
+
+      <p>The fastest website is a small website. For larger projects you can still make a small website by splitting up the needed content at one time through Code Splitting. With Single Page Applications, multiple views of a website will navigate between each other through url routes, this can be a nice point to load any further needed scripts and content. Another way to break up a large app with Code Splitting is by deferring rendering of some complex content, like graphs or galleries, while simpler content can be rendered earlier, like the body text of an article.</p>
+
+      <ul>
+        <li>Require.ensure</li>
+        <li>Split large apps into smaller pieces</li>
+      </ul>
+    </div>
+  </body>
+</html>
