@@ -20,21 +20,22 @@ jQuery(function($) {
   canvas.add(subtitle);
   subtitle.centerH();
 
+  var imgInstance;
+
   $('.select-image').click(function(ev) {
     ev.preventDefault();
     var img = $('img', this)[0];
 
-    var imgInstance = new fabric.Image(img, {
+    canvas.remove(imgInstance);
+
+    imgInstance = new fabric.Image(img, {
       left: 100,
       top: 100,
       width: 400,
       height: 300
     });
-
     canvas.add(imgInstance);
   });
-
-
 
   $('.edit-subtitle').on('keyup', function(ev) {
     subtitle.setText(ev.target.value);

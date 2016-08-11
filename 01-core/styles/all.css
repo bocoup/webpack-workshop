@@ -9,3 +9,12 @@ body {
 #canvas {
   background-color: #fff;
 }
+
+.wrapper {
+  max-width: 720px;
+  margin: auto;
+}
+
+h1 {
+  line-height: 2em;
+}
