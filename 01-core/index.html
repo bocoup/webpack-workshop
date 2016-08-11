@@ -12,17 +12,16 @@
     <div class="wrapper">
       <h1>Meme generator</h1>
       <div class="canvas-wrapper">
-        <canvas id="canvas" width="600" height="500"></canvas>
+        <canvas id="canvas" width="720" height="600"></canvas>
       </div>
 
       <section>
-        <h2>Write a text:</h2>
-        <input type="text" name="subtitle" class="edit-subtitle">
+        <input type="text" name="subtitle" class="edit-subtitle" autocomplete="off" placeholder="Hello, world!" value="">
       </section>
 
       <section>
         <h2>Select image:</h2>
-        <ul>
+        <ul class="image-selector">
           <li>
             <a href="#1" class="select-image">
               <img src="assets/bunny-725x544.jpg" width="120" height="90">
@@ -45,6 +44,7 @@
   <!-- Replace these with a bundle file -->
   <script src="vendor/fabric.js"></script>
   <script src="vendor/jquery-3.1.0.js"></script>
+  <script src="src/canvas.js"></script>
   <script src="src/main.js"></script>
 </body>
 </html>
