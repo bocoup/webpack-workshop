@@ -1,3 +1,5 @@
+var fabric = require('../vendor/fabric');
+
 var canvas = new fabric.Canvas('canvas');
 
 var subtitle = new fabric.Text('Hello, world', {

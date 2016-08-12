@@ -3,6 +3,6 @@
   "description": "Learn Webpack from the basics to the advanced.",
   "private": true,
   "devDependencies": {
-    "fabric": "^1.6.3"
+    "jquery": "^3.1.0"
   }
 }

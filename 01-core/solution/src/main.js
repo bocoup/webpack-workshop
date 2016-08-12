@@ -1,3 +1,8 @@
+var canvas = require('./canvas');
+var jQuery = require('jquery');
+
+var { addBorder, addSubtitle, replaceImage, updateSubtitle } = canvas;
+
 jQuery(function($) {
   addBorder();
   addSubtitle();
