@@ -1,0 +1,1 @@
+- Students will be able to describe what webpack does at a high level
