@@ -29,7 +29,7 @@ module.exports = {
   context: __dirname,
   entry: './src/main.js',
   output: {
-    path: 'dist',
+    path: 'dist/',
     filename: 'main.js',
   },
   module: {
@@ -55,7 +55,7 @@ module.exports = {
   context: __dirname,
   entry: './src/main.js',
   output: {
-    path: 'dist',
+    path: 'dist/',
     filename: 'main.js',
   },
   module: {

@@ -24,9 +24,12 @@ Loading your style files means you can load it as a module.
 Let's say you have an app strucutre like this:
 
 - `src/`
-  - `main.js`
-  - `styles/`
-    - `index.css`
+  - `index.js`
+- `styles/`
+  - `index.css`
+- `webpack.config.js`
+
+---
 
 # Importing your style with JS, part 2
 
@@ -37,7 +40,7 @@ module.exports = {
   context: __dirname,
   entry: './src/main.js',
   output: {
-    path: 'dist',
+    path: 'dist/',
     filename: 'main.js',
   },
   module: {
@@ -51,13 +54,28 @@ module.exports = {
 };
 ```
 
+---
+
 # Importing your style with JS, part 3
 
-Now you can import that module with your `src/main.js`:
+Now you can import that module with your `src/index.js`:
 
 ```js
-require('style!css!./styles/index.css');
+require('./styles/index.css');
 ```
 
-Done! This will add an style tag to your document.
+Done! This will add an style tag to your document, directly from your JS bundle.
 
+---
+
+# Modular css
+
+Using the `css-loader` in this way, you can also count on webpack to bundle your css dependencies through `@import` lines.
+
+```css
+@import 'reset.css';
+```
+
+The line above will be parsed as a require and will load the contents `reset.css` in the css file with the import command.
+
+---
