@@ -26,9 +26,6 @@ module.exports = {
       {
         test: /\.woff$/,
         loader: 'file',
-        output: {
-          publicPath: 'dist/',
-        },
       },
     ],
   },
