@@ -20,4 +20,43 @@ As an example, you could use one loader to take the doc blocks from a file and a
 
 ---
 
-#
+# Common loaders
+
+- `babel-loader`
+- `style-loader`
+- `css-loader`
+- `file-loader`
+
+---
+
+# Webpack configuration with loaders
+
+```js
+module.exports = {
+  context: __dirname,
+  entry: './src/main.js',
+  output: {
+    path: 'dist',
+    filename: 'main.js',
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel',
+      },
+      {
+        test: /\.css$/,
+        loader: 'style!css',
+      },
+      {
+        test: /\.png$/,
+        loader: 'file',
+      },
+    ],
+  },
+};
+```
+
+---
