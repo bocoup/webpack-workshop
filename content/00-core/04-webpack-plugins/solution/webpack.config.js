@@ -1,4 +1,5 @@
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var webpack = require('webpack');
 
 module.exports = {
   context: __dirname,
@@ -31,5 +32,11 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin("bundle.css"),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+      },
+      sourceMap: true,
+    }),
   ],
 };

@@ -7,8 +7,6 @@ jQuery(function($) {
   addBorder();
   addSubtitle();
 
-  var imgInstance;
-
   $('.select-image').click(function(ev) {
     ev.preventDefault();
     var img = $('img', this)[0];
