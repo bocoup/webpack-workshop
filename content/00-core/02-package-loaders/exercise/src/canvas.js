@@ -1,10 +1,6 @@
 var canvas = document.querySelector('#canvas');
 var context = canvas.getContext('2d');
 
-var backgroundStyles = {
-  fillStyle: '#000',
-}
-
 var subtitleStyles = {
   font: '24px "Helvetica Neue", helvetica',
   fillStyle: '#fff',
