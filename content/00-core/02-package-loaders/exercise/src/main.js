@@ -1,17 +1,17 @@
 jQuery(function($) {
-  addBorder();
-  addSubtitle();
+  var currentImage = $('.image-selector img')[0];
+  var currentText = "Hello, world!";
 
-  var imgInstance;
+  drawMeme(currentImage, currentText);
 
   $('.select-image').click(function(ev) {
     ev.preventDefault();
-    var img = $('img', this)[0];
-
-    replaceImage(img);
+    currentImage = $('img', this)[0];
+    drawMeme(currentImage, currentText);
   });
 
-  $('.edit-subtitle').on('keyup', function(ev) {
-    updateSubtitle(ev.target.value);
+  $('.edit-subtitle').on('keyup input', function(ev) {
+    currentText = ev.target.value;
+    drawMeme(currentImage, currentText);
   });
 });
