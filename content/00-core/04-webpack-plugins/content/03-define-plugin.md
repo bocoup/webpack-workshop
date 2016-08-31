@@ -51,7 +51,7 @@ if ("production" !== "production") {
 if ("production" !== "production") {
 ```
 
-From this expression, __DefinePlugin__ will take this a step further since this boolean test can be statically evaluated:
+From this expression, webpack will take this a step further since this boolean test can be statically evaluated:
 
 ```js
 if (false) {
@@ -67,7 +67,7 @@ This example produces a block that will never run:
 if (false) {
 ```
 
-You can then check the UglifyJS will remove that for you, including any other piece of dead code.
+You can then run with UglifyJS, which will remove that block in its output. Including any other piece of dead code, webpack through uglify removes any code that could never run.
 
 ---
 
@@ -75,9 +75,13 @@ You can then check the UglifyJS will remove that for you, including any other pi
 
 Now we need to make something clear about what __DefinePlugin__ does because how it works is often misunderstood. This change to libraries built into an output script is affecting the runtime, when the output script is run in a browser.
 
-We talked about `babel-loader` earlier. `babel-loader` is also affected by the value of `process.env.NODE_ENV` but when Babel runs is important. `babel-loader` is run by webpack to affect the output assets.
+We talked about `babel-loader` earlier. `babel-loader` is affected by the value of `process.env.NODE_ENV`. `babel`'s compiler uses `NODE_ENV` to determine some defaults when it runs. As it runs when when webpack runs it'll be effected by `NODE_ENV` in node's `process.env`. `process.env.NODE_ENV` in your scripts being affected by webpack and babel however will not be evaluated. Later when that code is evaluated in a browser, `NODE_ENV` won't be set, it'll be empty because babel and webpack don't persist that in their output.
 
-DefinePlugin also affects the output asset but _its effect isn't realized until the script runs in a browser_.
+This is where DefinePlugin comes in. It lets you persist a `NODE_ENV` value. As it persists that where it directly appears in your code provides some other benefits.
+
+---
+
+# Plugins vs Loaders (pt II)
 
 - Babel uses `NODE_ENV` to default settings for building a production script.
 - React uses `NODE_ENV` to consider assertions inside an already built script.
@@ -85,5 +89,3 @@ DefinePlugin also affects the output asset but _its effect isn't realized until 
 - DefinePlugin does set the environment where React runs in as it helps execute your built app.
 
 If you want production settings for both Babel and a library like React you need to both set `NODE_ENV` in the process's environment __and__ in the built script through DefinePlugin.
-
----

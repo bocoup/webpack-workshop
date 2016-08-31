@@ -1,5 +1,7 @@
+class: center, middle
+
 # webpack workshop
-## module bundler
+## How does one pack the web?
 
 ???
 

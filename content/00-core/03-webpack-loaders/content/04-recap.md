@@ -8,5 +8,3 @@ Webpack only understands and parses javascript. Through loaders it can take any 
 - `file-loader` emits an asset and returns code that at runtime refers to where the emitted asset is.
 
 This way webpack uses javascript as an intermediate format for any content.
-
----

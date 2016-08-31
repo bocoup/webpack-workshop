@@ -64,7 +64,7 @@ Now you can import that module with your `src/index.js`:
 require('./styles/index.css');
 ```
 
-Done! This will add an style tag to your document, directly from your JS bundle.
+Done! This will add a style tag to your document, directly from your JS bundle.
 
 ---
 
@@ -78,4 +78,12 @@ Using the `css-loader` in this way, you can also count on webpack to bundle your
 
 The line above will be parsed as a require and will load the contents `reset.css` in the css file with the import command.
 
----
+## required urls
+
+`css-loader` also lets `url('some-file.png')` be required. This lets webpack handle images and other files to include them in the build and transform them like any other web app detail built with webpack.
+
+```css
+.image {
+  background: url('image.png');
+}
+```

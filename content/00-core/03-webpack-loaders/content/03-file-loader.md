@@ -32,13 +32,7 @@ Now we need to add the loader to `webpack.config.js`.
 
 ```js
 module.exports = {
-  context: __dirname,
-  entry: './src/main.js',
-  output: {
-    path: 'dist/',
-    filename: 'main.js',
-    publicPath: 'dist/',
-  },
+  // entry, context, output same as before
   module: {
     loaders: [
       {
@@ -53,8 +47,6 @@ module.exports = {
   },
 };
 ```
-
-You should notice we also set a value for `output.publicPath`. Parsed files will need it to link to the generated file assets, even if it's the same as `output.path`.
 
 ---
 
@@ -72,5 +64,3 @@ This will directly affect your parsed code when you load that font.
 ```
 
 Do you see that part with a relative reference to `'../fonts/Droid-Serif.woff'`? That will be loaded by webpack as a reference. Webpack will pack your font to the `dist/` folder and load it when necessary.
-
----

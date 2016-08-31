@@ -1,8 +1,14 @@
+class: center, middle, dark
+
+# Loaders
+
+---
+
 # The loaders transform your world
 
-As a general package loader, you can use different loaders with webpack.
+As a general module bundler, you can use different **loaders** with webpack.
 
-Loaders can modify individual modules, providing the magic for developing with webpack, beyond the built-in configuration options.
+Loaders modify individual modules, providing the magic for developing with webpack, beyond the built-in configuration options.
 
 ???
 
@@ -22,10 +28,10 @@ As an example, you could use one loader to take the doc blocks from a file and a
 
 # Common loaders
 
-- `babel-loader`
-- `style-loader`
-- `css-loader`
-- `file-loader`
+### `babel-loader`
+### `style-loader`
+### `css-loader`
+### `file-loader`
 
 ---
 
@@ -58,5 +64,3 @@ module.exports = {
   },
 };
 ```
-
----

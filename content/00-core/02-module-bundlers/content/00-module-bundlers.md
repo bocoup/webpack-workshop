@@ -1,8 +1,8 @@
-# Package Loaders
+# Module bundlers
 
-Webpack is a module bundler, also a package loader.
+**Webpack** is a module bundler.
 
-It produces and load packages.
+It bundles modules together into a smaller set of files.
 
 ???
 
@@ -12,34 +12,65 @@ for them without writing something custom every time.
 
 ---
 
-# Package loaders
+# Known bundlers
 
-Some well-known package loaders:
+Some well-known module bundlers:
 
 - RequireJS
 - Browserify
+--
+
+- **Webpack**
 
 ---
 
 # RequireJS
 
-...
+- One of the earliest well known bundlers
+- Asynchronously loads individual modules
+- Supports AMD, Asynchronous Module Definition
+- Componion **r.js** performs the bundling
+
+--
+
+```javascript
+define(['./dependency.js'], function(dependency) {
+  return {
+    render: function() {
+      dependency.render();
+    },
+  };
+});
+```
 
 ???
 
 One of the most well known package loaders is Requirejs using the AMD format,
 Asynchronous Module Definition, to describe modules and their dependencies.
 Requirejs could use this format to load modules in the browser with some
-configuration. Its companion r.js could "optimize" an application into a smaller
+configuration. Its companion r.js "optimizes" an application into a smaller
 set of files. Loading the many hundreds of files that make up web applications
 in the client now is convenient for a developer to debug locally but from a
 production server for a user can take a lot of time.
+
+TK notes just drop off
 
 ---
 
 # Browserify
 
-...
+- Supports CommonJS, the format Node modules are written in
+
+--
+
+```javascript
+var dependency = require('./dependency');
+module.exports = {
+  render: function() {
+    dependency.render();
+  },
+};
+```
 
 ???
 
@@ -53,7 +84,10 @@ its output.
 
 # Why webpack?
 
-...
+- Supports AMD
+- Supports CommonJS
+- Smaller output bundles
+- Smart code splitting
 
 ???
 
@@ -69,10 +103,12 @@ behaviour that may be deemed too much work or prone to developer error.
 
 # Handling all static contents
 
-- Scripts
+- Source Code
 - HTML
-- CSS
-- other assets
+- Style (CSS, Less, Stylus)
+- Images (png, jpg, gif)
+- Other assets (mp3, mpeg)
+- Data (json)
 
 ???
 
@@ -85,20 +121,14 @@ application.
 
 ---
 
-# You can do more with webpack
+# More than a source code bundler
 
-- Use loaders
-  - styles / css, static files, babel...
-- Use plugins
-  - extract text
-  - uglify / minify
-- Webpack watch, dev middleware and dev server
+- Load styles and files and other code languages
+- Use plugins to optimize run time like extracting css into its own file and minifying source with uglify
+- Fast rebuilds with webpack watch mode, dev middleware and dev server
 
 ???
 
 Webpack is way beyong just webpacking scripts, you can connect it to different
 loaders, attach plugins including some to uglify your code, open a watch monitor
 for auto updates, connect to dev middleware and set a dev server.
-
-
----

@@ -37,14 +37,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var webpack = require('webpack');
 
 module.exports = {
-  context: __dirname,
-  entry: {
-    main: './src/index.js'
-  },
-  output: {
-    path: 'dist/',
-    filename: '[name].js',
-  },
+  // ...
   module: {
     loaders: [
       /* ... */
@@ -78,6 +71,8 @@ If you don't need source maps or just want faster webpack runs, you can turn it 
     }),
   ],
 ```
+
+---
 
 # Removing warnings
 

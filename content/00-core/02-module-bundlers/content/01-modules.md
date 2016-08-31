@@ -8,7 +8,7 @@
 
 <sub>\*</sub> Webpack 1.x with a common configuration setup easily handles es2015 modules.
 
-Webpack 2, in beta, uses a newer esprima parser to understand es2015 modules and provides tree shaking like Rollup.
+Webpack 2, in beta, adds to its parser so it can understand es2015 modules and provides tree shaking like Rollup
 
 ???
 
@@ -61,11 +61,24 @@ Let's discuss these terms
 
 ## The Webpack units
 
-A module is a unit in webpack output. Sometimes they are just input files, but webpack and its plugins can produce modules without an existing file or a module may be produced to create references.
+A **module** is a unit in webpack output. Sometimes they are just input files, other times webpack and plugins create them to store information to supply a related webpack or plugin's feature.
 
 ???
 
 A module is a unit in webpack output. Its too simple to say they are input files for webpack. Webpack and plugins can produce modules without an existing file or a module may be produced to refer some other thing. Commonly though they will be files included in the webpack compilation process.
+
+--
+
+```javascript
+module.exports = function Application(options) {
+  this.options = options;
+  this.render();
+};
+
+Application.prototype.render = function() {
+  document.querySelector(this.options.root).innerHtml = '<h1>Hello World</h1>';
+};
+```
 
 ---
 
@@ -73,7 +86,7 @@ A module is a unit in webpack output. Its too simple to say they are input files
 
 ## Where webpack starts
 
-Entry is the first module to be executed in a script using webpack. This entry can then call on other dependencies (modules).
+An **entry** is the first module to be executed in a script using webpack. This entry can then call on other modules through dependencies.
 
 Entries are special modules where no other module may depend on them. Every other module may refer to any other module, even circularly.
 
@@ -81,15 +94,25 @@ Entries are special modules where no other module may depend on them. Every othe
 
 _Lets start_ with where webpack starts, the entry. The entry is a module that is the first to be executed in a script. Right after webpack's output does a little startup it'll call the entry source code. This entry can then call on other dependencies. Entries are special in that no other module may depend on them. Every other module may refer to any module even circularly. (Webpack won't stop you from creating stack overflows so be careful.)
 
+--
+
+```javascript
+var Application = require('./application');
+
+new Application({
+  root: '#root',
+});
+```
+
 ---
 
 # Chunks
 
 ## Where modules are collected to.
 
-They are just chunks of modules. Most often they will represent the output with the filename template.
+They are just chunks of modules. Most often they will represent the output with the filename template. An `output.filename` webpack options set to something like `'[name].js'` would end up like `'main.js'`.
 
-Chunks are also used by plugins on transform operations in many ways to help with optiming an app.
+Chunks are also used by plugins on transform operations in many ways to help with optimizing an app.
 
 ???
 
@@ -101,11 +124,14 @@ Webpack collects modules into chunks. They are really just that chunks of module
 
 ## Any output file
 
-Modules and Chunks can have assets. A run of the compiler can have assets.
+Everything webpack outputs is an asset.
 
-A Chunk maybe be also transformed into assets.
+- Chunks are output as assets
+- Non-inline source maps are output as assets
+- Depend on images and other files through file-loader are output as assets
+- ExtractText outputs css files as assets
 
-You can also include non-source files, like images, as assets to your webpack process. They will be transformed to assets.
+In this way assets are any binary or utf8 content that will be output at some file name.
 
 ???
 
@@ -119,5 +145,3 @@ In webpack, an asset is any output file. Modules can have assets. Chunks can hav
 - Entry is the starting module
 - Chunks are the collected modules
 - Asset is any output file
-
----
