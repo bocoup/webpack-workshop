@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+module.exports = `<!DOCTYPE html>
 <html>
   <head>
     <title>My Awesome Presentation</title>
@@ -8,38 +8,20 @@
       @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
       @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
 
-      body { font-family: 'Droid Serif'; }
+      body { font-family: \'Droid Serif\'; }
       h1, h2, h3 {
-        font-family: 'Yanone Kaffeesatz';
+        font-family: \'Yanone Kaffeesatz\';
         font-weight: normal;
       }
-      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code, .remark-inline-code { font-family: \'Ubuntu Mono\'; }
     </style>
   </head>
   <body>
     <textarea id="source" style="visibility: hidden">
 
-class: center, middle
-
-# My Awesome Presentation
-
-???
-
-Notes for the _first_ slide!
-
----
-
-# Agenda
-
-1. Introduction
-2. Deep-dive
-3. ...
-
-[NOTE]: Note that you need remark.js alongside this html file, but no internet connection.
----
-
-# Introduction
+    ${require('./slide-source')}
 
     </textarea>
   </body>
 </html>
+`;
