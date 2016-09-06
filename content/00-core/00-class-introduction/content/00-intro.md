@@ -5,12 +5,13 @@ class: center, middle
 
 ???
 
-Welcome to the class!
+Welcome to the class!  Today we are going to learn about webpack, but before we get started, let's handle some introductions share some important information.
 
 ---
 
 ## Info:
 
+* Code of Conduct: [https://bocoup.com/guidelines/code-of-conduct](https://bocoup.com/guidelines/code-of-conduct)
 * Class website: [link](link)
 * Email us any time:
   - [z@bocoup.com](mailto:z@bocoup.com)
@@ -18,14 +19,17 @@ Welcome to the class!
 
 ???
 
-Introduce selves
+Code of Conduct - The quick version: Bocoup is dedicated to providing a harassment-free experience for everyone, regardless of gender, sexual orientation, disability, age, physical appearance, body size, race, or religion. We do not tolerate harassment of event participants in any form. Sexual language and imagery is not appropriate for any venue, including talks. Participants violating these rules may be sanctioned or expelled from the event without a refund at the discretion of the event organizers.
+
+Introduce yourselves, Answer some of the questions from the next slide about yourself.
 
 ---
 
 # Introductions
 
 - Your Name
-- Where do you work / What do you do there?
+- What do you do?
+- Who do you do it for?
 - Experience with webpack or related tools?
 - What do you hope to get out of the class?
 
