@@ -1,3 +1,10 @@
+# Part 2. Module bundlers
+
+???
+Intro slide for next section
+
+---
+
 # Module bundlers
 
 **Webpack** is a module bundler.
@@ -34,6 +41,7 @@ Some well-known module bundlers:
 --
 
 ```javascript
+// This is an AMD format module
 define(['./dependency.js'], function(dependency) {
   return {
     render: function() {

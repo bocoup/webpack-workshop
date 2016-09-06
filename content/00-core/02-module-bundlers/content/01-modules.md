@@ -116,7 +116,7 @@ Chunks are also used by plugins on transform operations in many ways to help wit
 
 ???
 
-Webpack collects modules into chunks. They are really just that chunks of modules. Most often they be output with the filename template but plugins can transform them to be output in other ways to help with optimizing an app for users.
+Webpack collects modules into chunks. They are really just that -- chunks of modules. Most often they use a filename template but plugins can transform them to be output in other ways to help with optimizing an app for users.
 
 ---
 

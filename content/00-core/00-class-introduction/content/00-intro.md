@@ -3,6 +3,8 @@ class: center, middle
 # webpack workshop
 ## How does one pack the web?
 
+Illustration Thoughts: Someone trying to pack a www "globe" into a small box for shipping with some pictures, books and stuff
+
 ???
 
 Welcome to the class!  Today we are going to learn about webpack, but before we get started, let's handle some introductions share some important information.
@@ -36,3 +38,37 @@ Introduce yourselves, Answer some of the questions from the next slide about you
 ???
 
 We only have a few hours with you today but let's go around very briefly and you can introduce yourself and share the sort of work you do.
+
+---
+
+# Upcoming sections
+
+--
+
+### 1. Introduction to webpack and module bundlers
+
+???
+
+The first section of our couse will describe what webpack is, what problems it solves, and teach some very simple basics of setting up webpack with an example application.
+
+--
+### 2. Webpack Loaders
+
+???
+
+The second section we will study in more detail one of webpacks extremely powerful features, loaders.  We will be building upon our previous example application to include some loaders.
+
+--
+
+### 3. Webpack Plugins
+
+???
+
+After we've practiced with loaders, we will dive into another of webpack's features, Plugins.  We will learn how to enhance our projects with some example plugins.
+
+---
+
+# Questions before we get started?
+
+???
+After we handle questions, advance to the next slide and perhaps offer a quick bathroom break
