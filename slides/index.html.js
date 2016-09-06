@@ -17,11 +17,7 @@ module.exports = `<!DOCTYPE html>
     </style>
   </head>
   <body>
-    <textarea id="source" style="visibility: hidden">
-
-    ${require('./slide-source')}
-
-    </textarea>
+    <textarea id="source" style="visibility: hidden">${require('./slide-source')}</textarea>
   </body>
 </html>
 `;
