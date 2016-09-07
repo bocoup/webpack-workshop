@@ -65,7 +65,7 @@ You might not realize it, but we already taught you `M.E.CH.A`...
 
 ???
 
-Let's discuss these terms in more detal
+Let's discuss these terms in more detail
 
 ---
 

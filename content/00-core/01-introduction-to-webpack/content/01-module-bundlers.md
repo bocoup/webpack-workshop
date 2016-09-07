@@ -55,7 +55,7 @@ Some well-known module bundlers:
 - One of the earliest well known bundlers
 - Asynchronously loads individual modules
 - Supports AMD, Asynchronous Module Definition
-- Componion **r.js** performs the bundling
+- Companion **r.js** performs the bundling
 
 ```javascript
 // This is an AMD format module
@@ -70,7 +70,7 @@ define(['./dependency.js'], function(dependency) {
 
 ???
 
-One of the most well known package loaders is Requirejs using the AMD format,
+One of the most well known module bundlers is Requirejs using the AMD format,
 __Asynchronous__ Module Definition, to describe modules and their dependencies.
 Requirejs could use this format to load modules in the browser with some
 configuration. Its companion r.js "optimizes" an application into a smaller
