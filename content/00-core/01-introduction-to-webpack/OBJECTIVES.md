@@ -1,3 +1,3 @@
 - Students will be able to describe what webpack does at a high level
-- Students will be able to explain what package loaders are
+- Students will be able to explain what module bundlers are
 - Students will be know how a webpack configuration is structured
