@@ -1,4 +1,13 @@
-# The present future
+class: center, middle
+# M.E.CH.A.
+
+???
+
+Section 2
+
+---
+
+# Webpack
 
 ## Modules
 
@@ -20,7 +29,7 @@ describe modules.
 
 # The most basic webpack configuration
 
-## `webpack.config.js`
+### `webpack.config.js`
 
 ```js
 module.exports = {
@@ -32,6 +41,7 @@ module.exports = {
   },
 };
 ```
+Note that the webpack config is used by NodeJS so we use the CommonJS `module.exports`
 
 1. root __context__, where _modules_ are relative to
 2. __entry__ point relative to the _context_
@@ -40,20 +50,22 @@ module.exports = {
 
 ???
 
-The most basic webpack configuration needs to define the root context of a package, where the modules it'll contain are relative to, an entry point, relative to the context, an output path, to place all output assets, and a filename template for all output chunks.
+The most basic webpack configuration needs to define the root context of a package, where the modules it'll contain are relative to, an entry point, an output path to place all output assets, and a filename template for all output chunks.
+
+You might not realize it, but we already taught you `M.E.CH.A`...
 
 ---
 
 # The webpack M.E.CH.A.
 
-- Modules
-- Entry
-- CHunks
-- Assets
+- __M__odules
+- __E__ntry
+- __CH__unks
+- __A__ssets
 
 ???
 
-Let's discuss these terms
+Let's discuss these terms in more detail
 
 ---
 
@@ -80,6 +92,9 @@ Application.prototype.render = function() {
 };
 ```
 
+???
+Note that we are exporting our application via the CommonJS `module.exports`
+
 ---
 
 # Entry
@@ -104,6 +119,9 @@ new Application({
 });
 ```
 
+???
+And again, note that to take our exported function from the previous slide, we use `require`
+
 ---
 
 # Chunks
@@ -116,7 +134,7 @@ Chunks are also used by plugins on transform operations in many ways to help wit
 
 ???
 
-Webpack collects modules into chunks. They are really just that chunks of modules. Most often they be output with the filename template but plugins can transform them to be output in other ways to help with optimizing an app for users.
+Webpack collects modules into chunks. They are really just that -- chunks of modules. Most often they use a filename template but plugins can transform them to be output in other ways to help with optimizing an app for users.
 
 ---
 

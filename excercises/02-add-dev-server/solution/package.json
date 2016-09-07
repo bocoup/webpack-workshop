@@ -1,0 +1,14 @@
+{
+  "name": "01-my-first-app",
+  "description": "My First Webpack App",
+  "private": true,
+  "devDependencies": {
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.15.1"
+  },
+  "scripts": {
+    "build": "webpack",
+    "dev-server": "webpack-dev-server",
+    "start": "webpack-dev-server"
+  }
+}
