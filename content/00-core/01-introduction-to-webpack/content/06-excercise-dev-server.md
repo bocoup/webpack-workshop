@@ -8,4 +8,4 @@ Section 6
 ---
 # Excercise 02 - Add dev server
 
-* Install the `webpack-dev-server`
+* Use the `webpack-dev-server` in our first app.
