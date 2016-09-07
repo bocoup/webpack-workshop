@@ -1,51 +1,48 @@
 # What is `babel-loader`?
 
-`babel-loader` follows a common pattern for loaders. It takes an input source and passes it through through an external library (Babel) and then returns the output for another loader or just webpack.
+Babel is a Transpiler.
+???
 
-Commonly used with `babel-preset-es2015`, Babel is commonly used to transpile __ES2015+__ syntax, including the ES Modules, to transform the input source to a compatible __ES5__ + CommonJS modules syntax output.
-
-Webpack can then pack this loaded output parsing for dependencies.
+`babel-loader` follows a common pattern for loaders. It takes an input source and passes it through through an external library (Babel) and then returns the output.
 
 --
 
 ```javascript
 import dependency from './dependency';
 
-export default {
-  render: function() {
-    dependency.render();
-  },
-};
+const render = () => dependency.render();
+
+export default { render };
 ```
+
+???
+
+Commonly used with `babel-preset-es2015`, Babel can convert __ES2015+__ syntax, including the ES Modules syntax `import` and `export`, to a compatible __ES5__ + CommonJS modules syntax output.
+
+Webpack can then parse this translated output for dependencies.
+
 
 ---
 
-# Using Babel with Webpack, part 1
-
-Webpack uses loaders as common npm packages. [`babel-loader`](https://github.com/babel/babel-loader) is not an exception.
-
-It needs to be installed with `babel-core` and we can go ahead and include the ES2015 preset with it:
+# Using Babel with Webpack
 
 ```shell
 npm install babel-loader babel-core babel-preset-es2015 --save-dev
 ```
 
+???
+
+Webpack uses loaders as common npm packages. [`babel-loader`](https://github.com/babel/babel-loader) is not an exception.
+
+It needs to be installed with `babel-core` and we will include the ES2015 preset as well:
+
 Since `babel-loader` passes its input to babel, `babel-loader` lets you determine the version of babel and its plugins to be used.
 
----
-
-# Using Babel with Webpack, part 2
-
-Now that we have the Babel loader installed, we can just declare it in the projects `webpack.config.js` file:
+--
 
 ```js
 module.exports = {
-  context: __dirname,
-  entry: './src/main.js',
-  output: {
-    path: 'dist/',
-    filename: 'main.js',
-  },
+  // other configuration here
   module: {
     loaders: [
       {
@@ -55,32 +52,16 @@ module.exports = {
       },
     ],
   },
-};
-```
-
----
-
-# Using Babel with Webpack, part 3
-
-We also need to include the ES2015 preset:
-
-```js
-module.exports = {
-  // ...
   babel: {
-    presets: ['es2015'],
-  },
-  module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel',
-      },
-    ],
+    presents: [ 'es2015' ],
   },
 };
 ```
+
+???
+Now that we have the babel loader, and the relevant packages installed, we can just declare it in the projects `webpack.config.js` file,
+
+We also need to include the ES2015 preset in the webpack options
 
 The next time we run Webpack, it will load the input source transpiling it with Babel using the ES2015 plugin set!
 
@@ -117,7 +98,7 @@ module.exports = {
 
 ???
 
-There are two common ways loaders consume options. As a key on the webpack options object and as a query parameters in the require request. Its up to each loader how to consume options from these two providers. Often the webpack options key provides defaults and the query params provider per require overrides. Query parameters specified in webpack options can be added to in specific requires.
+There are two common ways to set the options for loaders. Most loaders look for a key on the webpack options object as well as query parameters in the "require request". It is up to each loader how to consume options from these two providers. You will usually define the default options on the webpack condig, and only use the query parameters for overrides.
 
 ---
 
@@ -145,6 +126,10 @@ There are two common ways loaders consume options. As a key on the webpack optio
       },
     ],
 ```
+
+???
+
+You can also use a URL query parameter style syntax
 
 ---
 
