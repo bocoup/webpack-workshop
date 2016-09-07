@@ -1,21 +1,20 @@
-var canvas = require('./canvas');
-var jQuery = require('../vendor/jquery-3.1.0');
+import jQuery from '../vendor/jquery-3.1.0';
 
-var drawMeme = canvas.drawMeme;
+import {drawMeme} from './canvas';
 
-jQuery(function($) {
-  var currentImage = $('.image-selector img')[0];
-  var currentText = "Hello, world!";
+jQuery($ => {
+  let currentImage = $('.image-selector img')[0];
+  let currentText = "Hello, world!";
 
-  canvas.drawMeme(currentImage, currentText);
+  drawMeme(currentImage, currentText);
 
-  $('.select-image').click(function(ev) {
+  $('.select-image').click(ev => {
     ev.preventDefault();
-    currentImage = $('img', this)[0];
+    currentImage = $('img', ev.currentTarget)[0];
     drawMeme(currentImage, currentText);
   });
 
-  $('.edit-subtitle').on('keyup input', function(ev) {
+  $('.edit-subtitle').on('keyup input', ev => {
     currentText = ev.target.value;
     drawMeme(currentImage, currentText);
   });

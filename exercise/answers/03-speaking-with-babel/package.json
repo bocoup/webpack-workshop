@@ -3,11 +3,14 @@
   "description": "My First Webpack App",
   "private": true,
   "devDependencies": {
+    "babel-core": "^6.14.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.14.0",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.15.1"
   },
   "scripts": {
-    "build": "webpack && cp index.html img styles dist",
+    "build": "webpack && cp -R index.html img styles dist",
     "dev-server": "webpack-dev-server",
     "start": "webpack-dev-server"
   }
