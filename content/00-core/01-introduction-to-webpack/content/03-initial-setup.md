@@ -24,26 +24,28 @@ Webpack installation is done through npm, install the `webpack` package.
 
 # Using webpack
 
-```shell
-export PATH=node_modules/.bin:$PATH
-webpack
-```
-
-### or package.json - `npm run build`
-
+### package.json - `npm run build` - Recommended
 ```json
 "scripts": {
   "build": "webpack"
 }
 ```
 
+### or as a shell command
+```shell
+export PATH=node_modules/.bin:$PATH
+webpack
+```
+
 ### or combined with grunt, gulp, or broccoli
+(if you already use these tools)
 
 ???
 
-When working on node projects, it often helps to add the `node_modules/.bin` to your shells `PATH`.
+You should define a script in your `package.json` that creates an `npm run` command, this is the best way
+to run npm packages installed in a projects `node_modules`.
 
-You can also define a script in your `package.json` that creates an `npm run` command.
+When working on node projects, it often helps to add the `node_modules/.bin` to your shells `PATH` anyway, which would let you run `webpack` from the shell directly.
 
 Webpack can be used as its own tool creating a standalone build process for simple projects and for complex projects can be integrated into tools like grunt, gulp, and broccoli.
 
