@@ -1,10 +1,3 @@
-# Part 2. Module bundlers
-
-???
-Intro slide for next section
-
----
-
 # Module bundlers
 
 **Webpack** is a module bundler.

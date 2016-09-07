@@ -5,6 +5,6 @@ module.exports = {
   ],
   output: {
     path: 'dist',
-    filename: 'main.js',
+    filename: '[name].js',
   },
 };
