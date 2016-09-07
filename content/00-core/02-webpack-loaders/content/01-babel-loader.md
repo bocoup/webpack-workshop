@@ -98,7 +98,7 @@ module.exports = {
 
 ???
 
-There are two common ways to set the options for loaders. Most loaders look for a key on the webpack options object as well as query parameters in the "require request". It is up to each loader how to consume options from these two providers. You will usually define the default options on the webpack condig, and only use the query parameters for overrides.
+There are two common ways to set the options for loaders. Most loaders look for a key on the webpack options object as well as query parameters in the "require request". It is up to each loader how to consume options from these two providers. You will usually define the default options on the webpack config, and only use the query parameters for overrides.
 
 ---
 
