@@ -1,6 +1,13 @@
 class: center, middle, dark
 
-# Loaders
+# Part 2. Loaders
+
+Illustration??
+
+???
+In the second part we are going to talk about loaders.
+
+(This section will take about 30 minutes)
 
 ---
 
@@ -12,17 +19,27 @@ Loaders modify individual modules, providing the magic for developing with webpa
 
 ???
 
-A lot of the magic for developing with webpack comes through loaders. Outside of webpack's built in configuration options, loaders and plugins have a large impact on what can be done with webpack. Plugins are well plugins. The surface area of what a plugin can do in webpack is almost anything. In fact most webpack built in features are themselves plugins, including understanding CommonJS and AMD module details. While plugins modify the whole compilation process in webpack, loaders have a smaller focus. Modifying individual modules.
+A lot of the magic for developing with webpack comes from loaders. Outside of webpack's built in configuration options, loaders have a large impact on what can be done with webpack. Loaders have a very small focus, modifying individual modules.
 
 ---
 
 # Single Responsibility Loaders
 
-You may have one function that has a single responsiblity. A class. A file.
-
-The ideal for loaders works the same. In the same way you can pair two functions to build more complex behaviour by the second function acting on the output of the first, loaders too are built to work this way.
+Loaders should do one thing, and do it well.
 
 As an example, you could use one loader to take the doc blocks from a file and another to apply syntax highlight.
+
+```js
+const highlightedHtml = require('syntax!doc-blocks!./source.js');
+```
+
+???
+You may have heard this about, well, everything in programming.  Single responsibility principles.
+
+The ideal for loaders works the same. Just like you could pair two functions to build more complex behaviour in an application, you can easily combine multiple loaders in a chain.
+
+Each loader to maniuplate the asset in some way, parse CSV, inline data-uri, etc are just some of the possibilities.
+
 
 ---
 
@@ -33,34 +50,39 @@ As an example, you could use one loader to take the doc blocks from a file and a
 ### `css-loader`
 ### `file-loader`
 
+???
+
+In this session we are going to focus on 4 very common loaders and how to configure them.  Our goal is to take some of the assets we have in our meme generator and bundle them in with our `dist/` folder.
+
 ---
 
-# Webpack configuration with loaders
+# Example loader configuration
 
 ```js
 module.exports = {
-  context: __dirname,
-  entry: './src/main.js',
-  output: {
-    path: 'dist',
-    filename: 'main.js',
-  },
+  // standard configuration stuff,
   module: {
     loaders: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'babel',
+        loader: 'babel-loader',
       },
       {
         test: /\.css$/,
-        loader: 'style!css',
+        loader: 'style-loader!css-loader',
       },
       {
         test: /\.png$/,
-        loader: 'file',
+        loader: 'file-loader',
       },
     ],
   },
 };
 ```
+
+???
+
+Note that we define `module.loaders` as an array in our webpack config.  Each loader has a test, and an optional exclude to match against filenames, and a "loader" path.
+
+Let's talk a little about what each one of these loaders does.

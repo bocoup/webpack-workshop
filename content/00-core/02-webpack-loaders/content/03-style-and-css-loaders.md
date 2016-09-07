@@ -1,11 +1,18 @@
 # `style-loader` and `css-loader`
 
-The style and css loaders are two iconic loaders demoing loaders working on each other's output.
+- `css-loader` handles `@import` and `url()`
+- `style-loader` adds `<style>` tags to the DOM at runtime
 
-- `css-loader` takes css as input and parses it for @import lines to let webpack track other css modules and urls as dependencies.
-- `style-loader` takes the return from `css-loader` and create a module to add tags for the base css and its dependencies.
+???
 
-They should be both added as npm packages too:
+The style and css loaders a perfect example of letting one loader consume another loaders output.
+
+`css-loader` creates a js script that evaluates the css, translates @import and urls to requires, and returns an object that has a `toString` method, allowing `style-loader` to parse the return from `css-loader` and create a module that adds a `<style>` tag to the DOM.
+
+The result in the end, is that `require('style.css')` will allow our css tobecome a part of webpacks output chunks, and be stored in our `dist/` folder.
+
+---
+# Installing style and css loader.
 
 ```shell
 npm install style-loader css-loader --save-dev
@@ -13,15 +20,11 @@ npm install style-loader css-loader --save-dev
 
 ???
 
-`css-loader` returns a js script that evaluates into an object that can be transformed by a call to its toString into a string containing css
+These loaders are also predictably named on npm, and we save them to our dev dependencies.
 
 ---
 
-# Importing your style with JS, part 1
-
-Loading your style files means you can load it as a module.
-
-Let's say you have an app strucutre like this:
+# Importing your style with JS
 
 - `src/`
   - `index.js`
@@ -29,40 +32,45 @@ Let's say you have an app strucutre like this:
   - `index.css`
 - `webpack.config.js`
 
+???
+
+Loading your style files means you can load it as a module.
+
+Let's say you have an app strucutre like this:
+
 ---
 
-# Importing your style with JS, part 2
+# Importing your style with JS
 
-...and your `webpack.config.js` is set to use the `style-loader`:
-
+### webpack.config.js
 ```js
 module.exports = {
-  context: __dirname,
-  entry: './src/main.js',
-  output: {
-    path: 'dist/',
-    filename: 'main.js',
-  },
+  // ...
   module: {
     loaders: [
       {
         test: /\.css$/,
-        loader: 'style!css',
+        loader: 'style-loader!css-loader',
       },
     ],
   },
 };
 ```
 
----
+???
 
-# Importing your style with JS, part 3
+...and your `webpack.config.js` is set to use the `style-loader`:
 
-Now you can import that module with your `src/index.js`:
 
+--
+
+### src/index.js
 ```js
-require('./styles/index.css');
+require('../styles/index.css');
 ```
+
+???
+Now you can import that module with your `src/index.js`:
 
 Done! This will add a style tag to your document, directly from your JS bundle.
 
@@ -70,20 +78,26 @@ Done! This will add a style tag to your document, directly from your JS bundle.
 
 # Modular css
 
-Using the `css-loader` in this way, you can also count on webpack to bundle your css dependencies through `@import` lines.
-
 ```css
 @import 'reset.css';
 ```
 
-The line above will be parsed as a require and will load the contents `reset.css` in the css file with the import command.
+???
+
+Using the `css-loader` in this way, you can also count on webpack to bundle your css dependencies through `@import` lines.
+
+This line will be handled like a require and will inject the contents of `require('reset.css')` in the eventual output chunks.
+
+--
 
 ## required urls
-
-`css-loader` also lets `url('some-file.png')` be required. This lets webpack handle images and other files to include them in the build and transform them like any other web app detail built with webpack.
 
 ```css
 .image {
   background: url('image.png');
 }
 ```
+
+???
+
+`css-loader` also lets `url('image.png')` be required. This lets webpack handle images and other files to include them in the build and transform them like any other module built with webpack.

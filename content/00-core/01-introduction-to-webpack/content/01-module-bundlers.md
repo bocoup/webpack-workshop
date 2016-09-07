@@ -44,9 +44,19 @@ Some well-known module bundlers:
 
 - RequireJS
 - Browserify
+
+???
+
+In the "Module Bundler" category, we have RequireJS and Browserify, and...
+
 --
 
 - **Webpack**
+
+???
+
+Webpack...
+
 
 ---
 
@@ -70,13 +80,15 @@ define(['./dependency.js'], function(dependency) {
 
 ???
 
-One of the most well known module bundlers is Requirejs using the AMD format,
+One of the most well known module bundlers is Requirejs. It uses the AMD format,
 __Asynchronous__ Module Definition, to describe modules and their dependencies.
-Requirejs could use this format to load modules in the browser with some
+Requirejs uses this format to load modules in the browser with some
 configuration. Its companion r.js "optimizes" an application into a smaller
-set of files. Loading the many hundreds of files that make up web applications
-in the client now is convenient for a developer to debug locally as multiple files,
- but from a production server it can be bundled into a single file.
+set of files.
+
+The many hundreds of files that make up web applications in the client now
+is convenient for a developer to debug locally as multiple files,
+but from a production server it can be bundled into a single file.
 
 ---
 
@@ -159,4 +171,5 @@ and provide auto updates, connect to dev mode middleware and create a dev server
 
 ???
 
-
+And here is just a short list of some of the assets we've personally used with
+webpack.
