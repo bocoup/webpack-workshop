@@ -47,14 +47,12 @@ define(['./dependency.js'], function(dependency) {
 ???
 
 One of the most well known package loaders is Requirejs using the AMD format,
-Asynchronous Module Definition, to describe modules and their dependencies.
+__Asynchronous__ Module Definition, to describe modules and their dependencies.
 Requirejs could use this format to load modules in the browser with some
 configuration. Its companion r.js "optimizes" an application into a smaller
 set of files. Loading the many hundreds of files that make up web applications
 in the client now is convenient for a developer to debug locally but from a
 production server for a user can take a lot of time.
-
-TK notes just drop off
 
 ---
 

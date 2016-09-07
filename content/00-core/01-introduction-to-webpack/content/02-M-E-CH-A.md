@@ -32,6 +32,7 @@ module.exports = {
   },
 };
 ```
+Note that the webpack config is used by NodeJS so we use the CommonJS `module.exports`
 
 1. root __context__, where _modules_ are relative to
 2. __entry__ point relative to the _context_
