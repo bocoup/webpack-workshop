@@ -12,8 +12,9 @@ Plugins let webpack understand how modules relate to each other beyond them depe
 
 We're giong to look three well-used plugins.
 
-- DefinePlugin
 - ExtractTextWebpackPlugin
+- HtmlWebpackPlugin
+- DefinePlugin
 - UgilfyJsPlugin.
 
 ???
