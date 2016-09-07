@@ -50,7 +50,8 @@ webpack-dev-server --port 3000 --host 0.0.0.0
 ```
 
 ### -or- in your `webpack.config.js`
-```
+
+```js
 module.exports = {
   devServer: {
     host: '0.0.0.0',
@@ -58,6 +59,8 @@ module.exports = {
   },
   // ... the rest of the normal configuration stuff
 };
+```
 
 ???
+
 Webpack dev server has quite a few options that are documented on the website, but the most common and important ones will be `host` and `port`.  Here is an example of how you can configure dev-server to listen on a different host and port.
