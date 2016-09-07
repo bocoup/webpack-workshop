@@ -46,10 +46,10 @@ The most basic webpack configuration needs to define the root context of a packa
 
 # The webpack M.E.CH.A.
 
-- Modules
-- Entry
-- CHunks
-- Assets
+- __M__odules
+- __E__ntry
+- __CH__unks
+- __A__ssets
 
 ???
 
@@ -80,6 +80,9 @@ Application.prototype.render = function() {
 };
 ```
 
+???
+Note that we are exporting our application via the CommonJS `module.exports`
+
 ---
 
 # Entry
@@ -103,6 +106,9 @@ new Application({
   root: '#root',
 });
 ```
+
+???
+And again, note that to take our exported function from the previous slide, we use `require`
 
 ---
 
