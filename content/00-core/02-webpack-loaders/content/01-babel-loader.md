@@ -53,7 +53,7 @@ module.exports = {
     ],
   },
   babel: {
-    presents: [ 'es2015' ],
+    presets: [ 'es2015' ],
   },
 };
 ```
