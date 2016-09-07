@@ -1,4 +1,13 @@
-# The present future
+class: center, middle
+# M.E.CH.A.
+
+???
+
+Section 2
+
+---
+
+# Webpack
 
 ## Modules
 
@@ -20,7 +29,7 @@ describe modules.
 
 # The most basic webpack configuration
 
-## `webpack.config.js`
+### `webpack.config.js`
 
 ```js
 module.exports = {
@@ -41,7 +50,9 @@ Note that the webpack config is used by NodeJS so we use the CommonJS `module.ex
 
 ???
 
-The most basic webpack configuration needs to define the root context of a package, where the modules it'll contain are relative to, an entry point, relative to the context, an output path, to place all output assets, and a filename template for all output chunks.
+The most basic webpack configuration needs to define the root context of a package, where the modules it'll contain are relative to, an entry point, an output path to place all output assets, and a filename template for all output chunks.
+
+You might not realize it, but we already taught you `M.E.CH.A`...
 
 ---
 
@@ -54,7 +65,7 @@ The most basic webpack configuration needs to define the root context of a packa
 
 ???
 
-Let's discuss these terms
+Let's discuss these terms in more detal
 
 ---
 

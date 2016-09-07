@@ -1,3 +1,12 @@
+class: center, middle
+# Initial Setup
+
+???
+
+Section 3
+
+---
+
 # Installing webpack
 
 * Install node & npm
