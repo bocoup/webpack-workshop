@@ -7,7 +7,7 @@
     "webpack-dev-server": "^1.15.1"
   },
   "scripts": {
-    "build": "webpack && cp index.html img styles dist",
+    "build": "webpack && cp -R index.html img styles dist",
     "dev-server": "webpack-dev-server",
     "start": "webpack-dev-server"
   }
