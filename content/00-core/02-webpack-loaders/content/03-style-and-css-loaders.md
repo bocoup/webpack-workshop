@@ -74,6 +74,10 @@ Now you can import that module with your `src/main.js`:
 
 Done! This will add a style tag to your document, directly from your JS bundle.
 
+TK Have the require match the exerciese styles/all.css instead of styles/index.css
+
+TK Use ES Module syntax
+
 ---
 
 # Modular css
@@ -101,3 +105,5 @@ This line will be handled like a require and will inject the contents of `requir
 ???
 
 `css-loader` also lets `url('image.png')` be required. This lets webpack handle images and other files to include them in the build and transform them like any other module built with webpack.
+
+TK Slide after digging into what css-loader output can look like

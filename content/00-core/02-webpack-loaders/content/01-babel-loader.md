@@ -65,6 +65,10 @@ We also need to include the ES2015 preset in the webpack options
 
 The next time we run Webpack, it will load the input source transpiling it with Babel using the ES2015 plugin set!
 
+TK exclude vendor too to help the class
+
+TK loader: 'babel' -> loader: 'babel-loader'
+
 ---
 
 # Loader options

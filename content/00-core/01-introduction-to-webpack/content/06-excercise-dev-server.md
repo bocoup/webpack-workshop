@@ -10,4 +10,8 @@ Section 6
 
 * Install the `webpack-dev-server` package in our first app.
 * setup script in package.json
-* Run a dev server, make a small change in the javascript and watch it rebuild!
+* Run a dev server, change the default text in the javascript and watch it rebuild!
+
+???
+
+TK Slide after with what you should have done
