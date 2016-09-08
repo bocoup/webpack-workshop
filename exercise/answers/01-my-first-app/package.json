@@ -6,6 +6,6 @@
     "webpack": "^1.13.2"
   },
   "scripts": {
-    "build": "webpack && cp -R index.html img styles dist"
+    "build": "webpack"
   }
 }
