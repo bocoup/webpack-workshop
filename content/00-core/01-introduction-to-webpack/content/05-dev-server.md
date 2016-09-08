@@ -11,7 +11,7 @@ Section 5
 
 * Will watch input files for changes
 * Will cause a rebuild to happen when changes happen
-* Handles hosting the "web application" for us.
+* Handles serving the "web application" for us
 
 ???
 

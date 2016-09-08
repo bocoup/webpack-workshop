@@ -14,7 +14,7 @@ npm install file-loader --save-dev
 
 # Referencing files, part 1
 
-On the previous app strucutre we used, we might want to add a custom webfont. It would look like this:
+On the previous app structure we used, we might want to add a custom webfont. It would look like this:
 
 - `src/`
   - `main.js`
