@@ -17,7 +17,7 @@ Section 2
 
 <sub>\*</sub> Webpack 1.x with a common configuration setup easily handles es2015 modules.
 
-Webpack 2, in beta, adds to its parser so it can understand es2015 modules and provides tree shaking like Rollup
+Webpack 2, in beta, adds to its parser so it can understand es2015 modules and provides "tree shaking" like Rollup
 
 ???
 
@@ -107,7 +107,7 @@ Entries are special modules where no other module may depend on them. Every othe
 
 ???
 
-_Lets start_ with where webpack starts, the entry. The entry is a module that is the first to be executed in a script. Right after webpack's output does a little startup it'll call the entry source code. This entry can then call on other dependencies. Entries are special in that no other module may depend on them. Every other module may refer to any module even circularly. (Webpack won't stop you from creating stack overflows so be careful.)
+_Lets start_ with where webpack starts, the entry. The entry is a module that is the first to be executed in a script. Right after webpack's output does a little startup it'll call the entry source code. This entry can then call on other dependencies. Entries are special in that no other module may depend on them. Every other module may refer to any module, even circularly. (Webpack won't stop you from creating stack overflows so be careful.)
 
 --
 
@@ -146,7 +146,7 @@ Everything webpack outputs is an asset.
 
 - Chunks are output as assets
 - Non-inline source maps are output as assets
-- Depend on images and other files through file-loader are output as assets
+- Images and other files required through file-loader are output as assets
 - ExtractText outputs css files as assets
 
 In this way assets are any binary or utf8 content that will be output at some file name.
@@ -162,4 +162,4 @@ In webpack, an asset is any output file. Modules can have assets. Chunks can hav
 - Modules are units
 - Entry is the starting module
 - Chunks are the collected modules
-- Asset is any output file
+- Asset are any output files

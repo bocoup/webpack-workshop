@@ -31,7 +31,7 @@ module.exports = {
 * Install webpack in the excercise folder
 * Convert `main.js` and `canvas.js` to use CommonJS module syntax (`require` and `module.exports`)
 * Create a basic webpack config to bundle our demo application to a `dist/main.js`.
-* Alter the `index.html` to point at `dist/main.js` as it's only `<script>` tag
+* Alter the `index.html` to point at `dist/main.js` as its only `<script>` tag
 
 ### If you need a simple webserver, use `serve` from npm:
 
