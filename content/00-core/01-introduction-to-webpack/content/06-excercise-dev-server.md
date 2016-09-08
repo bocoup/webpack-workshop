@@ -1,12 +1,12 @@
 class: center, middle
-# Excercise!
+# Exercise!
 
 ???
 
 Section 6
 
 ---
-# Excercise 02 - Add dev server
+# Exercise 02 - Add dev server
 
 * Install the `webpack-dev-server` package in our first app.
 * setup script in package.json

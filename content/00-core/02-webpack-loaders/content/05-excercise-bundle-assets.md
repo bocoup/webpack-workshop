@@ -1,2 +1,2 @@
 class: center, middle
-# Excercise 04 - Bundle Assets
+# Exercise 04 - Bundle Assets
