@@ -1,2 +1,2 @@
 class: center, middle
-# Excercise 06 - Uglify
+# Exercise 06 - Uglify

@@ -19,7 +19,7 @@ Loaders modify individual modules, providing the magic for developing with webpa
 
 ???
 
-A lot of the magic for developing with webpack comes from loaders. Outside of webpack's built in configuration options, loaders have a large impact on what can be done with webpack. Loaders have a very small focus, modifying individual modules.
+A lot of the magic for developing with webpack comes from loaders. Outside of webpack's built-in configuration options, loaders have a large impact on what can be done with webpack. Loaders have a very small focus, modifying individual modules.
 
 ---
 
@@ -27,18 +27,18 @@ A lot of the magic for developing with webpack comes from loaders. Outside of we
 
 Loaders should do one thing, and do it well.
 
-As an example, you could use one loader to take the doc blocks from a file and another to apply syntax highlight.
+As an example, you could use one loader to take the doc blocks from a file, and another to apply syntax highlighting.
 
 ```js
 const highlightedHtml = require('syntax!doc-blocks!./source.js');
 ```
 
 ???
-You may have heard this about, well, everything in programming.  Single responsibility principles.
+You may have heard this about, well, everything in programming. Single responsibility principles.
 
 The ideal for loaders works the same. Just like you could pair two functions to build more complex behaviour in an application, you can easily combine multiple loaders in a chain.
 
-Each loader to maniuplate the asset in some way, parse CSV, inline data-uri, etc are just some of the possibilities.
+Each loader to manipulate the asset in some way, parse CSV, inline data-uri, etc are just some of the possibilities.
 
 
 ---
@@ -52,7 +52,7 @@ Each loader to maniuplate the asset in some way, parse CSV, inline data-uri, etc
 
 ???
 
-In this session we are going to focus on 4 very common loaders and how to configure them.  Our goal is to take some of the assets we have in our meme generator and bundle them in with our `dist/` folder.
+In this session we are going to focus on 4 very common loaders and how to configure them. Our goal is to take some of the assets we have in our meme generator and bundle them in with our `dist/` folder.
 
 ---
 
@@ -83,6 +83,6 @@ module.exports = {
 
 ???
 
-Note that we define `module.loaders` as an array in our webpack config.  Each loader has a test, and an optional exclude to match against filenames, and a "loader" path.
+Note that we define `module.loaders` as an array in our webpack config. Each loader has a test, an optional exclude (or include) to match against filenames, and a "loader" path.
 
 Let's talk a little about what each one of these loaders does.

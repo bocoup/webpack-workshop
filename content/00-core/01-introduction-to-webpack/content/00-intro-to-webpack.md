@@ -5,9 +5,9 @@ class: center, middle
 ### A short history of module bundlers
 ### M.E.CH.A.
 ### Installing webpack with basic configurations
-### Excercise: My Frist App
+### Exercise: My First App
 ### Development Server
-### Excercise: Dev Server
+### Exercise: Dev Server
 
 ???
 In the first section we will cover a short history of module bundlers,

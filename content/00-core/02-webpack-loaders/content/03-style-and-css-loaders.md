@@ -9,7 +9,7 @@ The style and css loaders a perfect example of letting one loader consume anothe
 
 `css-loader` creates a js script that evaluates the css, translates @import and urls to requires, and returns an object that has a `toString` method, allowing `style-loader` to parse the return from `css-loader` and create a module that adds a `<style>` tag to the DOM.
 
-The result in the end, is that `require('style.css')` will allow our css tobecome a part of webpacks output chunks, and be stored in our `dist/` folder.
+The result in the end, is that `require('style.css')` will allow our css to become a part of webpack's output chunks, and be stored in our `dist/` folder.
 
 ---
 # Installing style and css loader.
@@ -36,7 +36,7 @@ These loaders are also predictably named on npm, and we save them to our dev dep
 
 Loading your style files means you can load it as a module.
 
-Let's say you have an app strucutre like this:
+Let's say you have an app structure like this:
 
 ---
 
@@ -70,7 +70,7 @@ require('../styles/index.css');
 ```
 
 ???
-Now you can import that module with your `src/index.js`:
+Now you can import that module with your `src/main.js`:
 
 Done! This will add a style tag to your document, directly from your JS bundle.
 

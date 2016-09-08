@@ -1,5 +1,5 @@
 class: center, middle
-# Excercise Time!
+# Exercise Time!
 
 ???
 
@@ -7,7 +7,7 @@ Section 4
 
 ---
 
-# Pre-Excercise Recap
+# Pre-Exercise Recap
 * We will use CommonJS `module.exports` and `require` to import and export.
 * Install Webpack - `npm install --save-dev webpack`
 * Basic Webpack configuration
@@ -25,13 +25,13 @@ module.exports = {
 
 ---
 
-# Excercise 01 - My First App
+# Exercise 01 - My First App
 
 ### Goals:
-* Install webpack in the excercise folder
+* Install webpack in the exercise folder
 * Convert `main.js` and `canvas.js` to use CommonJS module syntax (`require` and `module.exports`)
 * Create a basic webpack config to bundle our demo application to a `dist/main.js`.
-* Alter the `index.html` to point at `dist/main.js` as it's only `<script>` tag
+* Alter the `index.html` to point at `dist/main.js` as its only `<script>` tag
 
 ### If you need a simple webserver, use `serve` from npm:
 
@@ -41,4 +41,4 @@ npm install -g serve
 
 ???
 
-We expect this excercise to take around 5 to 10 minutes
+We expect this exercise to take around 5 to 10 minutes

@@ -1,8 +1,8 @@
 # The Define Plugin
 
-Our last plugin to cover isn't an optimization plugin normally but can have a similar affect thanks to how a lot of modern libraries are written.
+Our last plugin to cover isn't an optimization plugin normally, but can have a similar affect thanks to how a lot of modern libraries are written.
 
-The __DefinePlugin__ lets you make static definitions that when webpack's parser finds them, it replaces them with a desired value.
+The __DefinePlugin__ lets you provide static values that webpack's parser can use to replace specific identifiers within your code.
 
 A growing number of libraries have debug assertions behind simple tests, often looking like:
 
@@ -31,7 +31,7 @@ A common DefinePlugin use for this looks like:
   ],
 ```
 
-One common library that benefits from this setting is React. React's assertion wrapped by the above test are transfromed from:
+One common library that benefits from this setting is React. React's assertions wrapped by the above test are transformed from:
 
 ```js
 if (process.env.NODE_ENV !== "production") {
@@ -67,17 +67,17 @@ This example produces a block that will never run:
 if (false) {
 ```
 
-You can then run with UglifyJS, which will remove that block in its output. Including any other piece of dead code, webpack through uglify removes any code that could never run.
+You can then run with UglifyJS, which will remove that block in its output. Including any other piece of dead code, webpack (through uglify) removes any code that could never run.
 
 ---
 
-# Plugins vs loaders
+# Plugins vs Loaders
 
-Now we need to make something clear about what __DefinePlugin__ does because how it works is often misunderstood. This change to libraries built into an output script is affecting the runtime, when the output script is run in a browser.
+Now we need to make something clear about what __DefinePlugin__ does because how it works is often misunderstood. This plugin does not change webpack's runtime environment; it changes how values are interpreted within the built code when that output code is run in a browser.
 
 We talked about `babel-loader` earlier. `babel-loader` is affected by the value of `process.env.NODE_ENV`. `babel`'s compiler uses `NODE_ENV` to determine some defaults when it runs. As it runs when when webpack runs it'll be effected by `NODE_ENV` in node's `process.env`. `process.env.NODE_ENV` in your scripts being affected by webpack and babel however will not be evaluated. Later when that code is evaluated in a browser, `NODE_ENV` won't be set, it'll be empty because babel and webpack don't persist that in their output.
 
-This is where DefinePlugin comes in. It lets you persist a `NODE_ENV` value. As it persists that where it directly appears in your code provides some other benefits.
+This is where DefinePlugin comes in. It lets you persist a `NODE_ENV` value within the output script. Persisting these values where the environment reference occurs in your code provides some other benefits.
 
 ---
 

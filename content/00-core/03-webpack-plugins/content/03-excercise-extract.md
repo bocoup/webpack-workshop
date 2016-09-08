@@ -1,2 +1,2 @@
 class: center, middle
-# Excercise 05 - Extract CSS & HTML File
+# Exercise 05 - Extract CSS & HTML File

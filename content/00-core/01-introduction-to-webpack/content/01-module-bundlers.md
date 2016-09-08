@@ -13,9 +13,9 @@ Illustration??
 
 ???
 
-Before modules became popular, applications were written mostly on the server. Users interacting with an application would lead to requests to the server for new pages. This went on for a time and it was good. Well not really but it was the best we had.
+Before modules became popular, applications were written mostly on the server. Users interacting with an application would lead to requests to the server for new pages. This went on for a time and it was good. Well not really, but it was the best we had.
 
-JavaScript was written in script tags in the HTML - or - as smaller indivudual files. Time went on and client side scripts became more complex, we had more of them, and we realized requesting 20 scripts on page load was a bad thing.
+JavaScript was written in script tags in the HTML, or as smaller individual files. Time went on and client side scripts became more complex, we had more of them, and we realized requesting 20 scripts on page load was a bad thing.
 
 So we wrote custom build processes to construct a single file from the larger set of files that would be loaded instead of an army of script tags.
 
@@ -64,8 +64,8 @@ Webpack...
 
 - One of the earliest well known bundlers
 - Asynchronously loads individual modules
-- Supports AMD, Asynchronous Module Definition
-- Companion **r.js** performs the bundling
+- Supports Asynchronous Module Definition (AMD)
+- Companion tool **r.js** performs the bundling
 
 ```javascript
 // This is an AMD format module
@@ -94,8 +94,8 @@ but from a production server it can be bundled into a single file.
 
 # Browserify
 
-- Supports CommonJS, the format Node modules are written in
-- Shims some of the "common" node modules.
+- Supports CommonJS, the format [Node modules](https://nodejs.org/docs/v0.4.1/api/modules.html#modules) are written in
+- Shims some of the "common" node modules
 
 ```javascript
 var dependency = require('./dependency');
@@ -112,7 +112,7 @@ Browserify uses CommonJS, which lets us port a lot of node modules into the brow
 
 Here is an example CommonJS module that uses `require` and `module.exports` to import and export.
 
-Like r.js, and browserify, webpack also bundles modules into fewer files so users can quickly access an application.
+Like r.js and browserify, webpack also bundles modules into fewer files so users can quickly access an application.
 
 ---
 
@@ -135,14 +135,14 @@ runtime, webpack by default transforms these paths into numeric ids to refer to
 each package. Some developers like this to obfuscate their output further for
 proprietary projects.
 
-Webpack also includes a syntax for splitting bundles very intellegently, allowing you to load critial bits of JS only on the first pass, and ensure the additional scripts are loaded before you need to use them.
+Webpack also includes a syntax for splitting bundles very intelligently, allowing you to load critical bits of JS only on the first pass, and ensure the additional scripts are loaded before you need to use them.
 
 ---
 
 # Webpack is more than JavaScript Modules
 
 - Load styles and files and other code languages
-- Use plugins to optimize run time like extracting css into its own file and minifying source with uglify
+- Use plugins to optimize run time like extracting css into its own file, and minifying source with uglify
 - Fast rebuilds with webpack watch mode, dev middleware and dev server
 
 ???
@@ -164,7 +164,7 @@ and provide auto updates, connect to dev mode middleware and create a dev server
 
 - Source Code
 - HTML
-- Style (CSS, Less, Stylus)
+- Style (CSS, SASS, Stylus, Less)
 - Images (png, jpg, gif)
 - Other assets (mp3, mpeg)
 - Data (json)
