@@ -24,7 +24,7 @@ function drawMeme(image, text) {
   context.fillStyle = '#000';
   context.fillRect(borderPadding, borderPadding, width-borderPadding*2, height-borderPadding*2);
 
-  for (key in subtitleStyles) {
+  for (var key in subtitleStyles) {
     context[key] = subtitleStyles[key];
   }
   var measured = context.measureText(text);
