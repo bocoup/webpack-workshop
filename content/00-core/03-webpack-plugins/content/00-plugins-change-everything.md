@@ -6,11 +6,11 @@ class: center, middle, dark
 
 # Plugins change everything
 
-Loaders let webpack understand and include files that aren't javascript. Loaders work on modules.
+Loaders let webpack understand and include files that aren't JavaScript. Loaders work on modules.
 
-Plugins let webpack understand how modules relate to each other beyond them depending on each other. Well that and then practically anything else can be added to webpack through a plugin.
+Plugins let webpack understand how modules relate to each other beyond them depending on each other. Practically anything else can be added to webpack through a plugin.
 
-We're giong to look three well-used plugins.
+We're going to look four well-used plugins.
 
 - ExtractTextWebpackPlugin
 - HtmlWebpackPlugin
@@ -21,13 +21,13 @@ We're giong to look three well-used plugins.
 
 So that last whole section was a doozy but you made it. Now we can start peering at a specific plugin and see that meat it provides on webpack's skeleton.
 
-Active use of plugins is most of the time done when building an application for publishing online. There are plenty of others but three fairly universally used plugins are:
+Active use of plugins is most of the time done when building an application for publishing online. There are plenty of others, but four fairly universally used plugins are:
 
 ---
 
-# Built-in and external plugins
+# Built-in vs external plugins
 
-Webpack's own npm package comes with some built-in plugins, and it is pretty extensible through it's API.
+Webpack's own npm package comes with some built-in plugins, and it is pretty extensible through its API.
 
 From our previously listed plugins, __Define__ and __UglifyJs__ are provided by webpack's npm package, while __ExtractTextWebpackPlugin__ has its own [npm package](https://www.npmjs.com/package/extract-text-webpack-plugin). This means you'll need to install it in your project as another dependency:
 

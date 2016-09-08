@@ -1,8 +1,8 @@
-# Extracting texts
+# Extracting Text
 
-We introduced two loaders earlier - `style-loader` and `css-loader` - that work in build a project's css into the js package. That has a lot of benefits for development but for running in a end users computer, loading content over a normal internet connection can be improved or optimized.
+We introduced two loaders earlier - `style-loader` and `css-loader` - that work in build a project's css into the JS package. That has a lot of benefits for development but for running in a end users computer, loading content over a normal internet connection can be improved or optimized.
 
-The __ExtractTextWebpackPlugin__ extracts the source of modules affected by it into a file separate from the javascript. Most often you will see this used for extracting css handled by `css-loader` into a css file separate from the js files output by webpack. The built app can have this css loaded in a page at the same time and before the js so any server rendered content in the page can be styled as desired while the js loads.
+The __ExtractTextWebpackPlugin__ extracts the source of modules affected by it into a file separate from the JavaScript. Most often you will see this used for extracting css handled by `css-loader` into a css file separate from the js files output by webpack. The built app can have this css loaded in a page before the js, so any server rendered content in the page can be styled as desired while the js loads.
 
 ---
 
@@ -74,7 +74,7 @@ On this example, we call `ExtractTextPlugin.extract` with 2 arguments.
 
 The first one is the loader to be used when the css text is not extracted.
 
-The second one is the loader that will be used by the plugin to extract it's result.
+The second one is the loader that will be used by the plugin to extract its result.
 
 ---
 
