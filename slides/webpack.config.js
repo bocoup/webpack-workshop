@@ -5,10 +5,10 @@ module.exports = {
   entry: './index',
   output: {
     path: __dirname + '/dist',
-    filename: '[chunkhash].js',
+    filename: '[hash].js',
   },
   resolve: {
-    modulesDirectories: ['vendor'],
+    modulesDirectories: ['node_modules', 'vendor'],
   },
   babel: {
     env: {
