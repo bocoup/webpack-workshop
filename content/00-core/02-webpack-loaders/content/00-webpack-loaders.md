@@ -30,7 +30,7 @@ Loaders should do one thing, and do it well.
 As an example, you could use one loader to take the doc blocks from a file, and another to apply syntax highlighting.
 
 ```js
-const highlightedHtml = require('syntax!doc-blocks!./source.js');
+const highlightedHtml = require('syntax-loader!docblock-loader!./source.js');
 ```
 
 ???
@@ -45,44 +45,11 @@ Each loader to manipulate the asset in some way, parse CSV, inline data-uri, etc
 
 # Common loaders
 
-### `babel-loader`
+### `file-loader`
 ### `style-loader`
 ### `css-loader`
-### `file-loader`
 
 ???
 
-In this session we are going to focus on 4 very common loaders and how to configure them. Our goal is to take some of the assets we have in our meme generator and bundle them in with our `dist/` folder.
+In this section we are going to focus on 3 very common loaders and how to configure them. Our goal is to take some of the assets we have in our meme generator and bundle them in with our `dist/` folder.
 
----
-
-# Example loader configuration
-
-```js
-module.exports = {
-  // standard configuration stuff,
-  module: {
-    loaders: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-      },
-      {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader',
-      },
-      {
-        test: /\.png$/,
-        loader: 'file-loader',
-      },
-    ],
-  },
-};
-```
-
-???
-
-Note that we define `module.loaders` as an array in our webpack config. Each loader has a test, an optional exclude (or include) to match against filenames, and a "loader" path.
-
-Let's talk a little about what each one of these loaders does.

@@ -1,6 +1,6 @@
 class: center, middle
 
-# Exercise 03 - ES6ify!
+# Exercise 03 - Require Files!
 
 ???
 
