@@ -27,9 +27,9 @@ These loaders are also predictably named on npm, and we save them to our dev dep
 # Importing your style with JS
 
 - `src/`
-  - `index.js`
+  - `main.js`
 - `styles/`
-  - `index.css`
+  - `all.css`
 - `webpack.config.js`
 
 ???
@@ -64,9 +64,9 @@ module.exports = {
 
 --
 
-### src/index.js
+### src/main.js
 ```js
-require('../styles/index.css');
+require('../styles/all.css');
 ```
 
 ???
@@ -74,17 +74,24 @@ Now you can import that module with your `src/main.js`:
 
 Done! This will add a style tag to your document, directly from your JS bundle.
 
-TK Have the require match the exerciese styles/all.css instead of styles/index.css
-
-TK Use ES Module syntax
-
 ---
 
-# Modular css
+# What is css-loader doing?
 
+CSS:
 ```css
 @import 'reset.css';
+
+.image { background: url('image.png'); }
+/* more css */
 ```
+Becomes (roughly):
+```js
+module.exports = require('./reset.css') + '\n\n'
+  + '.image { background: url("' + require('./image.png') + '"); }\n'
+  + '/* more css */';
+```
+
 
 ???
 
@@ -92,18 +99,26 @@ Using the `css-loader` in this way, you can also count on webpack to bundle your
 
 This line will be handled like a require and will inject the contents of `require('reset.css')` in the eventual output chunks.
 
---
+`css-loader` also lets `url('image.png')` be required. This lets webpack handle images and other files to include them in the build and transform them like any other module built with webpack.
 
-## required urls
+---
 
-```css
-.image {
-  background: url('image.png');
-}
+# Why no `.css` file?
+
+```
+Hash: 9acbf8845506cd7f4e3b
+Version: webpack 1.13.2
+Time: 1356ms
+                               Asset     Size  Chunks             Chunk Names
+cbbb18816b6ef832d2498a285503e663.jpg  33.3 kB          [emitted]
+864ebd1e430c50612eac9ebd4db1faf8.jpg  88.7 kB          [emitted]
+f3db6422367750ca9c3711498d83e0f2.jpg  89.2 kB          [emitted]
+                             main.js   310 kB       0  [emitted]  main
 ```
 
 ???
 
-`css-loader` also lets `url('image.png')` be required. This lets webpack handle images and other files to include them in the build and transform them like any other module built with webpack.
+Note that unlike `file-loader` which emitted the assests, `css-loader` exports a module!
 
-TK Slide after digging into what css-loader output can look like
+This means that the `.css` code is embedded inside of our `.js` code now!  We will be able to remove the `<link>` tag from our HTML, and `style-loader` will inject it for us
+at runtime!
