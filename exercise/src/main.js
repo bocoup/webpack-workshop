@@ -21,7 +21,7 @@ jQuery(function($) {
   // Listen for clicks on images
   imageSelector.on('click', '.select-image', function(event) {
     event.preventDefault();
-    currentImage = $('img', event.target);
+    currentImage = $('img', this)[0];
     drawMeme(currentImage, currentText);
   });
 
