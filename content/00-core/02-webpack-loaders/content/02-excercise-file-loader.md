@@ -2,16 +2,50 @@ class: center, middle
 
 # Exercise 03 - Require Files!
 
+---
+
+# Recap file-loader
+
 ???
 
-TK Replace with an exercise on file loader
+TK Recap file-loader and module.loaders config
 
-TK Slide before with summary
+---
 
-TK ES Module syntax cheat sheet slide
+# Exercise 03 - Require Files!
 
-TK Follow up slide with goals
+- Install **`file-loader`**
+- Configure loaders in webpack.config for `file-loader`
+- Restart `npm start`
+- Move img folder into src
+- **`require()`** images from img folder
+- Remove **`img`** part of `cp` command in build script
+- Clean the dist and run a new build
+- Notice the image files in dist
 
-TK Extra credit: const and let the vars and change functions to arrows
+---
 
-TK Follow up follow up with what should have been done
+# Exercise 03 - Answer Overview
+
+**`webpack.config.js`**
+
+```js
+module: {
+  loaders: [
+    {
+      test: /\.(jpg|png)$/,
+      loader: 'file-loader',
+    },
+  ],
+},
+```
+
+**`main.js`**
+
+```js
+var imageUrls = [
+  require('./img/bunny-725x544.jpg'),
+  require('./img/funny-monkey-725x544.jpg'),
+  require('./img/guinea-pigs-725x544.jpg'),
+];
+```
