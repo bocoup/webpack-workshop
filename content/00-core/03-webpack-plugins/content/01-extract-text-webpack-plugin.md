@@ -39,7 +39,7 @@ module.exports = {
     loaders: [
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract("style", "css"),
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
       },
     ],
   },
@@ -60,7 +60,7 @@ module.exports = {
     loaders: [
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract("style", "css"),
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
       },
     ],
   },
@@ -72,7 +72,7 @@ module.exports = {
 
 On this example, we call `ExtractTextPlugin.extract` with 2 arguments.
 
-The first one is the loader to be used when the css text is not extracted.
+The first one is the fallback loader to be used when the css text is not extracted.
 
 The second one is the loader that will be used by the plugin to extract its result.
 
@@ -87,7 +87,7 @@ module.exports = {
     loaders: [
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract("style", "css"),
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
       },
     ],
   },
