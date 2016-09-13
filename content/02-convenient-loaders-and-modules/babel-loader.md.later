@@ -48,7 +48,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel', // This matches the `babel-loader`
+        loader: 'babel-loader',
       },
     ],
   },
@@ -66,8 +66,6 @@ We also need to include the ES2015 preset in the webpack options
 The next time we run Webpack, it will load the input source transpiling it with Babel using the ES2015 plugin set!
 
 TK exclude vendor too to help the class
-
-TK loader: 'babel' -> loader: 'babel-loader'
 
 ---
 
@@ -90,7 +88,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel',
+        loader: 'babel-loader',
         query: {
           presets: ['es2015'],
         },
@@ -113,7 +111,7 @@ There are two common ways to set the options for loaders. Most loaders look for 
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel',
+        loader: 'babel-loader',
         query: {
           presets: ['es2015'],
         },
@@ -126,7 +124,7 @@ There are two common ways to set the options for loaders. Most loaders look for 
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel?presets[]=es2015',
+        loader: 'babel-loader?presets[]=es2015',
       },
     ],
 ```
@@ -156,7 +154,7 @@ module.exports = {
       {
         test: /\.jsx?$/, // Catching .js and .jsx files
         exclude: /node_modules/,
-        loader: 'babel',
+        loader: 'babel-loader',
       },
     ],
   },
