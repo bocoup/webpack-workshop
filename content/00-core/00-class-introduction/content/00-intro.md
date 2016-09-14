@@ -7,7 +7,7 @@ Illustration Thoughts: Someone trying to pack a www "globe" into a small box for
 
 ???
 
-Welcome to the class!  Today we are going to learn about webpack, but before we get started, let's handle some introductions share some important information.
+Welcome to the class!  Today we are going to learn about webpack, but before we get started, let's handle some introductions and share some important information.
 
 ---
 
@@ -19,8 +19,11 @@ Welcome to the class!  Today we are going to learn about webpack, but before we 
   - [webpack-workshop@bocoup.com](mailto:webpack-workshop@bocoup.com)
 
 ???
+All Bocoup events follow our Code of Conduct, Here is the quick version:
 
-Code of Conduct - The quick version: Bocoup is dedicated to providing a harassment-free experience for everyone, regardless of gender, sexual orientation, disability, age, physical appearance, body size, race, or religion. We do not tolerate harassment of event participants in any form. Sexual language and imagery is not appropriate for any venue, including talks. Participants violating these rules may be sanctioned or expelled from the event without a refund at the discretion of the event organizers.
+Bocoup is dedicated to providing a harassment-free experience for everyone, regardless of gender, sexual orientation, disability, age, physical appearance, body size, race, or religion. We do not tolerate harassment of event participants in any form. Sexual language and imagery is not appropriate for any venue, including talks. Participants violating these rules may be sanctioned or expelled from the event without a refund at the discretion of the event organizers.
+
+We have all the slides for todays class online here (follow the link), and please e-mail us at any time if you have questions.
 
 ---
 
@@ -34,13 +37,17 @@ Code of Conduct - The quick version: Bocoup is dedicated to providing a harassme
 
 ???
 
-We only have a few hours with you today but let's go around very briefly and you can introduce yourself and share the sort of work you do.
+We only have a few hours with you today but let's go around very briefly and introduce ourselves.  Starting with myself ...
 
-Starting with myself, ...
+(go around the room!)
 
 ---
 
-# Upcoming sections
+# Chapter 1: Webpack Core
+
+???
+
+In the first chapter of our webpack class, we will be covering a few topics to get you familiar with webpack's core concepts.
 
 --
 
@@ -48,7 +55,7 @@ Starting with myself, ...
 
 ???
 
-The first section of our couse will describe what webpack is, what problems it solves, and teach some very simple basics of setting up webpack with an example application.
+First we will describe what webpack is, what problems it solves, and teach some very simple basics of setting up webpack with an example application.
 
 --
 ### 2. Webpack Loaders
@@ -63,11 +70,11 @@ The second section we will study in more detail one of webpacks extremely powerf
 
 ???
 
-After we've practiced with loaders, we will dive into another of webpack's features, Plugins.  We will learn how to enhance our projects with some example plugins.
+After we've practiced with loaders, we will learn how to further enhance our projects with webpack plugins.
 
 ---
 
 # Questions before we get started?
 
 ???
-After we handle questions, advance to the next slide and perhaps offer a quick bathroom break
+Are there any questions, before we get started?
