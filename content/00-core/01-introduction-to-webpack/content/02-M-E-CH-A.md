@@ -92,24 +92,17 @@ Webpack collects modules into chunks. They are really just that -- chunks of mod
 
 # Assets
 
-## Any output file
+## Any string or buffer that will be output
 
 Everything webpack outputs is an asset.
 
-- Chunks are output as assets
-- Non-inline source maps are output as assets
-- Images and other files required through file-loader are output as assets
-- ExtractText outputs css files as assets
-
-In this way assets are any binary or utf8 content that will be output at some file name.
+- Images and other files required are turned into assets
+- Chunks of Modules are transformed into assets
+- Through a plugin CSS handled by webpack can be turned into assets
 
 ???
 
-In webpack, an asset is any output file. Modules can have assets. Chunks can have assets. A run of the compiler can have assets.
-
-This last part is interesting to consider. Chunks are not just written out to the file system once they are ready, they are also transformed into assets that in webpack's file step are emitted like any other asset.
-
-To ground asset a little, you can include non source files like images in the webpack process, these are transformed into assets that in that final step like the assets produced from chunks are emitted to the file system.
+A webpack asset is a file that has yet to be written to the output directory. Webpack builds up a list of assets through modules, chunks, and plugins. Modules create assets like images and data files. Webpack and plugins create assets from chunks and other groups of information.
 
 ---
 
