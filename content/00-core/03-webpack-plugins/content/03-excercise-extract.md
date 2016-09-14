@@ -6,6 +6,18 @@ class: center, middle
 
 # Recap - CSS and HTML files
 
+## ExtractTextPlugin
+
+- Uses loaders to determine css to extract
+- Uses a plugin instance to determine what to call the css file
+- `[contenthash].css` as the file name will output a css file with a hash of the content
+
+## HtmlPlugin
+
+- Renders a template
+- Injects `<link>` and `<script>` tags into the rendered html
+- Outputs the html in the output directory
+
 ---
 
 # Exercise 05 - Extract CSS & HTML File

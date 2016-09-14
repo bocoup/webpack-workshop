@@ -1,8 +1,11 @@
-# Recap - style and css loader
-
----
-
 # Exercise 04 - Building styles
+
+### Recap
+
+- css-loader transforms css into javascript that require's @imports and urls
+- style-loader evaluates the javascript from css-loader and places it in a style tag
+
+### Goals
 
 - Install **`style-loader`** and **`css-loader`**
 - Configure **`.css`** to be loaded by style and css loader

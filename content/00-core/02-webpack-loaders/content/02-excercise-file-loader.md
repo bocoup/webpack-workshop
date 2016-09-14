@@ -4,15 +4,14 @@ class: center, middle
 
 ---
 
-# Recap file-loader
-
-???
-
-TK Recap file-loader and module.loaders config
-
----
-
 # Exercise 03 - Require Files!
+
+### Recap
+
+- Loaders should do one thing
+- file-loader outputs the file to the output directory and returns a url
+
+### Goals
 
 - Install **`file-loader`**
 - Configure loaders in webpack.config for `file-loader`
