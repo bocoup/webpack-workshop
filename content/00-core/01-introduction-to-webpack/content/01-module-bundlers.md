@@ -28,7 +28,7 @@ We called these Module Bundlers.
 
 ---
 
-# Known bundlers
+# Module bundlers
 
 Some well-known module bundlers:
 
@@ -125,30 +125,17 @@ Webpack can analyze the code and be **smarter** about outputing multiple bundles
 
 Since webpack is capable of analyzing and transforming JavaScript, it is also able to produce output bundles that are smaller and more portable, not relying on details like file paths to operate at runtime.
 
-It also supports both AMD and CommonJS modules, by renaming the define and require statments to its own syntax, its output bundles may be consumed by requirejs or browserify as well.
+It also supports both AMD and CommonJS modules, allowing us to consume a wide variety of javascript modules.  By renaming the `define` and `require` statments to its own syntax, its output bundles may be consumed by requirejs or browserify as well.
 
 ---
 
 # Webpack is more than JavaScript Modules
 
-- Load styles and files and other code languages
-- Use plugins to optimize run time like extracting css into its own file, and minifying source with uglify
-- Fast rebuilds with webpack watch mode, dev middleware and dev server
-
-???
-
-Other module bundlers HTML, CSS, and other static assets used to be a part of a different processes, however webpack can also handle all of the static content that goes into an application. As you extend your webpack configuration this provides a lot of functionality to streamline delivery of your entire application.
-
-Webpack goes way beyond just packing scripts, you can connect it to different
-loaders for different content, use plugins like uglify, watch your filesystem
-and provide auto updates, connect to dev mode middleware and create a dev server.
-
----
-
-# Short list of things we've webpacked:
+### "modules" in webpack
 
 - Source Code
 - HTML
+- Templates (Handlebars, Lodash, etc)
 - Style (CSS, SASS, Stylus, Less)
 - Images (png, jpg, gif)
 - Other assets (mp3, mpeg)
@@ -156,5 +143,33 @@ and provide auto updates, connect to dev mode middleware and create a dev server
 
 ???
 
-And here is just a short list of some of the assets we've personally used with
-webpack.
+Webpack also allows you to bundle static content like HTML, CSS, and images.  This allows you to bundle the non-javascript dependencies with our javascript.
+
+Webpack goes way beyond just packing scripts, in webpack you can use loaders and plugins to enhance your development workflows.
+
+(((pause on this for a few seconds)))
+---
+
+# Module Bundlers (recap)
+
+- RequireJS
+- Browserify
+- **Webpack**
+
+-------
+
+### Bundlers provide:
+- Developer Experience
+- User Experience
+- Module Formats
+- Efficient Bundles
+
+???
+
+So we have covered the three common module bundlers.
+
+We've also talked about why...
+
+- Module bundlers improve developer and user experience
+- and should support the module formats we need
+- and should help us build the most efficient bundles for our users
