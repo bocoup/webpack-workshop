@@ -1,6 +1,6 @@
 class: center, middle
 # Dev Server
-
+Illustate me?
 ???
 
 Section 5
@@ -16,7 +16,9 @@ Section 5
 ???
 
 Webpack dev server is a great addition to the ecosystem.  It allows us to watch
-our source code for changes, rebuild, and see those changes in the browser.
+our source code for changes, rebuild automatically, and see those changes in the browser.
+
+It also acts as webserver for us while developing, hosting static content like images and html alongside the built output bundle.
 
 ---
 
@@ -68,3 +70,7 @@ Webpack dev server has quite a few options that are documented on the website, f
 In our example slide here, `host` and `port` are reconfigured to listen on port 3000, and allow outside connections (the default only listens on localhost).
 
 We can either pass these options as command line arguments, or, we can set some values on the `devServer` property of our webpack config.
+
+-------
+
+Does anyone have any questions before we try adding dev server to our meme generator?

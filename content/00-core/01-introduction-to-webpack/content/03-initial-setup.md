@@ -3,7 +3,7 @@ class: center, middle
 
 ???
 
-Alright, enough of the background knowledge, lets go over what we need to do to install and configure webpack the first time.  We have a short excercise to practice this process after this section.
+Enough of the background knowledge, let's go how we install and configure webpack the first time.  We have a short excercise to practice this process after this section.
 
 ---
 
@@ -33,22 +33,14 @@ In order to install the `webpack` package, we want to install via NPM and make s
 }
 ```
 
-### (sometimes useful to have)
-```shell
-export PATH=node_modules/.bin:$PATH
-webpack
-```
-
 ### or combined with grunt, gulp, or broccoli
 (if you already use these tools)
 
 ???
 
-After installing webpack, you should define a script in your `package.json` to launch it.  This creates an `npm run` command, and is the best way to run npm packages installed in a projects `node_modules`.
+After installing webpack, you should define a script in your `package.json` to launch it.  This creates an `npm run` command, and is the most cross-platform, and self-documenting way to run npm packages.
 
-When working on node projects, it often helps to add the `node_modules/.bin` to your shells `PATH` anyway, which would let you run `webpack` from the shell directly, but we still recommend using an `npm run` script.
-
-Webpack can be used as its own tool creating a standalone build process for simple projects, or for complex projects webpack can be integrated into tools like grunt, gulp, and broccoli.
+Webpack can be used as its own tool creating a standalone build process for simple projects, or for complex projects webpack can be integrated into existing toolchains like grunt, gulp, and broccoli.
 
 ---
 
@@ -73,9 +65,9 @@ module.exports = {
 
 By default, webpack will look for the `webpack.config.js`, so we name our configuration file that.
 
-We have to tell webpack the "context" (base directory) of our project, NodeJS provides us `__dirname` constant to mean the name of the directory of the current file, so this is very convenient.
+We have to tell webpack the "context" (base directory) of our project, NodeJS provides us `__dirname` constant to mean the name of the directory of the current file, so this is very convenient value for that context.
 
-Again, Entry, from the M.E.CH.A means "where we start", so we point this at whatever contains our "main application".
+Again, Entry, from the M.E.CH.A means "where we start", so we point this at whatever contains our "main application", in our exercise this will be `src/main.js`.  Note we need the `./` to indicate it is a relative path.
 
 The output configuration is fairly simple at this point, we want to provide a path and a filename.
 

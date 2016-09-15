@@ -63,7 +63,7 @@ In this example module, we are exporting our application via the CommonJS `modul
 
  Entries are special in that no other module may depend on them.
 
- Every other module may refer to any module, even circularly.
+ Every other module may refer to any module, even circularly, though we wouldn't suggest it...
 
 --
 
@@ -86,7 +86,7 @@ In this example entry, we use `require` to get the application we created in the
 
 ???
 
-Webpack collects modules into chunks. They are really just that -- chunks of modules. Most often they use a filename template but plugins can transform them to be output in other ways to help with optimizing an app for users.
+Webpack collects modules into chunks. They are really just that -- chunks of modules. Most often they use a filename template but plugins can transform them to be output in other ways to help with optimizing an application for users.
 
 ---
 
@@ -102,7 +102,7 @@ Everything webpack outputs is an asset.
 
 ???
 
-A webpack asset is a file that has yet to be written to the output directory. Webpack builds up a list of assets through modules, chunks, and plugins. Modules create assets like images and data files. Webpack and plugins create assets from chunks and other groups of information.
+A webpack asset is a file that has yet to be written to the output directory. Webpack builds up a list of assets through modules, chunks, and plugins. Modules can create assets like images and data files, and Webpack and plugins create assets from chunks and other groups of information.
 
 ---
 
@@ -111,10 +111,14 @@ A webpack asset is a file that has yet to be written to the output directory. We
 - __M__odules are input
 - __E__ntry is the starting module
 - __Ch__unks are the collected modules
-- __A__sset are output
+- __A__ssets are output, built from chunks, etc
 
 ???
 
 So just to briefly cover each of these again, Modules are input, Entry is the starting module, Chunks are collections of modules, and Assets are output.
 
-There is a lot of nuance to each of these terms, but we hope that having this general level of knowledge will help you understand how webpack works as we continue through this course.
+There is a lot of nuance to each of these terms, but we hope that having a general level of knowledge will help you understand how webpack works as we continue through this course.
+
+-------
+
+Are there any questions before we continue on to installing webpack?
