@@ -13,4 +13,4 @@ class: center, middle
 In the first section we will cover a short history of module bundlers,
 this thing called "M.E.CH.A" which isn't as cool as it sounds (heh), and the basic configuration for webpack and it's development server.
 
-(This section will take about 40 minutes)
+(This section will take about 30 minutes)

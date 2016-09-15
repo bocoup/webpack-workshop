@@ -1,63 +1,49 @@
+class: center, middle
 # Extracting Text
+Illustration?
 
-We introduced two loaders earlier - `style-loader` and `css-loader` - that work in build a project's css into the JS package. That has a lot of benefits for development but for running in a end users computer, loading content over a normal internet connection can be improved or optimized.
+???
 
-The __ExtractTextWebpackPlugin__ extracts the source of modules affected by it into a file separate from the JavaScript. Most often you will see this used for extracting css handled by `css-loader` into a css file separate from the js files output by webpack. The built app can have this css loaded in a page before the js, so any server rendered content in the page can be styled as desired while the js loads.
+We introduced two loaders earlier - `style-loader` and `css-loader` - that combined our css into the JS package. This is useful during development, but for deploying to a web server, loading a `.css` file is preferred.
+
+The __ExtractTextWebpackPlugin__ extracts the source of target modules into a file separate from the JavaScript. Most often it is used to extract css handled by `css-loader` into a css file.  The output bundle can have this css loaded in a page before the javascript, so any server rendered content in the page can be styled as desired while the javascript loads.
 
 ---
 
-# Extracting the CSS
-
-Let's extract the CSS from the bundle into a separate file!
-
-Back when we used the `style-loader` we set it to return a script to webpack that creates a style tag along with the JS. That means we bundled all the CSS content as well.
-
-To do that, we will extract the return of `css-loader`, and keep the `style-loader` only as a fallback.
-
-As this plugin is a separate npm package, we first need to install it.
+# Extracting Text
 
 ```shell
 npm install extract-text-webpack-plugin --save-dev
 ```
 
----
+???
 
-# Loading the plugin
+This plugin is called extract text webpack plugin on npm...
 
-Plugins are not loaders, this time we will need to require them in the `webpack.config.js` file.
-
+--
+**`webpack.config.js`:**
 ```js
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 ```
 
-Right after, we add this plugin as a new entry, but notice how this plugin also manipulates loaders:
+???
 
-```js
-module.exports = {
-  /* ... */,
-  module: {
-    loaders: [
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
-      },
-    ],
-  },
-  plugins: [
-    new ExtractTextPlugin("bundle.css"),
-  ],
-};
-```
+In order to use our plugin, we need to `require` it using node in our webpack.config.js...
 
 ---
 
-# Extracting vs Not Extracting
+# Extracting text
+
+### webpack.config.js
 
 ```js
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
 module.exports = {
   /* ... */,
   module: {
     loaders: [
+      /* ... */,
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
@@ -70,31 +56,16 @@ module.exports = {
 };
 ```
 
-On this example, we call `ExtractTextPlugin.extract` with 2 arguments.
+???
 
-The first one is the fallback loader to be used when the css text is not extracted.
+We need to change the loader for our `.css` files to be marked by the ExtractTextPlugin, and we need to add a new key to the config called `plugins` which will hold an instance of the `ExtractTextPlugin`
 
-The second one is the loader that will be used by the plugin to extract its result.
+In this example, we call `ExtractTextPlugin.extract` with 2 arguments.
 
----
+The first one is a fallback loader, it will be used when the css text is not extracted, which is an option we will be describing in further detail in another Chapter.
 
-# Creating the separate file
+The second argument is the loader that will be used by the plugin to extract its result.
 
-```js
-module.exports = {
-  /* ... */,
-  module: {
-    loaders: [
-      {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
-      },
-    ],
-  },
-  plugins: [
-    new ExtractTextPlugin("bundle.css"),
-  ],
-};
-```
+On the new plugins list, we initialize the ExtractTextPlugin with the filename we want to create. In this case it will be `bundle.css`.
 
-On the new plugins list, we initialize the ExtractTextPlugin and tell which file we want to create with the extracted css. In this case it will be set as `bundle.css`.
+We are now able to extract the `css` into it's own file when we build, but our HTML file won't reference it.
