@@ -8,7 +8,8 @@ Section 4
 ---
 
 # Pre-Exercise Recap
-* We will use CommonJS `module.exports` and `require` to import and export.
+* We will use CommonJS `module.exports` to export.
+* We will use `require` to import.
 * Install Webpack - `npm install --save-dev webpack`
 * Basic Webpack configuration
 
@@ -42,16 +43,18 @@ This first exercise will end up with a distribution folder like:
 # Exercise 01 - My First App
 
 * Install serve with **`npm install -g serve`**
-* Run **`serve`** in the exercise and open a browser to **`localhost:3000`**
-* Create a package.json with **`npm init --yes`**
-* Install webpack in the exercise folder with  
+* Run **`serve`** in the exercise folder and open a browser to **`localhost:3000`**
+> Examine the application before making changes
+* Create a package.json: **`npm init --yes`**
+* Install webpack:
   **`npm install --save-dev webpack`**
-* Convert **`main.js`** and **`canvas.js`** to use CommonJS module syntax (**`require`** and **`module.exports`**)
+* Convert **`main.js`** and **`canvas.js`** to use CommonJS syntax (**`require`** and **`module.exports`**)
 * Create a basic webpack config to bundle our demo application to a **`dist/main.js`**.
 * Alter the **`index.html`** to point at **`main.js`** as its only **`<script>`** tag
-* Write package.json script to build webpack and copy files with  
-  **`webpack && cp -R index.html img styles dist`**
-* Run a build and run serve in dist
+* Write package.json script to build: run webpack and copy the non-js files
+>  **`"build": "webpack && cp -R index.html img styles dist"`**
+* **`npm run build`** then **`cd dist`** and **`serve`**
+> Test output bundle
 
 ???
 
@@ -67,14 +70,13 @@ For now, we need to manually copy a few of the "additional files" since webpack 
 
 # Exercise 01 Answer Overview
 
-**`main.js`**
-
+**`main.js`**: Require the drawMeme and jQuery, instead of relying on global scope
 ```js
 var drawMeme = require('./canvas').drawMeme;
 var jQuery = require('../vendor/jquery-3.1.0');
 ```
 
-**`canvas.js`**
+**`canvas.js`**: Added an export to the bottom
 
 ```js
 module.exports = {
@@ -82,13 +84,13 @@ module.exports = {
 };
 ```
 
-**`index.html`**
+**`index.html`**: Replaced three script tags with
 
 ```html
 <script src="main.js"></script>
 ```
 
-**`package.json`**
+**`package.json`**: Created with `npm init`, and added this script
 
 ```json
 "scripts": {
@@ -96,3 +98,32 @@ module.exports = {
 }
 ```
 
+???
+
+Let's go over each of the changes we made.  There are a couple of variations on how
+you could have exported `drawMeme`, but either way, you'll want to `require` the canvas.js and jquery files from `main.js` now, replace the 3 scripts we were loading
+before with our output bundle, and have given ourselves our first `build process`
+
+The only thing left is the basic webpack configuration...
+
+---
+
+# Exercise 01 Answer Overview (2)
+
+**`webpack.config.js`**: Basic setup:
+```js
+module.exports = {
+  context: __dirname,
+  entry: './src/main.js',
+  output: {
+    path: 'dist',
+    filename: 'main.js',
+  },
+};
+```
+
+???
+
+Which was entirely unmodified from the recap slide.
+
+Any questions about anything we've covered so far before we move on to adding the development server?
