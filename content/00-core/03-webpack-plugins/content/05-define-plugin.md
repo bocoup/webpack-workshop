@@ -1,10 +1,13 @@
 # The Define Plugin
 
-Our last plugin to cover isn't an optimization plugin normally, but can have a similar affect thanks to how a lot of modern libraries are written.
 
-The __DefinePlugin__ lets you provide static values that webpack's parser can use to replace specific identifiers within your code.
+???
 
-A growing number of libraries have debug assertions behind simple tests, often looking like:
+Our last plugin to cover isn't an optimization plugin normally, but has a similar effect.
+
+The __DefinePlugin__ lets you provide static values that webpack's parser can use to replace specific identifiers within your code...
+
+--
 
 ```js
 if (process.env.NODE_ENV !== "production") {
@@ -12,80 +15,81 @@ if (process.env.NODE_ENV !== "production") {
 }
 ```
 
-These assertions are great while developing to make sure you are not breaking assumptions your library makes or that you are using an API correctly.
+???
 
-Once you're ready to ship a feature, since those tests have already done their job and slow down your app, __DefinePlugin__ enters here to let you remove these tests.
+A growing number of libraries have debug assertions behind simple tests, often looking like this.  These assertions are great while developing to add extra code to ensure you are using things correctly.
+
+Once you're ready to ship a feature, since those tests have already done their job and slow down your app, __DefinePlugin__ allows you to remove these tests.
 
 ---
 
-# Common usage
+# The Define Plugin
 
-A common DefinePlugin use for this looks like:
-
-```
-  // webpack.config.js
+webpack.config.js:
+```js
   plugins: [
-    new DefinePlugin({
+    new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
     }),
   ],
 ```
-
-One common library that benefits from this setting is React. React's assertions wrapped by the above test are transformed from:
-
+----
+then:
 ```js
 if (process.env.NODE_ENV !== "production") {
+  ...
+}
 ```
-
-to:
-
-```js
-if ("production" !== "production") {
-```
-
----
-
-# A step further
-
-```js
-if ("production" !== "production") {
-```
-
-From this expression, webpack will take this a step further since this boolean test can be statically evaluated:
-
+becomes:
 ```js
 if (false) {
+  ...
+}
 ```
+
+???
+
+To use the plugin, we add the define plugin in our plugins list, and pass it an object of identifiers to replace.
+
+In this example, we will replace `process.env.NODE_ENV` with the string *quote* **production** *quote* - a string literal in JSON format.
+
+From this expression, webpack will replace the value in the if expression, recognize that it is a static condition, and evaluate it.  Our code now says `if (false)`
 
 ---
 
 # DefinePlugin + UglifyJSPlugin
 
-This example produces a block that will never run:
+This never runs!
 
 ```js
 if (false) {
 ```
 
-You can then run with UglifyJS, which will remove that block in its output. Including any other piece of dead code, webpack (through uglify) removes any code that could never run.
+Uglify knows this and removes "dead code"
 
----
+???
 
-# Plugins vs Loaders
+Combined with UglifyJS, this code is then removed from our output bundle because it will never run, and we have optimized our production builds.
 
-Now we need to make something clear about what __DefinePlugin__ does because how it works is often misunderstood. This plugin does not change webpack's runtime environment; it changes how values are interpreted within the built code when that output code is run in a browser.
+(let it sink in)
 
-We talked about `babel-loader` earlier. `babel-loader` is affected by the value of `process.env.NODE_ENV`. `babel`'s compiler uses `NODE_ENV` to determine some defaults when it runs. As it runs when when webpack runs it'll be effected by `NODE_ENV` in node's `process.env`. `process.env.NODE_ENV` in your scripts being affected by webpack and babel however will not be evaluated. Later when that code is evaluated in a browser, `NODE_ENV` won't be set, it'll be empty because babel and webpack don't persist that in their output.
+--
 
-This is where DefinePlugin comes in. It lets you persist a `NODE_ENV` value within the output script. Persisting these values where the environment reference occurs in your code provides some other benefits.
+# Only in production
 
----
+### webpack.config.js
+### webpack.production.js
+> `webpack --config webpack.production`
 
-# Plugins vs Loaders (pt II)
 
-- Babel uses `NODE_ENV` to default settings for building a production script.
-- React uses `NODE_ENV` to consider assertions inside an already built script.
-- DefinePlugin does not set the environment where Babel runs in as it helps build your app.
-- DefinePlugin does set the environment where React runs in as it helps execute your built app.
+???
 
-If you want production settings for both Babel and a library like React you need to both set `NODE_ENV` in the process's environment __and__ in the built script through DefinePlugin.
+These features are great for production builds, but only complicate your development process.  We need a way to disable them for our development builds.
+
+We need one config to build, and one config to develop.
+
+So what we can do is create a second configuration file, and tell our build process to use it.
+
+----
+
+Any questions before we try these two plugins in our meme generator?
