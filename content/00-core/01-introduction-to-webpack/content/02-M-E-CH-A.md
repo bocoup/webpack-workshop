@@ -108,7 +108,13 @@ A webpack asset is a file that has yet to be written to the output directory. We
 
 # Reviewing the M.E.CH.A
 
-- Modules are units
-- Entry is the starting module
-- Chunks are the collected modules
-- Asset are any output files
+- __M__odules are input
+- __E__ntry is the starting module
+- __Ch__unks are the collected modules
+- __A__sset are output
+
+???
+
+So just to briefly cover each of these again, Modules are input, Entry is the starting module, Chunks are collections of modules, and Assets are output.
+
+There is a lot of nuance to each of these terms, but we hope that having this general level of knowledge will help you understand how webpack works as we continue through this course.
