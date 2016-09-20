@@ -1,3 +1,4 @@
 - Students will be able to describe what webpack does at a high level
 - Students will be able to explain what module bundlers are
 - Students will be know how a webpack configuration is structured
+- Students will be able to set up a basic webpack configuration

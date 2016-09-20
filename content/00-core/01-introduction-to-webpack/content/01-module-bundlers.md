@@ -1,11 +1,4 @@
 class: center, middle
-# Module Bundlers
-
-???
-
-Section 1
-
----
 
 # In a land before JavaScript Modules...
 
@@ -13,7 +6,7 @@ Illustration??
 
 ???
 
-Before modules became popular, applications were written mostly on the server. Users interacting with an application would lead to requests to the server for new pages. This went on for a time and it was good. Well not really, but it was the best we had.
+Before modules became popular, applications were written mostly on the server. Users interacting with an application would request new pages from the server. This went on for a time and it was good. Well not really, but it was the best we had.
 
 JavaScript was written in script tags in the HTML, or as smaller individual files. Time went on and client side scripts became more complex, we had more of them, and we realized requesting 20 scripts on page load was a bad thing.
 
@@ -23,22 +16,19 @@ So we wrote custom build processes to construct a single file from the larger se
 
 # Module bundlers
 
-**Webpack** is a module bundler.
-
-It bundles modules together into a smaller set of files.
+Bundles modules together into a smaller set of files.
 
 ???
 
 
 The "custom" part of the processes was a lot of work to construct and maintain.
-So developers started writing tools that, with some minimal configuration, could bundle our smaller
-files into a single file to deliver to the
+So developers started collaborating on tools that, with some minimal configuration, could bundle our smaller files into a single file to deliver to the user.
 
 We called these Module Bundlers.
 
 ---
 
-# Known bundlers
+# Module bundlers
 
 Some well-known module bundlers:
 
@@ -90,6 +80,8 @@ The many hundreds of files that make up web applications in the client now
 is convenient for a developer to debug locally as multiple files,
 but from a production server it can be bundled into a single file.
 
+The AMD format uses `define`, which is passed an array of dependencies and callback function which receives the dependencies and returns the module
+
 ---
 
 # Browserify
@@ -108,62 +100,42 @@ module.exports = {
 
 ???
 
-Browserify uses CommonJS, which lets us port a lot of node modules into the browser now.
+Requirejs used the AMD format for defining modules, but around this time node was gaining in popularity, and it's module format (CommonJS) was not supported.
 
-Here is an example CommonJS module that uses `require` and `module.exports` to import and export.
+Browserify uses CommonJS, which allows most node modules to be used inside the browser.
 
-Like r.js and browserify, webpack also bundles modules into fewer files so users can quickly access an application.
+Here is an example CommonJS module that uses `require` to include dependencies, and `module.exports` to export the module.  Note that this format is **synchronus**, it implies that all depenencies can be synchronusly loaded.
 
 ---
 
-# Why webpack?
+# Webpack
 
+- Smart code splitting
+- Smaller output bundles
 - Supports AMD
 - Supports CommonJS
-- Smaller output bundles
-- Smart code splitting
+- Pluginable
+- Portable
 
 ???
 
-So why pick webpack? It supports both AMD and CommonJS syntax for modules (unlike r.js and browserify)
+In very large applications, bundling everything could easily create bundles that were tens or hundreds of megabytes of JavaScript.  Browserify and Require eventually had ways to seperate chunks of the output into loadable "feature" bundles, but the configuration was hard to automate.
 
-Webpack can generate smaller output by using the knowledge it builds up of the
-individual files in its output.
+Webpack can analyze the code and be **smarter** about outputing multiple bundles. Webpack also includes a syntax for splitting bundles very intelligently, allowing you to load critical bits of JavaScript only on the first pass, and ensure the additional scripts are loaded before you need to use them.
 
-Requirejs and browserify need to include file paths so it can operate at
-runtime, webpack by default transforms these paths into numeric ids to refer to
-each package. Some developers like this to obfuscate their output further for
-proprietary projects.
+Since webpack is capable of analyzing and transforming JavaScript, it is also able to produce output bundles that are smaller and more portable, not relying on details like file paths to operate at runtime.
 
-Webpack also includes a syntax for splitting bundles very intelligently, allowing you to load critical bits of JS only on the first pass, and ensure the additional scripts are loaded before you need to use them.
+It also supports both AMD and CommonJS modules, allowing us to consume a wide variety of javascript modules.  By renaming the `define` and `require` statments to its own syntax, its output bundles may be consumed by requirejs or browserify as well.
 
 ---
 
 # Webpack is more than JavaScript Modules
 
-- Load styles and files and other code languages
-- Use plugins to optimize run time like extracting css into its own file, and minifying source with uglify
-- Fast rebuilds with webpack watch mode, dev middleware and dev server
-
-???
-
-Module Bundlers started as a way to package up scripts for an application. HTML,
-CSS, and other assets would be left to other processes to prepare for
-distributing an app. Webpack provides avenues to handle all of the static
-content that goes into an application. As you build on to your webpack
-configuration this provides lot of functionality to streamline delivery of your
-application.
-
-Webpack goes way beyond just packing scripts, you can connect it to different
-loaders for different content, use plugins like uglify, watch your filesystem
-and provide auto updates, connect to dev mode middleware and create a dev server.
-
----
-
-# Short list of things we've webpacked:
+### "modules" in webpack
 
 - Source Code
 - HTML
+- Templates (Handlebars, Lodash, etc)
 - Style (CSS, SASS, Stylus, Less)
 - Images (png, jpg, gif)
 - Other assets (mp3, mpeg)
@@ -171,5 +143,33 @@ and provide auto updates, connect to dev mode middleware and create a dev server
 
 ???
 
-And here is just a short list of some of the assets we've personally used with
-webpack.
+Webpack also allows you to bundle static content like HTML, CSS, and images.  This allows you to bundle the non-javascript dependencies with our javascript.
+
+Webpack goes way beyond just packing scripts, in webpack you can use loaders and plugins to enhance your development workflows.
+
+(((pause on this for a few seconds)))
+---
+
+# Module Bundlers (recap)
+
+- RequireJS
+- Browserify
+- **Webpack**
+
+-------
+
+### Bundlers provide:
+- Developer Experience
+- User Experience
+- Module Formats
+- Efficient Bundles
+
+???
+
+So we have covered the three common module bundlers.
+
+We've also talked about why...
+
+- Module bundlers improve developer and user experience
+- and should support the module formats we need
+- and should help us build the most efficient bundles for our users

@@ -1,6 +1,6 @@
 class: center, middle
 # Dev Server
-
+Illustate me?
 ???
 
 Section 5
@@ -16,7 +16,9 @@ Section 5
 ???
 
 Webpack dev server is a great addition to the ecosystem.  It allows us to watch
-our source code for changes, rebuild, and see those changes in the browser.
+our source code for changes, rebuild automatically, and see those changes in the browser.
+
+It also acts as webserver for us while developing, hosting static content like images and html alongside the built output bundle.
 
 ---
 
@@ -30,7 +32,7 @@ npm install --save-dev webpack-dev-server
 ```json
 {
   "scripts": {
-    "build": "webpack",
+    "build": "webpack && cp -R index.html img styles dist"
     "dev": "webpack-dev-server"
   }
 }
@@ -42,9 +44,9 @@ Here is how we setup webpack-dev-server.  We need to `npm install` it just like 
 
 ---
 
-# Common Options
-The most common options you might need to specify with webpack-dev-server are host and port:
+# Configuring dev server
 
+### Command line arguments:
 ```shell
 webpack-dev-server --port 3000 --host 0.0.0.0
 ```
@@ -63,4 +65,12 @@ module.exports = {
 
 ???
 
-Webpack dev server has quite a few options that are documented on the website, but the most common and important ones will be `host` and `port`.  Here is an example of how you can configure dev-server to listen on a different host and port.
+Webpack dev server has quite a few options that are documented on the website, for the purpose of our exercise, we shouldn't need these, but we would like to show you how anyway.
+
+In our example slide here, `host` and `port` are reconfigured to listen on port 3000, and allow outside connections (the default only listens on localhost).
+
+We can either pass these options as command line arguments, or, we can set some values on the `devServer` property of our webpack config.
+
+-------
+
+Does anyone have any questions before we try adding dev server to our meme generator?

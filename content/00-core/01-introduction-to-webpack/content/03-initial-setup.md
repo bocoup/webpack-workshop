@@ -1,9 +1,9 @@
 class: center, middle
-# Initial Setup
+# Installing webpack with basic configurations
 
 ???
 
-Section 3
+Enough of the background knowledge, let's go how we install and configure webpack the first time.  We have a short excercise to practice this process after this section.
 
 ---
 
@@ -18,7 +18,9 @@ Section 3
 ???
 We've talked a little about how webpack works, but lets talk about how to install it.
 
-Webpack installation is done through npm, install the `webpack` package.
+Webpack installation is done through npm, you will need a `package.json` for your project which you can create very quickly with `npm init --yes`  We use `--yes` to skip a bunch of questions it would normally ask, all of this information you can change by editing `package.json`
+
+In order to install the `webpack` package, we want to install via NPM and make sure to save it as a development depenedency.
 
 ---
 
@@ -31,23 +33,14 @@ Webpack installation is done through npm, install the `webpack` package.
 }
 ```
 
-### or as a shell command
-```shell
-export PATH=node_modules/.bin:$PATH
-webpack
-```
-
 ### or combined with grunt, gulp, or broccoli
 (if you already use these tools)
 
 ???
 
-You should define a script in your `package.json` that creates an `npm run` command, this is the best way
-to run npm packages installed in a projects `node_modules`.
+After installing webpack, you should define a script in your `package.json` to launch it.  This creates an `npm run` command, and is the most cross-platform, and self-documenting way to run npm packages.
 
-When working on node projects, it often helps to add the `node_modules/.bin` to your shells `PATH` anyway, which would let you run `webpack` from the shell directly.
-
-Webpack can be used as its own tool creating a standalone build process for simple projects and for complex projects can be integrated into tools like grunt, gulp, and broccoli.
+Webpack can be used as its own tool creating a standalone build process for simple projects, or for complex projects webpack can be integrated into existing toolchains like grunt, gulp, and broccoli.
 
 ---
 
@@ -57,7 +50,9 @@ Webpack can be used as its own tool creating a standalone build process for simp
 
 ```js
 module.exports = {
+  // Base directory
   context: __dirname,
+  // The "first" module - requires the `./`
   entry: './src/main.js',
   output: {
     path: 'dist',
@@ -68,14 +63,14 @@ module.exports = {
 
 ???
 
-We are bringing this slide back once again to talk about the most basic configuration.
-
 By default, webpack will look for the `webpack.config.js`, so we name our configuration file that.
 
-We have to tell webpack the "context" (base directory) of our project, NodeJS provides us `__dirname` constant to mean the name of the directory of the current file, so this is very convenient.
+We have to tell webpack the "context" (base directory) of our project, NodeJS provides us `__dirname` constant to mean the name of the directory of the current file, so this is very convenient value for that context.
 
-Again, Entry, from the M.E.CH.A means "where we start", so we point this at whatever contains our "main application".
+Again, Entry, from the M.E.CH.A means "where we start", so we point this at whatever contains our "main application", in our exercise this will be `src/main.js`.  Note we need the `./` to indicate it is a relative path.
 
-The output configuration, we provide a path and a filename.
+The output configuration is fairly simple at this point, we want to provide a path and a filename.
 
-That sums up how we install and get the most simple webpack configuration running, lets give it a shot!
+------
+
+That sums up how we install and get the most simple webpack configuration running, are there any questions before we move onto the exercise?

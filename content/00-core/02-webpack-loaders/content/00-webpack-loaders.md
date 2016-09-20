@@ -15,15 +15,21 @@ In the second part we are going to talk about loaders.
 
 As a general module bundler, you can use different **loaders** with webpack.
 
-Loaders modify individual modules, providing the magic for developing with webpack, beyond the built-in configuration options.
+Loaders can modify individual modules in many ways:
+- Parse files
+- Return objects
+- Return urls
+- Emit assets
 
 ???
 
-A lot of the magic for developing with webpack comes from loaders. Outside of webpack's built-in configuration options, loaders have a large impact on what can be done with webpack. Loaders have a very small focus, modifying individual modules.
+Loaders are webpack extensions which allow you to modify how modules are loaded.
 
----
+Loaders are capable of doing many things, however...
 
-# Single Responsibility Loaders
+--
+
+### Single Responsibility Loaders
 
 Loaders should do one thing, and do it well.
 
@@ -34,11 +40,11 @@ const highlightedHtml = require('syntax-loader!docblock-loader!./source.js');
 ```
 
 ???
-You may have heard this about, well, everything in programming. Single responsibility principles.
+Loaders should do one thing and do it well.  You may of heard this principle used in other software development, and the ideal for loaders is the same.
 
-The ideal for loaders works the same. Just like you could pair two functions to build more complex behaviour in an application, you can easily combine multiple loaders in a chain.
+Just like you can combine multiple functions to build more complex behaviour in an application, you can easily combine multiple loaders in a chain.
 
-Each loader to manipulate the asset in some way, parse CSV, inline data-uri, etc are just some of the possibilities.
+Each loader will manipulate the module in some way, parse CSV, inline a data-uri, etc are just some of the possibilities.
 
 
 ---
@@ -52,4 +58,8 @@ Each loader to manipulate the asset in some way, parse CSV, inline data-uri, etc
 ???
 
 In this section we are going to focus on 3 very common loaders and how to configure them. Our goal is to take some of the assets we have in our meme generator and bundle them in with our `dist/` folder.
+
+-----
+
+Any questions before we dive into `file-loader`?
 

@@ -26,16 +26,14 @@ class: center, middle
 # Exercise 06 - Production
 
 - require **`webpack`** at the beginning of the config
-- Add **`UglifyJs`** and **`Define`** plugins
+- Add **`UglifyJsPlugin`** and **`DefinePlugin`**
 - Restart the dev server if running
 - Notice how much longer it takes now?
 - Make a second production config with ExtractText, Uglify, and Define
 - Remove ExtractText, Uglify, and Define from **`webpack.config.js`**
-- Update the npm build script to use  
+- Update the npm build script to use
   **`webpack --config webpack.config.production.js`**
-- Add a **`if () {} else {}`** block in `main.js` to demonstrate DefinePlugin  
-  (it could for example change the images available or just console.log)
-- Check out different of your `if/else` block causes between a development build and a production build
+- Note that the "debug mode" console log in our main.js doesn't exist in the `dist` output
 
 ---
 

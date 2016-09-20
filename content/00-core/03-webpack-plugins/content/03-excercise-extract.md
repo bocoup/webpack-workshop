@@ -6,17 +6,21 @@ class: center, middle
 
 # Recap - CSS and HTML files
 
-## ExtractTextPlugin
+## ExtractTextWebpackPlugin
 
 - Uses loaders to determine css to extract
 - Uses a plugin instance to determine what to call the css file
 - `[contenthash].css` as the file name will output a css file with a hash of the content
 
-## HtmlPlugin
+## HtmlWebpackPlugin
 
 - Renders a template
 - Injects `<link>` and `<script>` tags into the rendered html
 - Outputs the html in the output directory
+
+???
+
+
 
 ---
 
@@ -41,6 +45,9 @@ class: center, middle
 **`webpack.config.js`**
 
 ```js
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlPlugin = require('html-webpack-plugin');
+// ....
 module: {
   loaders: [
     // other loaders
@@ -65,3 +72,9 @@ plugins: [
 "scripts": {
   "build": "webpack",
 ```
+
+???
+
+------
+
+Any questions before we move on to some final details on "production builds" and optimizations?

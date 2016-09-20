@@ -10,11 +10,15 @@ var imageURL = 'img/bunny-725x544.jpg';
 var imageURL = require('./img/bunny-725x544.jpg');
 // This will bundle the file as an asset to the output folder
 // and give us the relative URL.
+
+// this "module" for './img/bunny-725x544.jpg' would look like:
+module.exports = 'cbbb18816b6ef832d2498a285503e663.jpg';
 ```
+
 
 ???
 
-The `file-loader` takes the content of a file and emits it as an asset (to the "dist" folder).  It then returns a script that at runtime returns a path to the emitted asset relative to the running script.
+File loader is interesting because it does not return the file itself, but instead will emit that file as an asset to the output directory, and return the URL to it at runtime.
 
 You can use `file-loader` to emit any files including images and fonts.
 
@@ -28,7 +32,7 @@ npm install file-loader --save-dev
 
 ???
 
-We need to first install the `file-loader` package with npm.
+Installing file loader follows our common pattern of installing the `file-loader` package with npm and saving it as a dev dependency...
 
 --
 ### `module.loaders` in `webpack.config.js`
@@ -52,7 +56,7 @@ Next we need to setup a `module.loaders` array in the webpack config file.
 
 We define a `test` that is a regular expression matching the filename, in this case
 we want to match files ending with `.jpg` or `.png`, and then we tell webpack which
-loader to use by default for these files.
+loader to use automatically for the files that pass the test.
 
 ---
 
@@ -81,3 +85,19 @@ cbbb18816b6ef832d2498a285503e663.jpg  33.3 kB          [emitted]
 f3db6422367750ca9c3711498d83e0f2.jpg  89.2 kB          [emitted]
                              main.js   310 kB       0  [emitted]  main
 ```
+
+???
+
+Let's take a look at how file-loader works again.
+
+We can see here in the JavaScript we are requireing 3 images.  If we were to console.log the variable, we will get 3 urls back.
+
+We also see that when we `npm run build` we are emitting 3 `.jpg` files that correspond to the three images we used in the JavaScript.
+
+This also has lovely side-effect of generating errors while compiling if your images are missing, the same way as if your JavaScript file is missing (or mis-spelt)
+
+------
+
+It's a very interesting loader to start with, it will allow us to remove the `img` directory from the things we are copying manually in our build step!
+
+Does anyone have any questions before we try it out with our meme generator?

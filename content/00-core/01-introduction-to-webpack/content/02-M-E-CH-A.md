@@ -1,58 +1,9 @@
 class: center, middle
 # M.E.CH.A.
-
+Illustration? Voltronish thing
 ???
 
-Section 2
-
----
-
-# Webpack
-
-## Modules
-
-- AMD
-- CommonJS
-- ES Modules<sub>\*</sub>
-
-<sub>\*</sub> Webpack 1.x with a common configuration setup easily handles es2015 modules.
-
-Webpack 2, in beta, adds to its parser so it can understand es2015 modules and provides "tree shaking" like Rollup
-
-???
-
-Webpack supports both AMD and CommonJS ways to describe modules and the files
-they depend on. It is even possible with plugins to use Angular v1's style to
-describe modules.
-
----
-
-# The most basic webpack configuration
-
-### `webpack.config.js`
-
-```js
-module.exports = {
-  context: __dirname,
-  entry: './src/main.js',
-  output: {
-    path: 'dist',
-    filename: 'main.js',
-  },
-};
-```
-Note that the webpack config is used by NodeJS so we use the CommonJS `module.exports`
-
-1. root __context__, where _modules_ are relative to
-2. __entry__ point relative to the _context_
-3. __output__ __path__, to place all output _assets_
-  1. __filename__ template for all output _chunks_
-
-???
-
-The most basic webpack configuration needs to define the root context of a package, where the modules it'll contain are relative to, an entry point, an output path to place all output assets, and a filename template for all output chunks.
-
-You might not realize it, but we already taught you `M.E.CH.A`...
+In webpack, there are 4 core concepts at work that when combined form the ultimate robot module bundler
 
 ---
 
@@ -64,20 +15,23 @@ You might not realize it, but we already taught you `M.E.CH.A`...
 - __A__ssets
 
 ???
+Mecha: Modules, entry, chunks, and assets.
 
-Let's discuss these terms in more detail
+Let's discuss each of these terms in more detail...
 
 ---
 
 # Modules
 
-## The Webpack units
-
-A **module** is a unit in webpack output. Sometimes they are just input files, other times webpack and plugins create them to store information to supply a related webpack or plugin's feature.
+- Executable JavaScript
+- Find Dependencies
+- Load those Dependencies as Modules
 
 ???
 
-A module is a unit in webpack output. Its too simple to say they are input files for webpack. Webpack and plugins can produce modules without an existing file or a module may be produced to refer some other thing. Commonly though they will be files included in the webpack compilation process.
+A **module** is a unit in webpack output. Sometimes they are just input files but loaders and plugins can produce modules without an existing file.
+
+Webpack determines from the module any dependencies and loads them as modules.
 
 --
 
@@ -93,21 +47,23 @@ Application.prototype.render = function() {
 ```
 
 ???
-Note that we are exporting our application via the CommonJS `module.exports`
+In this example module, we are exporting our application via the CommonJS `module.exports`
 
 ---
 
 # Entry
 
-## Where webpack starts
+### The "first" module
 
-An **entry** is the first module to be executed in a script using webpack. This entry can then call on other modules through dependencies.
-
-Entries are special modules where no other module may depend on them. Every other module may refer to any other module, even circularly.
+### **CAN NOT** be a dependency
 
 ???
 
-_Lets start_ with where webpack starts, the entry. The entry is a module that is the first to be executed in a script. Right after webpack's output does a little startup it'll call the entry source code. This entry can then call on other dependencies. Entries are special in that no other module may depend on them. Every other module may refer to any module, even circularly. (Webpack won't stop you from creating stack overflows so be careful.)
+ The "Entry" is the first module to be loaded and executed in a script using webpack.  It then loads its dependencies, which loads its dependencies, etc.
+
+ Entries are special in that no other module may depend on them.
+
+ Every other module may refer to any module, even circularly, though we wouldn't suggest it...
 
 --
 
@@ -120,46 +76,49 @@ new Application({
 ```
 
 ???
-And again, note that to take our exported function from the previous slide, we use `require`
+In this example entry, we use `require` to get the application we created in the previous slide, and start it.
 
 ---
 
 # Chunks
 
-## Where modules are collected to.
-
-They are just chunks of modules. Most often they will represent the output with the filename template. An `output.filename` webpack options set to something like `'[name].js'` would end up like `'main.js'`.
-
-Chunks are also used by plugins on transform operations in many ways to help with optimizing an app.
+## Collections of Modules
 
 ???
 
-Webpack collects modules into chunks. They are really just that -- chunks of modules. Most often they use a filename template but plugins can transform them to be output in other ways to help with optimizing an app for users.
+Webpack collects modules into chunks. They are really just that -- a collection of modules. Most often they use a filename template but plugins can transform them to be output in other ways to help with optimizing an application for users.
 
 ---
 
 # Assets
 
-## Any output file
+## Any string or buffer that will be output
 
 Everything webpack outputs is an asset.
 
-- Chunks are output as assets
-- Non-inline source maps are output as assets
-- Images and other files required through file-loader are output as assets
-- ExtractText outputs css files as assets
-
-In this way assets are any binary or utf8 content that will be output at some file name.
+- Images and other files required are turned into assets
+- Chunks of Modules are transformed into assets
+- Through a plugin CSS handled by webpack can be turned into assets
 
 ???
 
-In webpack, an asset is any output file. Modules can have assets. Chunks can have assets. A run of the compiler can have assets. This last part is interesting to consider. Chunks are not just written out to the file system once they are ready, they are also transformed into assets that in webpack's file step are emitted like any other asset. To ground asset a little, you can include non source files like images in the webpack process, these are transformed into assets that in that final step like the assets produced from chunks are emitted to the file system.
+A webpack asset is a file that has yet to be written to the output directory. Webpack builds up a list of assets through modules, chunks, and plugins. Modules can create assets like images and data files, and Webpack and plugins create assets from chunks and other groups of information.
 
 ---
 
 # Reviewing the M.E.CH.A
 
-- Modules are units
-- Entry is the starting module
-- Chunks are the collected modules
-- Asset are any output files
+- __M__odules are input
+- __E__ntry is the starting module
+- __Ch__unks are the collected modules
+- __A__ssets are output, built from chunks, etc
+
+???
+
+So just to briefly cover each of these again, Modules are input, Entry is the starting module, Chunks are collections of modules, and Assets are output.
+
+There is a lot of nuance to each of these terms, but we hope that having a general level of knowledge will help you understand how webpack works as we continue through this course.
+
+-------
+
+Are there any questions before we continue on to installing webpack?

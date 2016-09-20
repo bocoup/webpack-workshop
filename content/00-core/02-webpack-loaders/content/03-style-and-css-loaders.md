@@ -5,11 +5,13 @@
 
 ???
 
-The style and css loaders a perfect example of letting one loader consume another loaders output.
+The style and css loaders are a perfect example of one loader consuming another loaders output.
 
-`css-loader` creates a js script that evaluates the css, translates @import and urls to requires, and returns an object that has a `toString` method, allowing `style-loader` to parse the return from `css-loader` and create a module that adds a `<style>` tag to the DOM.
+`css-loader` will evaluate the css.  It translates @import and urls to use requires and creates a module.  That module exports an object that has a `toString` method that outputs the css as a string!
 
-The result in the end, is that `require('style.css')` will allow our css to become a part of webpack's output chunks, and be stored in our `dist/` folder.
+`style-loader` can then use the module from `css-loader` and create a module that adds a `<style>` tag to the DOM.
+
+The result in the end, is that `require('./style.css')` will allow our css to become a module in webpack's output chunks, and be stored in our `dist/` folder.
 
 ---
 # Installing style and css loader.
@@ -26,28 +28,13 @@ These loaders are also predictably named on npm, and we save them to our dev dep
 
 # Importing your style with JS
 
-- `src/`
-  - `main.js`
-- `styles/`
-  - `all.css`
-- `webpack.config.js`
-
-???
-
-Loading your style files means you can load it as a module.
-
-Let's say you have an app structure like this:
-
----
-
-# Importing your style with JS
-
 ### webpack.config.js
 ```js
 module.exports = {
   // ...
   module: {
     loaders: [
+      // file-loader here... ,
       {
         test: /\.css$/,
         loader: 'style-loader!css-loader',
@@ -59,8 +46,7 @@ module.exports = {
 
 ???
 
-...and your `webpack.config.js` is set to use the `style-loader`:
-
+To use the loaders, we need to add another test and loader to our `module.loaders` in our webpack config.  Note that we use an exlamation point (bang) to separate and chain the loader output.  This style-bang-css means that style loader loads the output from css loader loading the file...
 
 --
 
@@ -70,7 +56,7 @@ require('../styles/all.css');
 ```
 
 ???
-Now you can import that module with your `src/main.js`:
+Now you can import that module from your `src/main.js`:
 
 Done! This will add a style tag to your document, directly from your JS bundle.
 
@@ -118,7 +104,10 @@ f3db6422367750ca9c3711498d83e0f2.jpg  89.2 kB          [emitted]
 
 ???
 
-Note that unlike `file-loader` which emitted the assests, `css-loader` exports a module!
+Note that unlike `file-loader` which emitted the assests, `css-loader` and `style-loader` export modules!
 
-This means that the `.css` code is embedded inside of our `.js` code now!  We will be able to remove the `<link>` tag from our HTML, and `style-loader` will inject it for us
-at runtime!
+This means that the `.css` code is embedded inside of our `.js` code now!  We will be able to remove the `<link>` tag from our HTML, and `style-loader` will inject a `<style>` for us at runtime!
+
+-------
+
+Any questions before we try this out in our meme generator?

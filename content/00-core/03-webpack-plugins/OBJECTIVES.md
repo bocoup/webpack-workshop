@@ -1,1 +1,2 @@
 - Students will be able to explain what webpack plugins are and how to use them
+- Students will have used ExtractText, Html, Uglify and Define plugins
