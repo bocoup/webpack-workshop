@@ -17,7 +17,7 @@ In webpack, there are 4 core concepts at work that when combined form the ultima
 ???
 Mecha: Modules, entry, chunks, and assets.
 
-Let's discuss each these terms in more detail
+Let's discuss each of these terms in more detail...
 
 ---
 
@@ -59,7 +59,7 @@ In this example module, we are exporting our application via the CommonJS `modul
 
 ???
 
- The "Entry" is the first module to be loaded and executed in a script using webpack.  It then loads its depenencies, which loads its depencencies, etc.
+ The "Entry" is the first module to be loaded and executed in a script using webpack.  It then loads its dependencies, which loads its dependencies, etc.
 
  Entries are special in that no other module may depend on them.
 
@@ -86,7 +86,7 @@ In this example entry, we use `require` to get the application we created in the
 
 ???
 
-Webpack collects modules into chunks. They are really just that -- chunks of modules. Most often they use a filename template but plugins can transform them to be output in other ways to help with optimizing an application for users.
+Webpack collects modules into chunks. They are really just that -- a collection of modules. Most often they use a filename template but plugins can transform them to be output in other ways to help with optimizing an application for users.
 
 ---
 
