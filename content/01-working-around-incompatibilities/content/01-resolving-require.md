@@ -1,3 +1,5 @@
+
+
 # Resolving `require()`
 
 - Absolute:
@@ -192,7 +194,7 @@ const method = require('mylibrary').method;
 
 Another very strong use case for creating resolve alias for modules is testing.
 
-If we are using webpack to produce a library, ee should write our tests as if we were consumers of our library.  We shouldn't require realative paths to `src` to get to our methods to test, we should test the publicly exported API.
+If we are using webpack to produce a library, we should write our tests as if we were consumers of our library.  We shouldn't require realative paths to `src` to get to our methods to test, we should test the publicly exported API.
 
 
 Using resolve aliases, we can write our tests using `require('mylibrary')` and still have the advantage of using the `src` files in dev mode, but be able to easily swap out that dependency and run tests against the minified production version.
@@ -222,6 +224,7 @@ So we check aliases, and this new path that we get is then resolved.  If we didn
 - [`fallback`](https://webpack.github.io/docs/configuration.html#resolve-fallback)
 
 ```js
+// default: only modulesDirectories: ['node_modules']
 resolve: {
   root: [path.resolve('./vendor'), path.resolve('./module_override')],
   modulesDirectories: ['node_modules', 'bower_components'],
