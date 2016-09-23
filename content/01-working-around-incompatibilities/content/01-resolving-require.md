@@ -71,7 +71,7 @@ Let's talk about what happens when we try to require a directory... First webpac
 
 In our example here, we are trying to include the `package` directory, which has a `package.json` who has a "browser" key defined, so we append that path to the directory, and require that file.
 
-This list of packageMains here is the default setting, and you can see, webpack searches pretty hard for this main file.
+`packageMains` is a list of fields that webpack looks for on package.json to find the modules "main entry",  the value here is the default setting, and you can see, webpack searches pretty hard for this main file.
 
 ---
 
@@ -88,7 +88,7 @@ require('/home/me/directory/index');
 
 ???
 
-If there isn't a package.json, or we don't find a main field in the package, we default to using a filename of `index` (no extension... yet)
+If there isn't a package.json, or we don't find a main field in the package, we default to using a filename of `index` (no extension... yet).  This behavior should be familiar if you've done any node development.
 
 ---
 
@@ -142,7 +142,7 @@ module.exports = {
       // require('jquery/src/file');
       // using "jquery$" as an alias - this IS AN ERROR
       // but with "jquery" you'd get
-      // vendor/jquery/sub/file
+      // vendor/jquery/src/file
     }
   }
 }
@@ -156,6 +156,8 @@ Alright, now that we know what happens when you have a relative or absolute path
 
 
 First, webpack will look in the `resolve.alias` configuration for a match.  Each key on this configuration object represents a "module name".  In our example here, we are making `require('jquery')` find jquery in our vendor folder.  Note that it is important to use an absolute path here.  This is a pretty simple search and replace operation.  If you use a relative path, it will be relative based on where the `require` is called, not the webpack config.
+
+The `$` is a bit tricky, when you have a `$` webpack looks for EXACT MATCH only.  You should use the `$` if your alias points to a single file, or leave it off if you want to be able to require files within the module directory.
 
 It is possible to alias one module to another module path as well as relative and absolute paths.
 
