@@ -1,5 +1,12 @@
 # `script-loader`
 
+```js
+// in something like app.js
+require('script-loader!../vendor/jquery-1.9.min.js')
+// equivalent to doing this in the html:
+// <script src="vendor/jquery-1.9.min.js"></script>
+```
+
 - Approximates loading the script in a global `<script>` tag in HTML.
 
 ???
@@ -31,11 +38,28 @@ This also means that the script is stored as a STRING in your javascript, and we
 # `script-loader`
 
 ```js
-// Load jQuery as a global script!
+// Assuming we installed jquery via npm: `npm install jquery@1.9`
+// Load jQuery using script-loader
 require('script-loader!jquery')
 
 // jQuery exported itself to the global context!
 console.log(jQuery);
+```
+Or configure in your webpack config:
+```js
+module.exports = {
+  module: {
+    loaders: [
+      {
+        // we usually only use "test" for extensions
+        test: /\.js$/,
+        // only include files in this directory
+        include: [path.resolve('./node_modules/jquery')],
+        loader: 'script-loader',
+      }
+    ]
+  }
+}
 ```
 
 ???

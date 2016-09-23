@@ -1,5 +1,3 @@
-
-
 # Resolving `require()`
 
 - Absolute:
@@ -176,17 +174,16 @@ const method = require('mylibrary').method;
 ```
 
 ```js
-  // In a "dev mode" test config
-  // stack traces will be from uncompressed, original source
   resolve: {
     alias: {
+      // In a "dev mode" configuration, use the unbundled src folder
       mylibrary: path.resolve('./src/index.js'),
+      // In a "post-build test mode" config you can test against minified output:
+      mylibrary: path.resolve('./dist/mylibrary.min.js'),
     }
   },
 
 
-  // In a "build mode" config you could then test against minified output:
-      mylibrary: path.resolve('./dist/mylibrary.min.js'),
 ```
 
 
@@ -195,7 +192,6 @@ const method = require('mylibrary').method;
 Another very strong use case for creating resolve alias for modules is testing.
 
 If we are using webpack to produce a library, we should write our tests as if we were consumers of our library.  We shouldn't require realative paths to `src` to get to our methods to test, we should test the publicly exported API.
-
 
 Using resolve aliases, we can write our tests using `require('mylibrary')` and still have the advantage of using the `src` files in dev mode, but be able to easily swap out that dependency and run tests against the minified production version.
 
@@ -208,7 +204,7 @@ require('module');
 require('module/with/path/to/file');
 ```
 
-- Check Aliases
+- First: Check Aliases
   - Result is a new path, which is resolved (absolute, relative, or module)
 
 ???
@@ -218,10 +214,10 @@ So we check aliases, and this new path that we get is then resolved.  If we didn
 --
 
 ### Still have a "module" path???  Hunt for it!
-
-- [`root`](https://webpack.github.io/docs/configuration.html#resolve-root)
-- [`modulesDirectories`](https://webpack.github.io/docs/configuration.html#resolve-modulesdirectories)
-- [`fallback`](https://webpack.github.io/docs/configuration.html#resolve-fallback)
+- Hunting order:
+  1. [`root`](https://webpack.github.io/docs/configuration.html#resolve-root)
+  2. [`modulesDirectories`](https://webpack.github.io/docs/configuration.html#resolve-modulesdirectories)
+  3. [`fallback`](https://webpack.github.io/docs/configuration.html#resolve-fallback)
 
 ```js
 // default: only modulesDirectories: ['node_modules']
@@ -273,7 +269,7 @@ Now that it's found the directory for the module, webpack will treat it like an 
 
 To recap the options we have available to teach webpack how to resolve requires.
 
-`packageMains` - this option is good to know about, but we find the defaults to be what you want in most cases, and other methods help with the "odd packages"
+`packageMains` - We showed you this setting mainly to describe how webpack finds the "main file" for a given package, the defaults will most likely be correct for your projects.
 
 `extensions` is a useful way to add more things to the auto-resolver capabilities.  This is where you'd add `jsx` or `coffee` extensions to be auto-resolved.
 

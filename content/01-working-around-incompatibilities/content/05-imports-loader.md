@@ -36,11 +36,15 @@ if we switch to use the arrow instead of just an equal here, we can set vars to 
 # `ProvidePlugin` - imports at a whole new level
 
 ```js
-new webpack.ProvidePlugin({
-    $: "jquery",
-    jQuery: "jquery",
-    "window.jQuery": "jquery"
-})
+{
+  plugins: [
+    new webpack.ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery",
+        "window.jQuery": "jquery"
+    })
+  ]
+}
 ```
 
 Similar to, but way better than:
