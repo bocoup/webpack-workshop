@@ -7,11 +7,17 @@ In webpack, there are 4 core concepts at work that when combined form the ultima
 
 ---
 
-# The webpack M.E.CH.A.
+# The webpack _M.E.CH.A._ Metaphor
 
 - __M__odules
+--
+
 - __E__ntry
+--
+
 - __CH__unks
+--
+
 - __A__ssets
 
 ???
@@ -21,19 +27,27 @@ Let's discuss each of these terms in more detail...
 
 ---
 
-# Modules
+# MEChA: Modules
 
-- Executable JavaScript
-- Find Dependencies
-- Load those Dependencies as Modules
+A _module_ is a single unit in webpack's output.
+
+--
+
+A module:
+
+- Is executable JavaScript
+- Declares where its dependencies are...
+- Such that webpack can load those dependencies as modules
 
 ???
 
-A **module** is a unit in webpack output. Sometimes they are just input files but loaders and plugins can produce modules without an existing file.
+A __module__ is a unit in webpack output. Sometimes they are just input files but loaders and plugins can produce modules without an existing file.
 
 Webpack determines from the module any dependencies and loads them as modules.
 
 --
+
+### Module Example
 
 ```javascript
 module.exports = function Application(options) {
@@ -51,11 +65,15 @@ In this example module, we are exporting our application via the CommonJS `modul
 
 ---
 
-# Entry
+# MEChA: Entry
 
-### The "first" module
+Every webpack configuration must contain an __entry__ module, which is where webpack "starts" its work.
 
-### **CAN NOT** be a dependency
+--
+
+### Entry **cannot** be a dependency
+
+_Entry_ is where webpack begins, so it cannot itself be a dependency (i.e. other modules cannot depend on the _entry_ module).
 
 ???
 
@@ -66,6 +84,8 @@ In this example module, we are exporting our application via the CommonJS `modul
  Every other module may refer to any module, even circularly, though we wouldn't suggest it...
 
 --
+
+### Entry Example
 
 ```javascript
 var Application = require('./application');
@@ -80,9 +100,9 @@ In this example entry, we use `require` to get the application we created in the
 
 ---
 
-# Chunks
+# MEChA: Chunks
 
-## Collections of Modules
+Webpack organizes modules into __chunks__, which are collections of modules.
 
 ???
 
@@ -90,15 +110,18 @@ Webpack collects modules into chunks. They are really just that -- a collection 
 
 ---
 
-# Assets
+# MEChA: Assets
 
-## Any string or buffer that will be output
+An __asset__ is any file (e.g. String or Buffer) that webpack outputs, but has not yet been written to an output directory.
 
-Everything webpack outputs is an asset.
+--
 
-- Images and other files required are turned into assets
-- Chunks of Modules are transformed into assets
-- Through a plugin CSS handled by webpack can be turned into assets
+### Examples of Things Webpack Transforms to Assets
+
+- Required files
+- Required images
+- Chunks of modules
+- CSS (by using a plugin)
 
 ???
 
@@ -111,7 +134,7 @@ A webpack asset is a file that has yet to be written to the output directory. We
 - __M__odules are input
 - __E__ntry is the starting module
 - __Ch__unks are the collected modules
-- __A__ssets are output, built from chunks, etc
+- __A__ssets are output, built from chunks, etc.
 
 ???
 
