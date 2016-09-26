@@ -24,18 +24,18 @@ Section 6
 
 ---
 
-# Exercise 02 - Add dev server
+# Exercise 02 - Add Dev Server
 
-#### Recap
+### Recap
 
 `webpack-dev-server` runs wepback in a server and serves static files. It provides fast rebuilds by using a memory cache.
 
 #### Goals
 
-* Install the **`webpack-dev-server`** package in our first app.
-* Add script in package.json for **`npm start`**
+* Install the **`webpack-dev-server`** package in our app
+* Add `scripts` entry package.json for **`npm run dev`**
   (this command doesn't need to copy files)
-* Run a dev server and open **`localhost:8080`**
+* Start the dev server and open **`localhost:8080`**
 * Change the default meme text in `src/main.js` and watch it rebuild (terminal)
 * Refresh and see your change in the browser!
 
@@ -49,30 +49,30 @@ That's it.  Let's try it!
 
 ---
 
-# Exercise 02 - Answer Overview
+# Exercise 2 Answer: Dev Server Setup Steps
 
-**`npm install webpack-dev-server --save-dev`**
+1. **Install `webpack-dev-server`**:
 
-**`package.json`**: added script
+    ```shell
+    npm install webpack-dev-server --save-dev
+    ```
 
-```json
-"scripts": {
-  "build": "webpack && cp -R index.html img styles dist",
-  "dev": "webpack-dev-server",
-}
-```
+2. **Configure `dev` script in `package.json`**:
 
-**`npm run dev`**: started our dev server
+    ```json
+    "scripts": {
+      "build": "webpack && cp -R index.html img styles dist",
+      "dev": "webpack-dev-server",
+    }
+    ```
+3. **Start dev server**: `npm run dev` starts our dev server
+4. **View app in browser**:  Visit http://localhost:8080/
+5. **Change meme text**: Edit `main.js`:
 
-Visted http://localhost:8080/
-
-**`main.js`**: Changed some text
-
-```js
-var currentText = "Work hard, Meme hard";
-```
-
-Saw the rebuild on the console, and in the browser after refresh.
+    ```js
+    var currentText = "Work hard, Meme hard";
+    ```
+6. **Save the changes**: Watch the rebuild in console; refresh browser to see changes
 
 ???
 
