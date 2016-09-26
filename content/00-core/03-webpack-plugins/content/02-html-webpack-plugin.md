@@ -1,14 +1,20 @@
 class: center, middle
 # html-webpack-plugin
 
-# Can I have html as my entry?
+# Can I have HTML as my entry?
 
 ???
 We might find ourselves asking if we can have html as an entry in webpack. The answer to this is no.
 
 However, the common use case can be fulfilled with a plugin.
 
-`html-webpack-plugin` renders a given template and inserts `<script>` and `<link>` tags for js and css assets.
+---
+
+# Well, yes...with a plugin
+
+`html-webpack-plugin` renders a given (HTML) template and inserts `<script>` and `<link>` tags for inclusion of JavaScript and CSS assets.
+
+???
 
 This provides a great way to define the shape of html your app needs to boot into, then connect that HTML to the necessary js and css files automatically.  It also provides the last thing we need to remove the copy from our meme generator.
 ---
@@ -33,11 +39,31 @@ module.exports = {
   ],
 };
 ```
+
+This will render the template at `index.html` and output the results to `index.html` (in the `dist` directory).
 ???
 
 To configure the html plugin we need to refer to a template and output filename.
 
-With only these simple lines of configuration, we can remove the copy command from our build, and the link and script tags will now be added to our html automatically, so we can remove the `<script>` tag from that html as well.
+With only these simple lines of configuration, we can remove the copy command for the HTML from our build, and the link and script tags will now be added to our html automatically, so we can remove the `<script>` tag from that html as well.
+
+---
+
+# Now we can hash!
+
+Webpack and the HTML plugin both provide some useful _hashes_ that can be used in filenames for cache-busting and versioning:
+--
+
+* `[hash]`: Webpack generates a `hash` for a given _build_
+--
+
+* `[contentHash]`: The HTML plugin generates a hash based on the content of assets
+
+Both of these can be referenced from the configuration...
+
+???
+
+Now that we have webpack generating an `index.html` in our `dist` folder, we can take advantage of using the `hash` output features for other output chunks like javascript, and css.
 
 ---
 
@@ -59,6 +85,8 @@ module.exports = {
   ],
 };
 ```
+
+The HTML plugin will automatically create `script` and `link` tags referencing the correct (hashed) filenames once the config is updated as shown.
 
 ???
 
