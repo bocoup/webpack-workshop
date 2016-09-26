@@ -1,17 +1,36 @@
-# The file loader
+# File Loader
 
-Generates a runtime-relative URL for an asset (image, font, mp3, etc).
+The file loader (npm: `file-loader`) generates a runtime-relative URL for an asset (image, font, mp3, etc).
+
+`file-loader` won't return a file—instead, it:
+
+* Emits the file itself as an asset to the output directory and
+* Returns a relative URL to the file's output location
+
+---
+
+# File Loader: In Practice
+
+Instead of:
 
 ```js
-// instead of:
 var imageURL = 'img/bunny-725x544.jpg';
+```
+--
 
-// using file-loader:
+With file-loader, you `require` the asset:
+
+```js
 var imageURL = require('./img/bunny-725x544.jpg');
 // This will bundle the file as an asset to the output folder
-// and give us the relative URL.
+// and give us the relative URL, something like
+// 'cbbb18816b6ef832d2498a285503e663.jpg'
+```
+--
 
-// this "module" for './img/bunny-725x544.jpg' would look like:
+It's as if you just required a module that does this:
+
+```js
 module.exports = 'cbbb18816b6ef832d2498a285503e663.jpg';
 ```
 
@@ -25,6 +44,7 @@ You can use `file-loader` to emit any files including images and fonts.
 ---
 
 # Setting up `file-loader`
+
 ### Install with npm:
 ```shell
 npm install file-loader --save-dev
