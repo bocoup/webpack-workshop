@@ -2,6 +2,8 @@
 
 ### Built-in optimization plugin
 
+__UglifyJS__ is a well-known tool for minifying and compressing JavaScript. It is _built in_ to webpack.
+
 ???
 __UglifyJS__ is a known tool to minify and compress JS code. This is a common and important step for any web application, and a minified output is smaller in bytes transferred (and gets even smaller when gzipped).
 
@@ -12,7 +14,7 @@ Webpack has a built-in __UglifyJSPlugin__ you can use to minify your output sour
 # Configuring uglify plugin
 
 ```js
-var webpack = require('webpack');
+var webpack = require('webpack'); // Require webpack...
 
 // .... other modules stuffs
   plugins: [
@@ -42,13 +44,15 @@ The next time you run webpack, you will get a minified bundle!
   ],
 ```
 
+Make Uglify's output less overwhelming...and we're done!
+
 ???
 
 
 Sometimes the UglifyJSPlugin can overwhelm you with warnings. These warnings
 are not necessarily errors, and there might be a time you want to silence them.
 
-This is a configuration option we can pass to the plugin.   Just keep in mind that using it might hide other important warnings in the future...
+This is a configuration option we can pass to the plugin.  Just keep in mind that using it might hide other important warnings in the future...
 
 ----
 
