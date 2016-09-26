@@ -1,5 +1,7 @@
 # The Define Plugin
 
+The built-in __DefinePlugin__ lets you provide static values that webpack's parser can use to replace specific identifiers within your code.
+
 
 ???
 
@@ -25,7 +27,7 @@ Once you're ready to ship a feature, since those tests have already done their j
 
 # The Define Plugin
 
-webpack.config.js:
+This addition to `webpack.config.js`:
 ```js
   plugins: [
     new webpack.DefinePlugin({
@@ -34,13 +36,18 @@ webpack.config.js:
   ],
 ```
 ----
-then:
+
+--
+
+will cause this source:
+
 ```js
 if (process.env.NODE_ENV !== "production") {
   ...
 }
 ```
-becomes:
+
+to become:
 ```js
 if (false) {
   ...
@@ -62,7 +69,7 @@ From this expression, webpack will replace the value in the if expression, recog
 This never runs!
 
 ```js
-if (false) {
+if (false) { /* ... */ }
 ```
 
 Uglify knows this and removes "dead code"
@@ -73,12 +80,18 @@ Combined with UglifyJS, this code is then removed from our output bundle because
 
 (let it sink in)
 
---
+---
 
-# Only in production
+# Configs for Production and Development
 
 ### webpack.config.js
+
+For our development builds
+
 ### webpack.production.js
+
+For our production builds. Tell `webpack` to use this build in production:
+
 > `webpack --config webpack.production`
 
 
