@@ -6,33 +6,45 @@ class: center, middle
 
 # Recap - Uglify and Define
 
-- Uglify and Define plugins provided by webpack
+- `Uglify` and `Define` plugins are built-in (provided by webpack)
+
+--
 
 ## Uglify
 
-- Runs uglify on output
-- Smaller output than running uglify separately
-- warnings can be turned off with `{compress: {warnings: false}}`
+- Runs `uglify` on output
+- Smaller output than running `uglify` separately
+- warnings can be turned off in config with `{compress: {warnings: false}}`
+
+--
 
 ## Define
 
 - Defines constant values
 - Those values can resolve tests to be always true or always false
-- Paired with Uglify, code under if/else blocks that are always false are removed from Output
-- Define makes code never run, Uglify makes code never download
+- Paired with Uglify, code under if/else blocks that are always false are removed from output
+
+--
+
+_Define makes code never run, Uglify makes code never download_
 
 ---
 
 # Exercise 06 - Production
 
-- require **`webpack`** at the beginning of the config
-- Add **`UglifyJsPlugin`** and **`DefinePlugin`**
-- Restart the dev server if running
-- Notice how much longer it takes now?
-- Make a second production config with ExtractText, Uglify, and Define
-- Remove ExtractText, Uglify, and Define from **`webpack.config.js`**
-- Update the npm build script to use
-  **`webpack --config webpack.config.production.js`**
+### Goals
+
+- **require webpack**: Add new `require` statement at top of config
+- **Add plugin configuration** for `UglifyJsPlugin` and `DefinePlugin`
+- **Restart `dev`** server if running
+- (Notice how much longer it takes now?)
+- **Create a production config**: Add configuration for `ExtractText`, `Uglify` and `Define`
+- **Remove** `ExtractText`, `Uglify` and `Define` from (dev) `webpack.config.js`
+- **Update `build` script** in `package.json` to use
+
+    ```shell
+    webpack --config webpack.config.production.js
+    ```
 - Note that the "debug mode" console log in our main.js doesn't exist in the `dist` output
 
 ---
@@ -47,6 +59,8 @@ plugins: [
 ],
 ```
 
+--
+
 **`webpack.config.production.js`**
 ```js
 plugins: [
@@ -57,6 +71,8 @@ plugins: [
 ],
 ```
 
+--
+
 **`package.json`**
 ```json
 "build": "webpack --config webpack.config.production.js",
@@ -64,7 +80,7 @@ plugins: [
 
 ---
 
-# Exercise 06 - Answer Overview
+# Exercise 06 - Answer Overview (cont.)
 
 **`main.js`**
 ```js
