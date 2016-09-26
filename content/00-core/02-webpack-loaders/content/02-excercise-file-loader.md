@@ -9,19 +9,24 @@ class: center, middle
 ### Recap
 
 - Loaders should do one thing
-- `file-loader` outputs the file to the output directory and returns a url
+- `file-loader` outputs the file to the output directory and returns a URL
+
+---
+# Exercise 03 - Require Files!
 
 ### Goals
 
-- Install **`file-loader`**
-- Configure `module.loaders` in webpack.config for `file-loader`
-  - `{ test: /\.(jpg|png)$/, loader: 'file-loader' }`
-- Restart `npm run dev`
-- In main.js: **`require('../img/filename.jpg')`** images from img folder
-- Remove **`img`** part of `cp` command in `build` script
-- Clean the dist (`rm -rf dist`) and run a new build
-- Notice the image files in `dist`
-- Check application with `serve` from `dist`
+- **Install `file-loader`**
+- **Configure `module.loaders`** in webpack.config:
+    ```js
+    { test: /\.(jpg|png)$/, loader: 'file-loader' }
+    ```
+- **Restart `npm run dev`**
+- **Edit `main.js`**: `require('../img/filename.jpg')` images from `img` folder
+- **Edit `package.json`**: Remove `img` part of `cp` command in `build` script
+- **Clean and build**: Clean the dist (`rm -rf dist`) and run a new build
+- **Notice the image files** in `dist`
+- **Check application** with `serve` from `dist`
 
 ???
 
@@ -51,6 +56,7 @@ module: {
   ],
 },
 ```
+--
 
 **`main.js`**
 
@@ -61,6 +67,7 @@ var imageUrls = [
   require('../img/guinea-pigs-725x544.jpg'),
 ];
 ```
+--
 
 **`package.json`**
 ```
