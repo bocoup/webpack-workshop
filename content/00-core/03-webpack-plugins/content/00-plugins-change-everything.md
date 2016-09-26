@@ -13,9 +13,10 @@ Welcome to the last part of the Core Chapter, Plugins
 
 # Loaders: Recap
 
-Loaders let webpack understand and include files that aren't JavaScript.
+* Loaders let webpack understand and include files that aren't JavaScript.
+--
 
-Loaders work on modules.
+* Loaders work on modules.
 
 ???
 
@@ -27,16 +28,22 @@ In order to do more complicated things, webpack has given us plugins.
 
 # Plugins change everything
 
+Plugins allow considerable customization of the build process. With a plugin you can:
+
 - change parser details
 - write custom transformations
-- utilize the module graph in other ways.
+- utilize the module graph in other ways
+
+--
 
 ### Plugins Used Here
 
-- ExtractTextWebpackPlugin
-- HtmlWebpackPlugin
-- DefinePlugin
-- UgilfyJsPlugin.
+We'll use the following four plugins today to bundle our application:
+
+- `ExtractTextWebpackPlugin`
+- `HtmlWebpackPlugin`
+- `DefinePlugin`
+- `UglifyJsPlugin`
 
 ???
 
@@ -48,11 +55,20 @@ In our quest to bundle our whole application for deployment, we will be includin
 
 # NPM Naming convention
 
-### Loaders: -loader
+### Loaders
 
-### Plugins: -webpack-plugin
+Named with suffix of `-loader`, e.g. `file-loader`
 
-### Tags: webpack, loader, plugin, etc
+### Plugins
+
+Named with suffix of `-webpack-plugin`, e.g. `extract-text-webpack-plugin`
+
+### Tags
+
+* `webpack`
+* `loader`
+* `plugin`
+* etc...
 
 ???
 
