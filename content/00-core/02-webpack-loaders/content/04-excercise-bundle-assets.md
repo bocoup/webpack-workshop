@@ -2,17 +2,17 @@
 
 ### Recap
 
-- css-loader transforms css into javascript that require's @imports and urls
-- style-loader evaluates the javascript from css-loader and places it in a style tag
+- `css-loader` transforms CSS into JavaScript that `require`s `@import`s and `url`s
+- `style-loader` evaluates the JavaScript from `css-loader` and places it in a `style` tag
 
 ### Goals
 
 - Install **`style-loader`** and **`css-loader`**
-- Configure **`.css`** to be loaded by style and css loader
-- Restart dev server if it was already running
+- Configure **`.css`** to be loaded by `style-` and `css-loader`
+- Restart `dev` server script if it was already running
 - Move **`styles`** folder into `src`
 - **`require()`** the css file from `main.js`
-- Remove the `<link>` tag from the `index.html`
+- Remove the `<link>` tag from `index.html`
 - Remove the **`styles`** part of the `cp` command in the build script
 - Clean `dist/`
 - `npm run build` and try `serve` from `dist`
@@ -30,9 +30,14 @@ After you do that, make sure your output bundle still has the proper styles!
 
 # Exercise 04 - Answer Overview
 
-**`npm install --save-dev style-loader css-loader`**: installed our loaders
+### Install the Loaders
 
-**`webpack.config.js`**: added a loader for `.css` files
+**`npm install --save-dev style-loader css-loader`**
+--
+
+### Add Configuration
+
+**`webpack.config.js`**: add a loader for `.css` files
 
 ```js
 module: {
@@ -46,17 +51,29 @@ module: {
 },
 ```
 
-**`main.js`**: require the styles
+---
+# Exercise 04 - Answer Overview (cont.)
+
+### Require the Styles
+
+In `main.js`:
 
 ```js
 require('../styles/all.css');
 ```
+--
 
-**`index.html`**: remove the `<link>` tag
+### Remove `<link>`
 
-**`package.json`**: remove `styles` from the cp:
-```
-  "build": "webpack && cp -R index.html dist"
+**`index.html`**: edit to remove the `<link>` tag
+--
+
+### Update `build` script
+
+Updated `package.json` `build` script (`styles` removed from `cp`):
+
+```js
+"build": "webpack && cp -R index.html dist"
 ```
 
 ???
