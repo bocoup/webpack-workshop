@@ -14,9 +14,9 @@ So we wrote custom build processes to construct a single file from the larger se
 
 ---
 
-# Module bundlers
+# Module bundlers: A Definition
 
-Bundles modules together into a smaller set of files.
+**Module bundler**: Software that _bundles modules_ together into a smaller set of files.
 
 ???
 
@@ -28,34 +28,46 @@ We called these Module Bundlers.
 
 ---
 
-# Module bundlers
+# Module bundlers: Well-known Examples
 
-Some well-known module bundlers:
+Some well-known module bundlers include:
 
-- RequireJS
-- Browserify
+- [RequireJS](http://requirejs.org/)
+- [Browserify](http://browserify.org/)
+--
+
+- **Webpack!**
 
 ???
 
 In the "Module Bundler" category, we have RequireJS and Browserify, and...
 
+---
+
+# RequireJS: The Basics
+
+- One of the earliest well-known bundlers
 --
 
-- **Webpack**
+- Asynchronously loads individual modules
+--
 
-???
+- Supports _Asynchronous Module Definition_ (AMD)
+--
 
-Webpack...
-
+- Companion tool **r.js** performs the bundling
 
 ---
 
-# RequireJS
+# AMD Module Syntax
 
-- One of the earliest well known bundlers
-- Asynchronously loads individual modules
-- Supports Asynchronous Module Definition (AMD)
-- Companion tool **r.js** performs the bundling
+There are several standard ways to define and format _modules_ in JavaScript. AMD is one of them.
+
+--
+
+### AMD Syntax Example
+
+Note the use of `define`.
 
 ```javascript
 // This is an AMD format module
@@ -70,9 +82,9 @@ define(['./dependency.js'], function(dependency) {
 
 ???
 
-One of the most well known module bundlers is Requirejs. It uses the AMD format,
-__Asynchronous__ Module Definition, to describe modules and their dependencies.
-Requirejs uses this format to load modules in the browser with some
+One of the most well known module bundlers is RequireJS. It uses the AMD format—
+__Asynchronous__ Module Definition—to describe modules and their dependencies.
+RequireJS uses this format to load modules in the browser with some
 configuration. Its companion r.js "optimizes" an application into a smaller
 set of files.
 
@@ -84,10 +96,24 @@ The AMD format uses `define`, which is passed an array of dependencies and callb
 
 ---
 
-# Browserify
+# Browserify: The Basics
 
-- Supports CommonJS, the format [Node modules](https://nodejs.org/docs/v0.4.1/api/modules.html#modules) are written in
-- Shims some of the "common" node modules
+- Supports the __CommonJS__ module format
+--
+
+- _Shims_ some of the "common" node modules, making them available in-browser
+
+---
+
+# CommonJS Module Syntax
+
+CommonJS is the format that [Node modules](https://nodejs.org/docs/v0.4.1/api/modules.html#modules) are written in.
+
+--
+
+### CommonJS Syntax Example
+
+Note the use of `require` and `module.exports`:
 
 ```javascript
 var dependency = require('./dependency');
@@ -100,32 +126,42 @@ module.exports = {
 
 ???
 
-Requirejs used the AMD format for defining modules, but around this time node was gaining in popularity, and it's module format (CommonJS) was not supported.
+Requirejs used the AMD format for defining modules, but around this time Node was gaining in popularity, and its module format (CommonJS) was not supported by other bundlers.
 
 Browserify uses CommonJS, which allows most node modules to be used inside the browser.
 
-Here is an example CommonJS module that uses `require` to include dependencies, and `module.exports` to export the module.  Note that this format is **synchronus**, it implies that all depenencies can be synchronusly loaded.
+Here is an example CommonJS module that uses `require` to include dependencies, and `module.exports` to export the module.  Note that this format is **synchronous**, it implies that all dependencies can be synchronously loaded.
 
 ---
 
-# Webpack
+# Webpack: The Basics
 
 - Smart code splitting
+--
+
 - Smaller output bundles
-- Supports AMD
-- Supports CommonJS
-- Pluginable
+--
+
+- Supports AMD...
+--
+
+- _and_ Supports CommonJS
+--
+
+- Plugin-able
+--
+
 - Portable
 
 ???
 
-In very large applications, bundling everything could easily create bundles that were tens or hundreds of megabytes of JavaScript.  Browserify and Require eventually had ways to seperate chunks of the output into loadable "feature" bundles, but the configuration was hard to automate.
+In very large applications, bundling everything could easily create bundles that were tens or hundreds of megabytes of JavaScript.  Browserify and Require eventually had ways to separate chunks of the output into loadable "feature" bundles, but the configuration was hard to automate.
 
-Webpack can analyze the code and be **smarter** about outputing multiple bundles. Webpack also includes a syntax for splitting bundles very intelligently, allowing you to load critical bits of JavaScript only on the first pass, and ensure the additional scripts are loaded before you need to use them.
+Webpack can analyze the code and be **smarter** about outputting multiple bundles. Webpack also includes a syntax for splitting bundles very intelligently, allowing you to load critical bits of JavaScript only on the first pass, and ensure the additional scripts are loaded before you need to use them.
 
 Since webpack is capable of analyzing and transforming JavaScript, it is also able to produce output bundles that are smaller and more portable, not relying on details like file paths to operate at runtime.
 
-It also supports both AMD and CommonJS modules, allowing us to consume a wide variety of javascript modules.  By renaming the `define` and `require` statments to its own syntax, its output bundles may be consumed by requirejs or browserify as well.
+It also supports both AMD and CommonJS modules, allowing us to consume a wide variety of javascript modules.  By renaming the `define` and `require` statements to its own syntax, we can be sure that its output bundles may be consumed by requirejs or browserify as well.
 
 ---
 
@@ -134,12 +170,22 @@ It also supports both AMD and CommonJS modules, allowing us to consume a wide va
 ### "modules" in webpack
 
 - Source Code
+--
+
 - HTML
-- Templates (Handlebars, Lodash, etc)
-- Style (CSS, SASS, Stylus, Less)
-- Images (png, jpg, gif)
-- Other assets (mp3, mpeg)
-- Data (json)
+--
+
+- Templates (e.g. Handlebars, Lodash)
+--
+
+- Styles (e.g. CSS, SASS, Stylus, Less)
+--
+
+- Images (e.g. PNG, JPG, GIF)
+- Other assets (MP3, MPEG)
+--
+
+- Data (JSON)
 
 ???
 
