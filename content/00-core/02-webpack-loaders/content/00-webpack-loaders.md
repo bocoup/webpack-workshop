@@ -13,9 +13,70 @@ In the second part we are going to talk about loaders.
 
 # The loaders transform your world
 
-As a general module bundler, you can use different **loaders** with webpack.
+Webpack is flexible, but it only understands and parses _JavaScript_.
 
-Loaders can modify individual modules in many ways:
+--
+
+Webpack **loaders** transform various kinds of input content into output JavaScript that webpack _can_ understand—files, images, CSS...you name it.
+
+--
+
+**Loaders** allow you to modify _how_ modules are loaded—that is, they can _preprocess_ the files you require or "load".
+
+---
+
+# What Loaders can Do: An Example
+
+One way to apply a loader or multiple loaders to a file is to explicitly define which loaders should be used within a `require` statement:
+
+--
+
+```js
+const highlightedHtml = require('syntax-loader!docblock-loader!./source.js');
+```
+
+Let's break that down...
+
+---
+
+# Loaders: Breaking it Down
+
+```js
+const highlightedHtml = require('syntax-loader!docblock-loader!./source.js');
+```
+
+--
+
+* Each loader is separated with a `!` and listed before the resource being required.
+--
+
+* Loaders are applied _right to left_: the `docblock-loader` is applied first and _then_ `syntax-loader`.
+
+---
+
+# Loaders: Breaking it Down
+
+```js
+const highlightedHtml = require('syntax-loader!docblock-loader!./source.js');
+```
+
+In this hypothetical example:
+--
+
+*  `docblock-loader` would first parse `source.js`, returning a string that only contained the doc blocks in the file
+--
+
+* `syntax-loader` would then apply syntax highlighting to the doc blocks...
+--
+
+* Result: a JavaScript string of syntax-highlighted doc-blocks from `./source.js`
+
+---
+
+# Loaders are Flexible
+
+Loaders can modify individual modules in many ways, e.g. they can:
+
 - Parse files
 - Return objects
 - Return urls
@@ -27,17 +88,19 @@ Loaders are webpack extensions which allow you to modify how modules are loaded.
 
 Loaders are capable of doing many things, however...
 
---
+---
 
-### Single Responsibility Loaders
+# Single Responsibility Loaders
 
-Loaders should do one thing, and do it well.
+Each loader module should do one thing, and do it well.
 
-As an example, you could use one loader to take the doc blocks from a file, and another to apply syntax highlighting.
+In the previous example:
 
 ```js
 const highlightedHtml = require('syntax-loader!docblock-loader!./source.js');
 ```
+
+Functionality is composed from `docblock-loader` _and_ `syntax-loader`—not a single loader that attempts to do multiple things at once.
 
 ???
 Loaders should do one thing and do it well.  You may of heard this principle used in other software development, and the ideal for loaders is the same.
@@ -46,10 +109,9 @@ Just like you can combine multiple functions to build more complex behaviour in 
 
 Each loader will manipulate the module in some way, parse CSV, inline a data-uri, etc are just some of the possibilities.
 
-
 ---
 
-# Common loaders
+# Common Loaders
 
 ### `file-loader`
 ### `style-loader`
@@ -57,9 +119,10 @@ Each loader will manipulate the module in some way, parse CSV, inline a data-uri
 
 ???
 
-In this section we are going to focus on 3 very common loaders and how to configure them. Our goal is to take some of the assets we have in our meme generator and bundle them in with our `dist/` folder.
+In the next section we are going to focus on 3 very common loaders and how to configure them.
+
+Our goal is to take some of the non-JavaScript assets we have in our meme generator and bundle them in with our `dist/` folder.
 
 -----
 
 Any questions before we dive into `file-loader`?
-
