@@ -209,15 +209,19 @@ module.exports = {
 
 --
 
+- `''` allows extensions to be used explicitly
+- __Without__ `''`, `require('./index.js')` will __break__
+- __With__ `''`, `require('./style.css')` will __work__
+- Add, e.g., `.css` to make `require('./style')` work
+
+???
+
+Note that an empty string is used as the first extension here, this allows webpack to find `require('style.css')` without trouble, but you can leave off the '.css' if you add the extension to this configuration.
+
 - The first `''` is important—it allows extensions to be explicitly used in `require`
 - Without `''`, `require('./index')` will work but `require('./index.js')` won't
 - `''` will cause `require('./style.css')` to work (or any other explicit extension)
 - Add `'.css'` to make `require('./style')` work, e.g.
-
-???
-
-
-Note that an empty string is used as the first extension here, this allows webpack to find `require('style.css')` without trouble, but you can leave off the '.css' if you add the extension to this configuration.
 
 You'll probably want to add 'jsx' to this list if you're working on a react project.
 
