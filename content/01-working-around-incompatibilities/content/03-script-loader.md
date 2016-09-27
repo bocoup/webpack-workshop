@@ -49,7 +49,6 @@ This also means that the script is stored as a STRING in your javascript, and we
 require('script-loader!jquery');
 console.log(jQuery); // Works because jQuery exported to global context!
 ```
---
 
 Or, configure your webpack config to use `script-loader` for jQuery:
 ```js

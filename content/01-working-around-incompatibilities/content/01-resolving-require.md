@@ -18,6 +18,9 @@ There are many ways you can configure how webpack searches for files to match th
 require('/home/me/file');
 require('C:\\home\\me\\file');
 ```
+
+???
+- Absolute
 --
 
 - Relative:
@@ -25,6 +28,9 @@ require('C:\\home\\me\\file');
 require('./file');
 require('../file');
 ```
+
+???
+- Relative
 --
 
 - Module:
@@ -32,6 +38,9 @@ require('../file');
 require('module');
 require('module/file');
 ```
+
+???
+- Module
 
 ---
 # Resolving `require()`: Relative Paths
@@ -75,10 +84,11 @@ require('/home/me/directory');
 
 ### Default Behavior
 
---
-
 * If no `package.json` file is found that applies to `directory` OR
 * The `package.json` doesn't define a recognizable `main`
+
+???
+If webpack can't find a `package.json` for the module being requested, OR if that `package.json` doesn't have a field that can be used to derive `main`...
 
 --
 
@@ -90,7 +100,7 @@ Look for a file named `index` \*:
 
 ???
 
-You can configure which fields are most important to the resolver in your webpack config.
+webpack will default to looking for a file named `index`...we'll look at how it determines extension in a couple of minutes.
 
 ---
 
@@ -107,15 +117,11 @@ If `/home/me/package/package.json` **does** exist and contains:
 }
 ```
 
---
-
 This `require`:
 
 ```js
 require('/home/me/package');
 ```
-
---
 
 Becomes this:
 
@@ -133,6 +139,9 @@ In our example here, we are trying to include the `package` directory, which has
 
 Huh? Why is it using the `browser` field??
 
+???
+You can configure which fields are most important to the resolver in your webpack config.
+
 --
 
 ### `packageMains` Configuration
@@ -142,7 +151,7 @@ Huh? Why is it using the `browser` field??
 
 ???
 
-`packageMains` is a list of fields that webpack looks for on package.json to find the module's "main entry"; the value here is the default setting of `resolve.packageMains`.
+`packageMains` is a list of fields that webpack looks for on package.json to find the module's "main entry"
 
 ---
 
@@ -161,10 +170,8 @@ module.exports = {
 ```
 
 ???
-
+The value shown here is the default setting of `resolve.packageMains`
 ...and you can see, even by default, webpack searches pretty hard for this main file.
-
-In our example here, we are trying to include the `package` directory, which has a `package.json` who has a "browser" key defined, so we append that path to the directory, and require that file.
 
 ---
 
@@ -173,8 +180,6 @@ In our example here, we are trying to include the `package` directory, which has
 ```js
 require('/home/me/directory/index');
 ```
-
---
 
 Becomes this:
 
@@ -186,7 +191,7 @@ require('/home/me/directory/index.js');
 
 ### Resolving `require()`: `resolve.extensions`
 
-- **`resolve.extensions`** is a webpack config that lists string extensions that webpack will try to append to `require`'d files
+- **`resolve.extensions`**: string extensions that webpack will try to append to `require`'d files
 - Default value of `resolve.extensions`:
 
 ```js
@@ -196,24 +201,21 @@ module.exports = {
   }
 };
 ```
+
+???
+- Every type of require eventually end up giving us a path to a file.
+- **`resolve.extensions`** is a webpack config that lists string extensions that webpack will try to append to `require`'d files
+- At this point webpack will check its list of extensions for the FIRST MATCH and use it.
+
 --
 
 - The first `''` is important—it allows extensions to be explicitly used in `require`
---
-
 - Without `''`, `require('./index')` will work but `require('./index.js')` won't
---
-
 - `''` will cause `require('./style.css')` to work (or any other explicit extension)
---
-
 - Add `'.css'` to make `require('./style')` work, e.g.
 
 ???
 
-Every type of require eventually end up giving us a path to a file.
-
-At this point webpack will check its list of extensions for the FIRST MATCH and use it.
 
 Note that an empty string is used as the first extension here, this allows webpack to find `require('style.css')` without trouble, but you can leave off the '.css' if you add the extension to this configuration.
 
@@ -228,16 +230,14 @@ require('module');
 require('module/with/path/to/file');
 ```
 
---
-
 - To resolve _modules_, webpack will check **`resolve.alias`** configuration
---
-
 - `resolve.alias` lets you _alias_ specific modules to other places than the `node_modules` directory
 
 ???
 
 All right, now that we know what happens when you have a relative or absolute path from webpack, lets talk about how webpack gets to a path from a "module" require path.
+
+`resolve.alias` lets you _alias_ specific modules to other places than the `node_modules` directory
 
 ---
 
@@ -256,14 +256,8 @@ module.exports = {
 ```
 
 - Syntax: the `$` signifies _exact match_ instead of _partial_
---
-
 - `require('jquery/src/file'); // --> ERROR (because of $)`
---
-
 - `require('jquery'); // --> 'vendor/jquery/src/file'`
---
-
 - [`resolve.alias` documentation](https://webpack.github.io/docs/configuration.html#resolve-alias) has a table that details this more
 
 

@@ -33,8 +33,6 @@ require('imports-loader?define=>undefined!./broken-amd.js');
 require('imports-loader?require=>undefined!./broken-common.js');
 ```
 
---
-
 - Syntax:
     - `foo=bar`: Within target file, set `foo` to the result of `require('bar')`
     - `foo=>undefined`: Within target file, set `foo` to any JavaScript value (`undefined` here)
