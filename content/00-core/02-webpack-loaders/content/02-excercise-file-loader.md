@@ -11,6 +11,9 @@ class: center, middle
 - Loaders should do one thing
 - `file-loader` outputs the file to the output directory and returns a URL
 
+???
+For review, loaders should do one thing!  Our `file-loader` outputs a file, and gives us the url!
+
 ---
 # Exercise 03 - Require Files!
 
@@ -30,9 +33,7 @@ class: center, middle
 
 ???
 
-For review, loaders should do one thing!  Our `file-loader` outputs a file, and gives us the url!
-
-We need to install it, and define `module.loaders` in our webpack config, it is an array which will contain one loader for now.
+We need to install `file-loader`, and define `module.loaders` in our webpack config, it is an array which will contain one loader for now.
 
 Whenever we change webpack.config we need to restart our dev server.
 
@@ -56,7 +57,6 @@ module: {
   ],
 },
 ```
---
 
 **`main.js`**
 
@@ -67,7 +67,6 @@ var imageUrls = [
   require('../img/guinea-pigs-725x544.jpg'),
 ];
 ```
---
 
 **`package.json`**
 ```

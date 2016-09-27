@@ -84,7 +84,6 @@ module: {
   ],
 },
 ```
---
 
 ### `ExtractTextPlugin.extract` Arguments
 

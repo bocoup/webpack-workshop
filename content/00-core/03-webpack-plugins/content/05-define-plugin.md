@@ -37,8 +37,6 @@ This addition to `webpack.config.js`:
 ```
 ----
 
---
-
 will cause this source:
 
 ```js

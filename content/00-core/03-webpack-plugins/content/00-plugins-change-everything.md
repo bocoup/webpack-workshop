@@ -14,8 +14,6 @@ Welcome to the last part of the Core Chapter, Plugins
 # Loaders: Recap
 
 * Loaders let webpack understand and include files that aren't JavaScript.
---
-
 * Loaders work on modules.
 
 ???
@@ -33,8 +31,6 @@ Plugins allow considerable customization of the build process. With a plugin you
 - change parser details
 - write custom transformations
 - utilize the module graph in other ways
-
---
 
 ### Plugins Used Here
 

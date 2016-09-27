@@ -11,13 +11,11 @@ Enough of the background knowledge, let's go how we install and configure webpac
 
 1. __Pre-Reqs__:
   Install Node.js and `npm`
---
 
 2. __Initialize `package.json`__:
   If your project doesn't already have an `npm` `package.json` configuration, initialize one:
 
     `npm init --yes`
---
 
 3. __Install webpack__:
   Install webpack locally for your project (and save it to `devDependencies` in the `package.json`):
@@ -37,8 +35,6 @@ In order to install the `webpack` package, we want to install via NPM and make s
 
 ### Take Advantage of `scripts` in `package.json`
 
---
-
 Add a `build` entry to the `scripts` field in `package.json`, e.g.:
 
 ```json
@@ -46,8 +42,6 @@ Add a `build` entry to the `scripts` field in `package.json`, e.g.:
   "build": "webpack"
 }
 ```
-
---
 
 Then you can use the command:
 
@@ -76,8 +70,6 @@ Webpack can be used as its own tool creating a standalone build process for simp
 # Webpack configuration: Ultra Basic Example
 
 By default, webpack looks for a file called `webpack.config.js` in your project.
-
---
 
 ### `webpack.config.js`
 
@@ -109,6 +101,10 @@ The output configuration is fairly simple at this point, we want to provide a pa
 # Webpack Setup (Recap)
 
 1. Install webpack for the project and save to `package.json`
+
+???
+
+Here's a recap of how to set up webpack
 --
 
 2. Create a `scripts` entry (`build`) in `package.json` or integrate webpack with your task runner
@@ -121,8 +117,9 @@ The output configuration is fairly simple at this point, we want to provide a pa
     * `context`: base directory
     * `entry`: "first" module
     * `output`: with `path` and `filename` properties
---
 
 ------
+
+???
 
 That sums up how we install and get the most simple webpack configuration running, are there any questions before we move onto the exercise?

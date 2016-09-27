@@ -26,15 +26,11 @@ Let's say you have some CSS in `styles.css`:
 /* more css... */
 ```
 
---
-
 And you `require` that CSS in a module:
 
 ```js
 require('styles.css');
 ```
-
---
 
 `css-loader` fulfills this `require` with (roughly):
 
@@ -57,9 +53,14 @@ This line will be handled like a require and will inject the contents of `requir
 ---
 # How the Styles Loader Works
 
+* `style-loader` injects CSS directly into the DOM
+* No need for `<style>` tags in the HTML
+
+???
 * `style-loader` generates JavaScript that will inject the CSS it parses directly into the DOM dynamically at runtime
 * This eliminates the need for `<style>` tags at all in the HTML
 * The JavaScript returned by `style-loader` (within `main.js` in our case) will create `<style>` nodes and populate them with the CSS
+
 
 ---
 # Installing the Loaders

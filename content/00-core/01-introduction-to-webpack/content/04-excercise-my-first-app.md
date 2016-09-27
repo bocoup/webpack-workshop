@@ -20,7 +20,7 @@ Throughout the exercises in this course we build upon our previous work to impro
 
 # Exercise Prep
 
-These steps will only need to be taken once today to prepare your working directory (the `exercise` directory in this repository).
+You only perform these steps once!
 
 ### 1. Install `serve`
 
@@ -35,6 +35,9 @@ Install the `serve` module (basic webserver for viewing the app) globally:
 3. `npm install --save-dev webpack` to install webpack
 
 ???
+
+
+These steps will only need to be taken once today to prepare your working directory (the `exercise` directory in this repository).
 
 - `npm init` will create a package.json for us
 - `npm install` with the save dev option will install webpack
@@ -55,7 +58,7 @@ The first exercise will get webpack going using a basic configuration. It will r
 
 ???
 
-The goal of each exercise in this course is to create a folder you could publish to a server. Given that at the end of each exercise you can run a local server with a tool like `serve` in the built folder to see what it'd be like published.
+The goal of each exercise in this course is to create a folder you could publish to a server. Given that at the end of each exercise you can run a local server with a tool like `serve` in the built (i.e. output) folder to see what it'd be like published.
 
 ---
 

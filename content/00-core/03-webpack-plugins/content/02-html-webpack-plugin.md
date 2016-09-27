@@ -52,18 +52,17 @@ With only these simple lines of configuration, we can remove the copy command fo
 # Now we can hash!
 
 Webpack and the HTML plugin both provide some useful _hashes_ that can be used in filenames for cache-busting and versioning:
---
 
 * `[hash]`: Webpack generates a `hash` for a given _build_
---
-
 * `[contentHash]`: The HTML plugin generates a hash based on the content of assets
 
 Both of these can be referenced from the configuration...
 
 ???
 
-Now that we have webpack generating an `index.html` in our `dist` folder, we can take advantage of using the `hash` output features for other output chunks like javascript, and css.
+Now that we have webpack generating an `index.html` in our `dist` folder, we can take advantage of using the `hash` output features for other output chunks like JavaScript, and CSS.
+
+This lets you create builds with cache busting and per-version file names. The only file that would not be hashed in this example is your `index.html`.
 
 ---
 
@@ -90,13 +89,9 @@ The HTML plugin will automatically create `script` and `link` tags referencing t
 
 ???
 
-Now that we have webpack generating an `index.html` in our `dist` folder, we can take advantage of using the `hash` output features for other output chunks like javascript, and css.
-
-This lets you create builds with cache busting and per-version file names. The only file that would not be hashed in this example is your `index.html`.
-
 You can now deploy on top of a previous deploy without interrupting users using the last version. Users on the last version (until they refresh the page) can still load images for example, getting the right image even if the updated image is different for the same original file path because the old version and the new version will have different output paths.
 
-This also works for the javascript and css. As soon as the user loads the page it will continue to work as long as the hashed files of that version persist on the server.
+This also works for the JavaScript and CSS. As soon as the user loads the page it will continue to work as long as the hashed files of that version persist on the server.
 
 ----
 

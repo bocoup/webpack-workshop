@@ -33,7 +33,6 @@ After you do that, make sure your output bundle still has the proper styles!
 ### Install the Loaders
 
 **`npm install --save-dev style-loader css-loader`**
---
 
 ### Add Configuration
 
@@ -51,7 +50,12 @@ module: {
 },
 ```
 
+???
+
+To recap what we did in this exercise, we installed our loaders, configured them in webpack.config...
+
 ---
+
 # Exercise 04 - Answer Overview (cont.)
 
 ### Require the Styles
@@ -61,12 +65,12 @@ In `main.js`:
 ```js
 require('../styles/all.css');
 ```
---
+
 
 ### Remove `<link>`
 
 **`index.html`**: edit to remove the `<link>` tag
---
+
 
 ### Update `build` script
 
@@ -77,8 +81,7 @@ Updated `package.json` `build` script (`styles` removed from `cp`):
 ```
 
 ???
-
-To recap what we did in this exercise, we installed our loaders, configured them in webpack.config, required the style from our script, removed the link from our html, and removed the styles from our build script since they are now bundled with our javascript.
+required the style from our script, removed the link from our html, and removed the styles from our build script since they are now bundled with our javascript.
 
 We are very close to removing the copy command entirely, and having the whole application bundled with webpack.
 

@@ -13,13 +13,17 @@ In the second part we are going to talk about loaders.
 
 # The loaders transform your world
 
+- Webpack only understands JavaScript.
+
+???
 Webpack is flexible, but it only understands and parses _JavaScript_.
 
 --
 
-Webpack **loaders** transform various kinds of input content into output JavaScript that webpack _can_ understand—files, images, CSS...you name it.
+- Webpack **loaders** transform various other (input) content into (output) JavaScript
 
---
+???
+Webpack **loaders** transform various kinds of input content into output JavaScript that webpack _can_ understand—files, images, CSS...you name it.
 
 **Loaders** allow you to modify _how_ modules are loaded—that is, they can _preprocess_ the files you require or "load".
 
@@ -27,13 +31,15 @@ Webpack **loaders** transform various kinds of input content into output JavaScr
 
 # What Loaders can Do: An Example
 
-One way to apply a loader or multiple loaders to a file is to explicitly define which loaders should be used within a `require` statement:
-
---
 
 ```js
 const highlightedHtml = require('syntax-loader!docblock-loader!./source.js');
 ```
+
+- Applies the `docblock-loader` and `syntax-loader` when loading `./source.js`
+
+???
+One way to apply a loader or multiple loaders to a file is to explicitly define which loaders should be used within a `require` statement.
 
 Let's break that down...
 
@@ -45,12 +51,19 @@ Let's break that down...
 const highlightedHtml = require('syntax-loader!docblock-loader!./source.js');
 ```
 
+- loaders are `!`-separated, listed before required resource
+
+???
+
+Each loader is separated with a `!` and listed before the resource being required.
+
 --
 
-* Each loader is separated with a `!` and listed before the resource being required.
---
+- loaders are applied right to left
 
-* Loaders are applied _right to left_: the `docblock-loader` is applied first and _then_ `syntax-loader`.
+???
+
+Loaders are applied _right to left_: the `docblock-loader` is applied first and _then_ `syntax-loader`.
 
 ---
 
@@ -61,16 +74,25 @@ const highlightedHtml = require('syntax-loader!docblock-loader!./source.js');
 ```
 
 In this hypothetical example:
+
+- `docblock-loader` gets applied to `source.js`
+
+???
+
+`docblock-loader` would first parse `source.js`, returning a string that only contained the doc blocks in the file
 --
 
-*  `docblock-loader` would first parse `source.js`, returning a string that only contained the doc blocks in the file
+- `syntax-loader` then applies syntax highlighting to the doc blocks...
+
+???
+`syntax-loader` would then apply syntax highlighting to the doc blocks...
 --
 
-* `syntax-loader` would then apply syntax highlighting to the doc blocks...
---
+- `highlightedHtml` value: string of syntax-highlighted doc-blocks from `./source.js`
 
-* Result: a JavaScript string of syntax-highlighted doc-blocks from `./source.js`
+???
 
+This ultimately results in `highlightedHhtml` being assigned a JavaScript string of syntax-highlighted doc blocks from `./source.js`
 ---
 
 # Loaders are Flexible

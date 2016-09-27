@@ -32,8 +32,6 @@ Inside of your project directory (`exercise`), run:
 npm install --save-dev webpack-dev-server
 ```
 
---
-
 ### package.json `dev` Script
 
 ```json
@@ -60,8 +58,6 @@ Here is how we setup webpack-dev-server.  We need to `npm install` it just like 
 ```shell
 webpack-dev-server --port 3000 --host 0.0.0.0
 ```
-
---
 
 ### Option 2: Configuration file
 

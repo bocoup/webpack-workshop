@@ -10,14 +10,8 @@ In webpack, there are 4 core concepts at work that when combined form the ultima
 # The webpack _M.E.CH.A._ Metaphor
 
 - __M__odules
---
-
 - __E__ntry
---
-
 - __CH__unks
---
-
 - __A__ssets
 
 ???
@@ -31,8 +25,6 @@ Let's discuss each of these terms in more detail...
 
 A _module_ is a single unit in webpack's output.
 
---
-
 A module:
 
 - Is executable JavaScript
@@ -40,7 +32,6 @@ A module:
 - Such that webpack can load those dependencies as modules
 
 ???
-
 A __module__ is a unit in webpack output. Sometimes they are just input files but loaders and plugins can produce modules without an existing file.
 
 Webpack determines from the module any dependencies and loads them as modules.
@@ -69,6 +60,10 @@ In this example module, we are exporting our application via the CommonJS `modul
 
 Every webpack configuration must contain an __entry__ module, which is where webpack "starts" its work.
 
+???
+
+ The "Entry" is the first module to be loaded and executed in a script using webpack.  It then loads its dependencies, which loads its dependencies, etc.
+
 --
 
 ### Entry **cannot** be a dependency
@@ -77,11 +72,9 @@ _Entry_ is where webpack begins, so it cannot itself be a dependency (i.e. other
 
 ???
 
- The "Entry" is the first module to be loaded and executed in a script using webpack.  It then loads its dependencies, which loads its dependencies, etc.
+Entries are special in that no other module may depend on them.
 
- Entries are special in that no other module may depend on them.
-
- Every other module may refer to any module, even circularly, though we wouldn't suggest it...
+Every other module may refer to any module, even circularly, though we wouldn't suggest it...
 
 --
 
@@ -113,8 +106,6 @@ Webpack collects modules into chunks. They are really just that -- a collection 
 # MEChA: Assets
 
 An __asset__ is any file (e.g. String or Buffer) that webpack outputs, but has not yet been written to an output directory.
-
---
 
 ### Examples of Things Webpack Transforms to Assets
 
