@@ -1,20 +1,25 @@
-# `script-loader`
+# Shimming Techniques: `script-loader`
+
+- In, e.g., `app.js`:
 
 ```js
-// in something like app.js
-require('script-loader!../vendor/jquery-1.9.min.js')
-// equivalent to doing this in the html:
-// <script src="vendor/jquery-1.9.min.js"></script>
+require('script-loader!../vendor/jquery-1.9.min.js');
 ```
 
-- Approximates loading the script in a global `<script>` tag in HTML.
+- This is equivalent to the following in HTML:
+
+```html
+<script src="vendor/jquery-1.9.min.js"></script>
+```
+
+- `script-loader` approximates loading the script in a global `<script>` tag in HTML.
 
 ???
 
 Script loader is a technique that we can use to run a script in the "main global context".  It is almost as if we use a `<script>` tag in the HTML...
 --
 
-- `require` `define` etc are `undefined`
+- `require`, `define`, etc. are `undefined`
 
 ???
 
@@ -22,7 +27,7 @@ This means that we are running outside of webpacks `require` and `define` land..
 
 --
 
-- using `eval()`
+- uses `eval()`
 - the script loaded can not be minified!
 
 > (think about using `.min.js` extension in production)
@@ -37,15 +42,16 @@ This also means that the script is stored as a STRING in your javascript, and we
 
 # `script-loader`
 
-```js
-// Assuming we installed jquery via npm: `npm install jquery@1.9`
-// Load jQuery using script-loader
-require('script-loader!jquery')
+- Assuming `jquery` has been installed via `npm` (`npm install jquery@1.9`)
+- In `app.js`:
 
-// jQuery exported itself to the global context!
-console.log(jQuery);
+```js
+require('script-loader!jquery');
+console.log(jQuery); // Works because jQuery exported to global context!
 ```
-Or configure in your webpack config:
+--
+
+Or, configure your webpack config to use `script-loader` for jQuery:
 ```js
 module.exports = {
   module: {
@@ -67,4 +73,3 @@ module.exports = {
 In order to use script loader, you can either define the loader with a specific test (like node_modules/jquery), or you can also use the `!` syntax to tell webpack which loader to use.
 
 In this example here, we are loading jQuery through the script loader, which then exports `jQuery` to the global window, and we can access jQuery immediately after.
-

@@ -1,10 +1,12 @@
-# `exports-loader`
+## Shimming Techniques: `exports-loader`
 
 ### Need a `module.exports`?
 
 ```js
 var jQuery = require('exports-loader?window.jQuery!script-loader!jQuery');
 ```
+
+- Result: Global jQuery from `script-loader` is assigned to `jQuery`
 
 ???
 
@@ -22,8 +24,8 @@ In our meme generator we *could* have done this:
 var drawMeme = require('exports-loader?drawMeme!./canvas');
 ```
 
+(Instead of adding `module.exports`)
+
 ???
 
 So this basically adds a `module.exports` to the bottom of the script, in our meme generator example, we could have told the require statement which function we wanted to load from our canvas script, however, adding the `module.exports` to the file is **way easier**.  This techinque can be used to "fix" external modules.
-
-
