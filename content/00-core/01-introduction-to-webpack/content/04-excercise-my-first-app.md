@@ -2,6 +2,10 @@ class: center, middle
 # Exercise Time!
 Illustration: The app running?
 
+???
+
+Section 4
+
 ---
 
 # Bundling a Meme-Generating App
@@ -11,8 +15,6 @@ All of the exercises in this workshop build upon each other, improving the bundl
 The application involved is a _meme generator_, built by our JavaScript team in the days before module bundlers.
 
 ???
-
-Section 4
 
 Throughout the exercises in this course we build upon our previous work to improve our bundling for our application.  Our application is a meme generator that our JavaScript team had written in the days before module bundlers.
 
