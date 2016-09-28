@@ -44,7 +44,7 @@ These steps will only need to be taken once today to prepare your working direct
 
 ---
 
-# Exercise 1
+# Exercise
 
 The first exercise will get webpack going using a basic configuration. It will result in a distribution folder structure like this:
 
@@ -146,7 +146,7 @@ you could have exported `drawMeme`, but either way, you'll want to `require` the
 
 ???
 
-We also replaced the 3 script tags in our HTML with our output bundle...
+We also replaced the 3 script tags in our HTML with our output bundle
 
 ---
 # Exercise 1 Answer: Set up `build` Script
@@ -161,9 +161,9 @@ We also replaced the 3 script tags in our HTML with our output bundle...
 
 ???
 
-...and have given ourselves our first `build` command in package.json
+... and have given ourselves our first `build` command in package.json
 
-The only thing left is the basic webpack configuration...
+The only thing left is the basic webpack configuration
 
 ---
 
