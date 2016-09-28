@@ -23,18 +23,20 @@ Let's discuss each of these terms in more detail...
 
 # MEChA: Modules
 
-A _module_ is a single unit in webpack's output.
+A _module_:
 
-A module:
-
+- Single smallest unit in webpack output
 - Is executable JavaScript
-- Declares where its dependencies are...
-- Such that webpack can load those dependencies as modules
+- Declares dependencies it needs
+- Dependencies leads to more modules
 
 ???
-A __module__ is a unit in webpack output. Sometimes they are just input files but loaders and plugins can produce modules without an existing file.
 
-Webpack determines from the module any dependencies and loads them as modules.
+A __module__ is a unit in webpack output. Sometimes they are just input files
+but loaders and plugins can produce modules without an existing file.
+
+Webpack determines from the module any dependencies and includes them as
+modules. ...
 
 --
 
@@ -52,7 +54,9 @@ Application.prototype.render = function() {
 ```
 
 ???
-In this example module, we are exporting our application via the CommonJS `module.exports`
+
+In this example module, we are exporting our application via the CommonJS
+`module.exports`.
 
 ---
 
@@ -62,19 +66,21 @@ Every webpack configuration must contain an __entry__ module, which is where web
 
 ???
 
- The "Entry" is the first module to be loaded and executed in a script using webpack.  It then loads its dependencies, which loads its dependencies, etc.
+The "Entry" is the first module to be loaded and executed in a script using
+webpack. It then loads its dependencies, which loads its dependencies, etc. ...
 
 --
 
-### Entry **cannot** be a dependency
+### Entry **cannot** be a depended on
 
-_Entry_ is where webpack begins, so it cannot itself be a dependency (i.e. other modules cannot depend on the _entry_ module).
+No other module may `require()` the entry module.
 
 ???
 
 Entries are special in that no other module may depend on them.
 
-Every other module may refer to any module, even circularly, though we wouldn't suggest it...
+Every other module may refer to any module, even circularly, though we wouldn't
+suggest it. ...
 
 --
 
