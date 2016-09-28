@@ -51,6 +51,8 @@ Then you can use the command:
 
 After installing webpack, you should define a script in your `package.json` to launch it.  This creates an `npm run` command, and is the most cross-platform, and self-documenting way to run npm packages.
 
+Webpack can be used as its own tool creating a standalone build process for simple projects.
+
 ---
 
 # Using Webpack: Option 2
@@ -61,9 +63,7 @@ If you already use `grunt`, `gulp`, or `broccoli`, you can integrate webpack int
 
 ???
 
-
-
-Webpack can be used as its own tool creating a standalone build process for simple projects, or for complex projects webpack can be integrated into existing toolchains like grunt, gulp, and broccoli.
+For complex projects webpack can be integrated into existing toolchains like grunt, gulp, and broccoli.
 
 ---
 
@@ -100,17 +100,32 @@ The output configuration is fairly simple at this point, we want to provide a pa
 
 # Webpack Setup (Recap)
 
-1. Install webpack for the project and save to `package.json`
-
 ???
 
-Here's a recap of how to set up webpack
+Here's a recap of how to set up webpack. ...
+
+--
+
+1. Install webpack for the project and save to `package.json`
+???
+
+Add webpack by installing it with npm and saving it to the package's list of
+developere dependencies. ...
+
 --
 
 2. Create a `scripts` entry (`build`) in `package.json` or integrate webpack with your task runner
+???
+
+Setup a build process with webpack through an npm build script or with your task runner of choice. ...
+
 --
 
 3. Create a webpack configuration, default filename `webpack.config.js`
+???
+
+Add a configuration file for webpack called `webpack.config.js`. ...
+
 --
 
 4. In config object, make sure to define _at least_ these properties:
@@ -119,7 +134,11 @@ Here's a recap of how to set up webpack
     * `output`: with `path` and `filename` properties
 
 ------
-
 ???
 
-That sums up how we install and get the most simple webpack configuration running, are there any questions before we move onto the exercise?
+Fill in the config file with values for context, entry, and output. ...
+
+--
+???
+
+That sums up how we install and get a simple webpack configuration running, are there any questions before we move onto the exercise?
