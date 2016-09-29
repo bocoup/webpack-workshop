@@ -108,6 +108,8 @@ Loaders can modify individual modules in many ways, e.g. they can:
 
 Loaders are webpack extensions which allow you to modify how modules are loaded.
 
+Loaders manipulate modules in some way, parse CSV, inline a data-uri, etc. Its fairly open ended so these are just some of the possibilities.
+
 ---
 
 # Single Responsibility Loaders
@@ -127,8 +129,6 @@ Functionality is composed from `docblock-loader` _and_ `syntax-loader`—not a s
 Loaders are capable of doing many things, however loaders should do one thing and do it well.  You may of heard this principle used in other software development, and the ideal for loaders is the same.
 
 Just like you can combine multiple functions to build more complex behaviour in an application, you can easily combine multiple loaders in a chain.
-
-Each loader will manipulate the module in some way, parse CSV, inline a data-uri, etc are just some of the possibilities.
 
 ---
 

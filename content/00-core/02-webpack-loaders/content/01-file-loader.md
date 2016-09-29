@@ -21,6 +21,10 @@ Instead of:
 ```js
 var imageURL = 'img/bunny-725x544.jpg';
 ```
+???
+
+Instead of referring to a url in JavaScript ...
+
 --
 
 With file-loader, you `require` the asset:
@@ -33,7 +37,9 @@ var imageURL = require('./img/bunny-725x544.jpg');
 ```
 
 ???
-File loader is interesting because it does not return the file itself, but instead will emit that file as an asset to the output directory, and return the URL to it at runtime.
+We require with a relative path to the file.
+
+A module created for that file is transformed by file loader. The transformed module returns a url so that imageURL can be used as it may have already been. For that url to point at the file, file loader will emit the file as an asset in the output directory.
 
 --
 
@@ -42,7 +48,6 @@ It's as if you just required a module that does this:
 ```js
 module.exports = 'cbbb18816b6ef832d2498a285503e663.jpg';
 ```
-
 
 ???
 
