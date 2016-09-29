@@ -41,7 +41,7 @@ In order to use our plugin, we need to `require` it using node in our webpack.co
 
 ---
 
-# Extracting text
+# Extracting Text
 
 ### webpack.config.js
 
@@ -67,7 +67,7 @@ module.exports = {
 
 ???
 
-And we'll need to update the `loaders` and add a `plugins` property...
+And we'll need to update the `loaders` and add a `plugins` property.
 
 ---
 
