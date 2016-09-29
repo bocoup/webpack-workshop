@@ -9,25 +9,31 @@ class: center, middle
 ### Recap
 
 - Loaders should do one thing
-- `file-loader` outputs the file to the output directory and returns a url
+- `file-loader` outputs the file to the output directory and returns a URL
+
+???
+For review, loaders should do one thing!  Our `file-loader` outputs a file, and gives us the url!
+
+---
+# Exercise 03 - Require Files!
 
 ### Goals
 
-- Install **`file-loader`**
-- Configure `module.loaders` in webpack.config for `file-loader`
-  - `{ test: /\.(jpg|png)$/, loader: 'file-loader' }`
-- Restart `npm run dev`
-- In main.js: **`require('../img/filename.jpg')`** images from img folder
-- Remove **`img`** part of `cp` command in `build` script
-- Clean the dist (`rm -rf dist`) and run a new build
-- Notice the image files in `dist`
-- Check application with `serve` from `dist`
+- **Install `file-loader`**
+- **Configure `module.loaders`** in webpack.config:
+    ```js
+    { test: /\.(jpg|png)$/, loader: 'file-loader' }
+    ```
+- **Restart `npm run dev`**
+- **Edit `main.js`**: `require('../img/filename.jpg')` images from `img` folder
+- **Edit `package.json`**: Remove `img` part of `cp` command in `build` script
+- **Clean and build**: Clean the dist (`rm -rf dist`) and run a new build
+- **Notice the image files** in `dist`
+- **Check application** with `serve` from `dist`
 
 ???
 
-For review, loaders should do one thing!  Our `file-loader` outputs a file, and gives us the url!
-
-We need to install it, and define `module.loaders` in our webpack config, it is an array which will contain one loader for now.
+We need to install `file-loader`, and define `module.loaders` in our webpack config, it is an array which will contain one loader for now.
 
 Whenever we change webpack.config we need to restart our dev server.
 

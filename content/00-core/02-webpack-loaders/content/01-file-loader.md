@@ -1,30 +1,62 @@
-# The file loader
+# File Loader
 
-Generates a runtime-relative URL for an asset (image, font, mp3, etc).
-
-```js
-// instead of:
-var imageURL = 'img/bunny-725x544.jpg';
-
-// using file-loader:
-var imageURL = require('./img/bunny-725x544.jpg');
-// This will bundle the file as an asset to the output folder
-// and give us the relative URL.
-
-// this "module" for './img/bunny-725x544.jpg' would look like:
-module.exports = 'cbbb18816b6ef832d2498a285503e663.jpg';
-```
-
+- `file-loader` (npm: `file-loader`) generates a URL for an asset
+- Returns URL, not file
 
 ???
 
-File loader is interesting because it does not return the file itself, but instead will emit that file as an asset to the output directory, and return the URL to it at runtime.
+The file loader (npm: `file-loader`) generates a runtime-relative URL for an asset (image, font, mp3, etc).
+
+`file-loader` won't return a file—instead, it:
+
+* Emits the file itself as an asset to the output directory and
+* Returns a relative URL to the file's output location
+
+---
+
+# File Loader: In Practice
+
+Instead of:
+
+```js
+var imageURL = 'img/bunny-725x544.jpg';
+```
+???
+
+Instead of referring to a url in JavaScript ...
+
+--
+
+With file-loader, you `require` the asset:
+
+```js
+var imageURL = require('./img/bunny-725x544.jpg');
+// This will bundle the file as an asset to the output folder
+// and give us the relative URL, something like
+// 'cbbb18816b6ef832d2498a285503e663.jpg'
+```
+
+???
+We require with a relative path to the file.
+
+A module created for that file is transformed by file loader. The transformed module returns a url so that imageURL can be used as it may have already been. For that url to point at the file, file loader will emit the file as an asset in the output directory.
+
+--
+
+It's as if you just required a module that does this:
+
+```js
+module.exports = 'cbbb18816b6ef832d2498a285503e663.jpg';
+```
+
+???
 
 You can use `file-loader` to emit any files including images and fonts.
 
 ---
 
 # Setting up `file-loader`
+
 ### Install with npm:
 ```shell
 npm install file-loader --save-dev

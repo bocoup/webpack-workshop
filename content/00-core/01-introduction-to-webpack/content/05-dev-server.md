@@ -9,9 +9,11 @@ Section 5
 
 # Webpack Dev Server
 
-* Will watch input files for changes
-* Will cause a rebuild to happen when changes happen
-* Handles serving the "web application" for us
+`webpack-dev-server` is a module that can:
+
+* watch input files for changes
+* cause a rebuild to happen when input files are changed
+* serve the "web application" for us
 
 ???
 
@@ -24,19 +26,24 @@ It also acts as webserver for us while developing, hosting static content like i
 
 # Installing webpack-dev-server
 
+Inside of your project directory (`exercise`), run:
+
 ```shell
 npm install --save-dev webpack-dev-server
 ```
 
-### package.json - `npm run dev`
+### package.json `dev` Script
+
 ```json
 {
   "scripts": {
-    "build": "webpack && cp -R index.html img styles dist"
+    "build": "webpack && cp -R index.html img styles dist",
     "dev": "webpack-dev-server"
   }
 }
 ```
+
+`npm run dev` will run `webpack-dev-server`
 
 ???
 
@@ -46,12 +53,15 @@ Here is how we setup webpack-dev-server.  We need to `npm install` it just like 
 
 # Configuring dev server
 
-### Command line arguments:
+### Option 1: Command line arguments
+
 ```shell
 webpack-dev-server --port 3000 --host 0.0.0.0
 ```
 
-### -or- in your `webpack.config.js`
+### Option 2: Configuration file
+
+`webpack-dev-server` will pick up configuration in `webpack.config.js`:
 
 ```js
 module.exports = {

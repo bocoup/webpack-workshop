@@ -7,13 +7,20 @@ Enough of the background knowledge, let's go how we install and configure webpac
 
 ---
 
-# Installing webpack
+# Installing webpack for a Project
 
-* Install node & npm
-* Create an npm package.json if needed
->  `npm init --yes`
-* Install webpack
->  `npm install --save-dev webpack`
+1. __Pre-Reqs__:
+  Install Node.js and `npm`
+
+2. __Initialize `package.json`__:
+  If your project doesn't already have an `npm` `package.json` configuration, initialize one:
+
+    `npm init --yes`
+
+3. __Install webpack__:
+  Install webpack locally for your project (and save it to `devDependencies` in the `package.json`):
+
+    `npm install --save-dev webpack`
 
 ???
 We've talked a little about how webpack works, but lets talk about how to install it.
@@ -24,29 +31,47 @@ In order to install the `webpack` package, we want to install via NPM and make s
 
 ---
 
-# Using webpack
+# Using webpack: Option 1
 
-### package.json - `npm run build` - Recommended
+### Take Advantage of `scripts` in `package.json`
+
+Add a `build` entry to the `scripts` field in `package.json`, e.g.:
+
 ```json
 "scripts": {
   "build": "webpack"
 }
 ```
 
-### or combined with grunt, gulp, or broccoli
-(if you already use these tools)
+Then you can use the command:
+
+`npm run build`
 
 ???
 
 After installing webpack, you should define a script in your `package.json` to launch it.  This creates an `npm run` command, and is the most cross-platform, and self-documenting way to run npm packages.
 
-Webpack can be used as its own tool creating a standalone build process for simple projects, or for complex projects webpack can be integrated into existing toolchains like grunt, gulp, and broccoli.
+Webpack can be used as its own tool creating a standalone build process for simple projects.
 
 ---
 
-# The most basic webpack configuration
+# Using Webpack: Option 2
 
-## `webpack.config.js`
+### Combine webpack with your favorite task runner
+
+If you already use `grunt`, `gulp`, or `broccoli`, you can integrate webpack into your existing toolchain.
+
+???
+
+For complex projects webpack can be integrated into existing toolchains like grunt, gulp, and broccoli.
+
+---
+
+# Webpack configuration: Ultra Basic Example
+
+By default, webpack looks for a file called `webpack.config.js` in your project.
+
+### `webpack.config.js`
 
 ```js
 module.exports = {
@@ -71,6 +96,49 @@ Again, Entry, from the M.E.CH.A means "where we start", so we point this at what
 
 The output configuration is fairly simple at this point, we want to provide a path and a filename.
 
-------
+---
 
-That sums up how we install and get the most simple webpack configuration running, are there any questions before we move onto the exercise?
+# Webpack Setup (Recap)
+
+???
+
+Here's a recap of how to set up webpack. ...
+
+--
+
+1. Install webpack for the project and save to `package.json`
+???
+
+Add webpack by installing it with npm and saving it to the package's list of
+developere dependencies. ...
+
+--
+
+2. Create a `scripts` entry (`build`) in `package.json` or integrate webpack with your task runner
+???
+
+Setup a build process with webpack through an npm build script or with your task runner of choice. ...
+
+--
+
+3. Create a webpack configuration, default filename `webpack.config.js`
+???
+
+Add a configuration file for webpack called `webpack.config.js`. ...
+
+--
+
+4. In config object, make sure to define _at least_ these properties:
+    * `context`: base directory
+    * `entry`: "first" module
+    * `output`: with `path` and `filename` properties
+
+------
+???
+
+Fill in the config file with values for context, entry, and output. ...
+
+--
+???
+
+That sums up how we install and get a simple webpack configuration running, are there any questions before we move onto the exercise?
