@@ -16,7 +16,7 @@ In the second part we are going to talk about loaders.
 - Webpack only understands JavaScript.
 
 ???
-Webpack is flexible, but it only understands and parses _JavaScript_.
+Webpack is flexible, but it only understands and parses _JavaScript_. ...
 
 --
 
@@ -55,7 +55,7 @@ const highlightedHtml = require('syntax-loader!docblock-loader!./source.js');
 
 ???
 
-Each loader is separated with a `!` and listed before the resource being required.
+Each loader is separated with a `!` and listed before the resource being required. ...
 
 --
 
@@ -79,13 +79,13 @@ In this hypothetical example:
 
 ???
 
-`docblock-loader` would first parse `source.js`, returning a string that only contained the doc blocks in the file
+`docblock-loader` would first parse `source.js`, returning a string that only contained the doc blocks in the file ...
 --
 
 - `syntax-loader` then applies syntax highlighting to the doc blocks...
 
 ???
-`syntax-loader` would then apply syntax highlighting to the doc blocks...
+`syntax-loader` would then apply syntax highlighting to the doc blocks ...
 --
 
 - `highlightedHtml` value: string of syntax-highlighted doc-blocks from `./source.js`
@@ -108,8 +108,6 @@ Loaders can modify individual modules in many ways, e.g. they can:
 
 Loaders are webpack extensions which allow you to modify how modules are loaded.
 
-Loaders are capable of doing many things, however...
-
 ---
 
 # Single Responsibility Loaders
@@ -125,7 +123,8 @@ const highlightedHtml = require('syntax-loader!docblock-loader!./source.js');
 Functionality is composed from `docblock-loader` _and_ `syntax-loader`—not a single loader that attempts to do multiple things at once.
 
 ???
-Loaders should do one thing and do it well.  You may of heard this principle used in other software development, and the ideal for loaders is the same.
+
+Loaders are capable of doing many things, however loaders should do one thing and do it well.  You may of heard this principle used in other software development, and the ideal for loaders is the same.
 
 Just like you can combine multiple functions to build more complex behaviour in an application, you can easily combine multiple loaders in a chain.
 
