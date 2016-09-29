@@ -16,6 +16,8 @@ However, the common use case can be fulfilled with a plugin.
 
 ???
 
+`html-webpack-plugin` renders a given (HTML) template and inserts `<script>` and `<link>` tags for inclusion of JavaScript and CSS assets.
+
 This provides a great way to define the shape of html your app needs to boot into, then connect that HTML to the necessary js and css files automatically.  It also provides the last thing we need to remove the copy from our meme generator.
 ---
 
