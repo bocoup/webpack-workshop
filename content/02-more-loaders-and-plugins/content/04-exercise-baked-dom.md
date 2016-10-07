@@ -44,7 +44,7 @@ module.exports = `
       <section>
         <h2>Select image:</h2>
         <ul class="image-selector">
-          {require('./server')}
+          ${require('./server')}
         </ul>
       </section>
 // ...
@@ -70,13 +70,11 @@ var imageUrls = [
   require('./img/guinea-pigs-725x544.jpg'),
 ];
 
-module.export = imageUrls.map(function(url) {
-  return (`
-    <li><a href="#" class="select-image">
-      <img src="{url}" width="120" height="90">
-    </a></li>
-  `);
-}).join('');
+module.export = imageUrls.map(url => `
+  <li><a href="#" class="select-image">
+    <img src="${url}" width="120" height="90">
+  </a></li>
+`}).join('');
 ```
 
 ???

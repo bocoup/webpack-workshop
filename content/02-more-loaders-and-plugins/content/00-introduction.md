@@ -12,5 +12,3 @@ Having covered the basics and how to work with libraries and tools that misbehav
 - Post CSS for more CSS utility
 - Working with ECMAScript 6 through Babel
 - And Building Pages or Part of pages statically with HTML Plugin
-
----

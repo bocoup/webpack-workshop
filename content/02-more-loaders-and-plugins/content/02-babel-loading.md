@@ -76,4 +76,4 @@ module.exports = {
 
 Like CSS super set loaders we can configure babel in webpack with the babel config field. `babel-loader` also works with babelrc files and the `BABEL_ENV` and `NODE_ENV` environment keys. Configuring the webpack config provides a way to be more specific given the config's needs.
 
-[Pause before baking html.]
+(Pause before baking html.)

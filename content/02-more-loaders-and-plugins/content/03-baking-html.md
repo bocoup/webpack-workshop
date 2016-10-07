@@ -49,7 +49,7 @@ module.exports = `<html>
     <title>Production App</title>
   </head>
   <body>
-    <div id="root">{require('./server').default}</div>
+    <div id="root">${require('./server').default}</div>
   </body>
 </html>
 `;
