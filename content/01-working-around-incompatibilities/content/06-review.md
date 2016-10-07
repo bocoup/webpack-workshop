@@ -4,7 +4,7 @@
   - Most importantly:
   - `extensions` - add `jsx` or `coffee` etc, -- keep `''` first!!!
   - `alias` - "trick" module locations
-  - `moduleDirectories` - need to add `"bower_components"
+  - `moduleDirectories` - need to add `"bower_components"`
 
 - Shimming Modules
 
