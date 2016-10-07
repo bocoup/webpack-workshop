@@ -1,3 +1,4 @@
+name: ch2-sec1
 # Resolving `require()`
 
 ### How webpack Finds the Things you `require`

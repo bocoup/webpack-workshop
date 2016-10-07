@@ -1,3 +1,4 @@
+name: ch3-sec3
 class: center, middle
 
 # Static HTML with Client JS

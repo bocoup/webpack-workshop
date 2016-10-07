@@ -1,3 +1,4 @@
+name: ch2-sec4
 ## Shimming Techniques: `exports-loader`
 
 ### Need a `module.exports`?

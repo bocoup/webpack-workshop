@@ -1,3 +1,4 @@
+name: ch3-sec4
 class: center, middle
 
 # Exercise

@@ -1,3 +1,4 @@
+name: ch2-sec3
 # Shimming Techniques: `script-loader`
 
 - In, e.g., `app.js`:

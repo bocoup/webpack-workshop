@@ -1,4 +1,5 @@
 class: center, middle
+name: ch1.3-sec2
 # html-webpack-plugin
 
 # Can I have HTML as my entry?

@@ -1,4 +1,5 @@
 class: center, middle
+name: ch2
 
 # Working around incompatibilities.
 

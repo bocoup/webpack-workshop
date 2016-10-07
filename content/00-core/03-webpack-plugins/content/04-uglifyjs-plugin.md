@@ -1,3 +1,4 @@
+name: ch1.3-sec4
 # Minifying JS w/ UglifyJS
 
 ### Built-in optimization plugin

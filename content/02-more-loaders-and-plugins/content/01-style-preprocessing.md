@@ -1,3 +1,4 @@
+name: ch3-sec1
 class: center, middle
 
 # Super CSS

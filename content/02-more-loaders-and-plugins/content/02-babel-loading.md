@@ -1,6 +1,7 @@
+name: ch3-sec2
 class: center, middle
 
-# ES6 With Babel
+# ES2015+ via Babel Loader
 
 ???
 

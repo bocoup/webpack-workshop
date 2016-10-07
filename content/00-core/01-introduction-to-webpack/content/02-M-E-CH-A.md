@@ -1,4 +1,6 @@
 class: center, middle
+name: ch1-sec2
+
 # M.E.CH.A.
 Illustration? Voltronish thing
 ???
