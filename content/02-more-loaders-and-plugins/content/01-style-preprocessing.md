@@ -34,9 +34,9 @@ npm install stylus-loader stylus --save-dev
 
 CSS super sets all having supporting loaders for webpack. They each fill the same role for their related library. They statically compile their CSS super set into CSS. As such css super set loaders keep to the loader ideal of single responsibility. To use the resulting CSS further you can pair it with style-loader and css-loader or an ExtractText plugin setup.
 
-An iconic idiom loaders have evolved for this kind of work is to rely on their primary library as a peer dependency. As the libraries core APIs change less frequently this lets webpack users setup pick and choose the version of their super set library and loader instead of being restricted to the version a loader may have hard set in its package.json.
+We need to install the webpack loader, as well as the library that provides the processor.  The webpack loader does not depend on stylus directly, it requires the consumer, you, to have a dependency,  we call this a peer dependency.
 
-So when you install one of these loaders you also need to install the corresponding library.
+SASS, Less, and stylus APIs change less frequently, and with a peer dependency, the loaders can stay the same and the webpack user can pick and choose the version of the css compilier and loader instead of being restricted forced to use the version a loader may have required in its package.json.
 
 ---
 

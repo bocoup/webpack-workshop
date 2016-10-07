@@ -8,18 +8,18 @@ class: center, middle
 
 Earlier we brought in a plugin, ExtractText, to optimize delivery of an app. We can use the HTML plugin to do that too.
 
+We can take our JavaScript recipie, and use it to generate a "baked" HTML chunk.  This chunk will be embedded in our HTML!
+
 ---
 
 # Let the browser download assets before JS
 
-Frontend client code wants
-
+Frontend code looks for:
 ```html
 <div id="root"></div>
 ```
 
-While a fast website wants
-
+Optimized, speedy loading, search-indexable sites need:
 ```html
 <div id="root">
   <div class="header">
@@ -33,7 +33,7 @@ While a fast website wants
 
 ???
 
-One part of optimizing an app is getting the browser to load as many needed assets as early as possible. With webpack we can build a script to render the web app leading to the browser to load needed assets. For a client side app though that means the HTML page, then the script, needs to load before any assets can load.
+A lot of "application frameworks" inject their HTML into a "root element" on the page, but for our application to be fast loading, and indexable by search engines, we should be generating the HTML and links to our important assests (like the logo).
 
 With ExtractText and the HTML plugin the css can load before our script loads. We can also get the web page to load other assets like images with the HTML plugin.
 
@@ -49,7 +49,7 @@ module.exports = `<html>
     <title>Production App</title>
   </head>
   <body>
-    <div id="root">${require('./server').default}</div>
+    <div id="root">${require('./server-render').default}</div>
   </body>
 </html>
 `;
@@ -57,7 +57,7 @@ module.exports = `<html>
 
 ???
 
-For this we can use ES6 template strings through babel-loader to render the bulk of our html structure to support however we render our site. While we may have a main.js to kick off the client render we can have server.js kick off a server render since that is what we are doing with this technique. ...
+For this we can use ES6 template strings through babel-loader to render the bulk of our html structure.  While we may have a main.js to kick off the client render we can have server-render.js kick off a server render since that is what we are doing with this technique. ...
 
 --
 
@@ -110,6 +110,11 @@ This is rendering a file in Node so some things aren't available
 - Canvas
 - XmlHTTPRequest
 - Many other browser APIs
+
+### But it's using webpack for `require`
+
+- Feels like node require
+- BUT - lets you use loaders like file-loader for images.
 
 ???
 
