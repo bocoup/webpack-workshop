@@ -10,7 +10,7 @@ Let's start off this section by talking about how webpack handles `require`.
 
 The first step is to figure out what type of request we are dealing with.  If you are familiar with how node looks for modules, this should look very familiar.
 
-There are many ways you can configure how webpack searches for files to match these requests.
+There are many ways you can configure how webpack searches for files to match these requests...
 --
 
 - Absolute:
@@ -20,7 +20,7 @@ require('C:\\home\\me\\file');
 ```
 
 ???
-- Absolute
+- Absolute, when you call require with an absolute path...
 --
 
 - Relative:
@@ -30,7 +30,7 @@ require('../file');
 ```
 
 ???
-- Relative
+- Relative, a path staring with `.` or `..` ...
 --
 
 - Module:
@@ -40,7 +40,7 @@ require('module/file');
 ```
 
 ???
-- Module
+- And lastly, everything else is treated as a Module.
 
 ---
 # Resolving `require()`: Relative Paths
@@ -253,7 +253,8 @@ For example:
 module.exports = {
   resolve: {
     alias: {
-      jquery$: path.resolve('./vendor/jquery') // `$` indicates "exact" match
+      jquery$: path.resolve('./vendor/jquery-3.1.0')
+      //   `$` indicates "exact" match
     }
   }
 }
@@ -261,7 +262,7 @@ module.exports = {
 
 - Syntax: the `$` signifies _exact match_ instead of _partial_
 - `require('jquery/src/file'); // --> ERROR (because of $)`
-- `require('jquery'); // --> 'vendor/jquery/src/file'`
+- `require('jquery'); // --> '/full/path/vendor/jquery-3.1.0'`
 - [`resolve.alias` documentation](https://webpack.github.io/docs/configuration.html#resolve-alias) has a table that details this more
 
 
@@ -328,7 +329,7 @@ So we check aliases, and this new path that we get is then resolved.  If we didn
 
 # Resolve configuration: There's More!
 
-No dice? Keep hunting, using more `resolve` config properties:
+No alias? Keep hunting, using more `resolve` config properties:
 
 Hunting order:
 

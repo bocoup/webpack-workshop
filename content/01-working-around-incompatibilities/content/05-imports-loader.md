@@ -34,8 +34,8 @@ require('imports-loader?require=>undefined!./broken-common.js');
 ```
 
 - Syntax:
-    - `foo=bar`: Within target file, set `foo` to the result of `require('bar')`
-    - `foo=>undefined`: Within target file, set `foo` to any JavaScript value (`undefined` here)
+    - `$=jquery`: Within target file, set `$` to the result of `require('jquery')`
+    - `$=>window.jQuery`: Within target file, set `$` to `window.jQuery`
 
 ???
 
@@ -82,9 +82,12 @@ Using `ProvidePlugin` is similar to, but way better than:
     loaders: [
       {
         test: /\.js$/,
-        loader: 'provide-plugin?$=jquery&jQuery=jquery&window.jQuery=jquery',
+        loader: 'imports-loader?$=jquery&jQuery=jquery&window.jQuery=jquery',
       }
     ]
   }
 }
 ```
+
+???
+Imports loader will inject these 3 vars in every js file we load, provide plugin injects it in the output bundle itself, a lot less code!
