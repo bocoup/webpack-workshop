@@ -16,6 +16,11 @@ jQuery(function($) {
   // Pick the first image by default
   var currentImage = $('.image-selector img')[0];
   var currentText = 'Hello, world!';
+
+  if (typeof process === 'object' && process.env.NODE_ENV !== 'production') {
+    currentText = 'Hello, developers!';
+  }
+
   drawMeme(currentImage, currentText);
 
   // Listen for clicks on images
