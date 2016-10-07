@@ -26,8 +26,9 @@ babel: {
   },
 },
 ```
-- Write `index.html.js` with template strings
-- Write a method to render the images
+- Remove the generation of the HTML from `src/main.js`
+- Write a `server.js` that outputs the `<li><a><img></a></li>` tags for the images
+- Write `index.html.js` with template strings that uses `require('./server.js')` to fill in `.image-selector`
 
 #### Extra credit
 
