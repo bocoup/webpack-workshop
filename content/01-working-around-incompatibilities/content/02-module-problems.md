@@ -33,15 +33,16 @@ Even when they are modules, not every JavaScript module you will find will make 
 
 The bit of code on screen here is just one example of how this can go wrong, where the library author incorrectly assumed that the presence of `module` means we are in node, and gives up on important browser functionality.
 
-We've also seen modules which when using AMD format define things incorrectly and the exports get messed up.  Luckilly there are ways we can solve this problem as well.
+We've also seen modules which when using AMD format define things incorrectly and the exports get messed up.  Luckily there are ways we can solve this problem as well.
 
 ---
 
-# Shiming modules
+# Shimming modules
 
 Webpack docs: [shimming modules](https://webpack.github.io/docs/shimming-modules.html)
 
 ### Techniques:
+
 - `script-loader`
 - `exports-loader`
 - `imports-loader`
@@ -49,6 +50,3 @@ Webpack docs: [shimming modules](https://webpack.github.io/docs/shimming-modules
 ???
 
 Webpack has a page on the documentation devoted to this whole class of problems.  In the next few sections, we are going to take a moment to focus on each of these techniques, talk about the problems they solve or create in more detail.
-
-
-
