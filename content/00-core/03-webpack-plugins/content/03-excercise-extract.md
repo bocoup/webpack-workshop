@@ -1,4 +1,5 @@
 class: center, middle
+name: ch1.3-ex1
 
 # Exercise!
 

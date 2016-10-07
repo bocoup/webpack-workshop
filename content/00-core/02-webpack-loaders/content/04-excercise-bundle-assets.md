@@ -1,3 +1,4 @@
+name: ch1.2-ex2
 # Exercise 04 - Building styles
 
 ### Recap

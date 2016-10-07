@@ -1,3 +1,4 @@
+name: ch2-sec5
 # `imports-loader`
 
 ### Add a local variable to the top of the file

@@ -1,3 +1,4 @@
+name: ch1.2-sec1
 # File Loader
 
 - `file-loader` (npm: `file-loader`) generates a URL for an asset

@@ -1,4 +1,5 @@
 class: center, middle, dark
+name: ch1.3
 
 # Plugins
 Illustration?

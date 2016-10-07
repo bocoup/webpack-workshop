@@ -1,3 +1,4 @@
+name: ch2-sec6
 # "Incompatibilities" Review
 
 - Resolver configuration

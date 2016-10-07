@@ -1,3 +1,4 @@
+name: ch1.3-sec5
 # The Define Plugin
 
 The built-in __DefinePlugin__ lets you provide static values that webpack's parser can use to replace specific identifiers within your code.

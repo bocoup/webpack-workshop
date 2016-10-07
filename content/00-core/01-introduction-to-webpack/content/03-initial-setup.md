@@ -1,4 +1,6 @@
 class: center, middle
+name: ch1-sec3
+
 # Installing webpack with basic configurations
 
 ???

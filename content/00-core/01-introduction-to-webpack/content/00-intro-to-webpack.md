@@ -1,4 +1,5 @@
 class: center, middle
+name: ch1
 
 # Part 1: Introduction to webpack
 

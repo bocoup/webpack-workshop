@@ -1,4 +1,5 @@
 class: middle
+name: ch1-ex2
 # Exercise Time!
 
 ```

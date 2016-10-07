@@ -1,4 +1,5 @@
 class: center, middle, dark
+name: ch1.2
 
 # Part 2. Loaders
 

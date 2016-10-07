@@ -1,3 +1,4 @@
+name: ch1.2-sec3
 # `style-loader` and `css-loader`
 
 - `css-loader` parses CSS, handling `@import` and `url()` statements within CSS, as well

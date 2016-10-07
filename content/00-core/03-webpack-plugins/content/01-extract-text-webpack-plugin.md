@@ -1,4 +1,5 @@
 class: center, middle
+name: ch1.3-sec1
 # Extracting Text
 Illustration?
 
