@@ -1,0 +1,3603 @@
+<!DOCTYPE html>
+	<html>
+	  <head>
+	    <title>Webpack Workshop</title>
+	    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	    <style type="text/css">
+	      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+	      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+	      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+	      body { font-family: 'Droid Serif'; }
+	      h1, h2, h3 {
+	        font-family: 'Yanone Kaffeesatz';
+	        font-weight: normal;
+	      }
+	      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+	    </style>
+	  <script type="text/javascript" src="8b14f8615343729473d3.js"></script></head>
+	  <body>
+	    <textarea id="source" style="visibility: hidden"># Table of Contents (home to return)
+
+- [Chapter 1 - Core](#ch1)
+  - [Section 1 - Introduction to Webpack](#ch1)
+      - [Module Bundlers](#ch1-sec1)
+      - [MEChA](#ch1-sec2)
+      - [Setup](#ch1-sec3)
+      - [Exercise: My First App](#ch1-ex1)
+      - [Development Server](#ch1-sec5)
+      - [Exercise: Dev Server](#ch1-ex2)
+  - [Section 2 - Loaders](#ch1.2)
+      - [File Loader](#ch1.2-sec1)
+      - [Exercise: File Loader](#ch1.2-ex1)
+      - [Style and CSS Loaders](#ch1.2-sec3)
+      - [Exercise: Bundle Assets](#ch1.2-ex2)
+      - [Recap](#ch1.2-sec5)
+  - [Section 3 - Plugins](#ch1.3)
+      - [Extract Text Webpack Plugin](#ch1.3-sec1)
+      - [HTML Webpack Plugin](#ch1.3-sec2)
+      - [Exercise: Extract](#ch1.3-ex1)
+      - [UglifyJS Plugin](#ch1.3-sec4)
+      - [Define Plugin](#ch1.3-sec5)
+      - [Exercise: Uglify and Define](#ch1.3-ex2)
+
+---
+
+# Table of Contents (cont.)
+
+- [Chapter 2 - Working with Incompatibilities](#ch2)
+  - [Resolving Require](#ch2-sec1)
+  - [Module Problems](#ch2-sec2)
+  - [Script Loader](#ch2-sec3)
+  - [Exports Loader](#ch2-sec4)
+  - [Imports Loader](#ch2-sec5)
+  - [Review](#ch2-sec6)
+- [Chapter 3 - More Loaders and Plugins](#ch3)
+  - [CSS Processing](#ch3-sec1)
+  - [Babel Loading - ES2015+](#ch3-sec2)
+  - [Static HTML with Client JS](#ch3-sec3)
+  - [Exercise: Bake HTML](#ch3-sec4)
+
+---
+
+class: center, middle
+
+# webpack workshop
+## How does one pack the web?
+
+Illustration Thoughts: Someone trying to pack a www "globe" into a small box for shipping with some pictures, books and stuff
+
+???
+
+Welcome to the class!  Today we are going to learn about webpack, but before we get started, let's handle some introductions and share some important information.
+
+---
+
+## Info:
+
+* Code of Conduct: [https://bocoup.com/guidelines/code-of-conduct](https://bocoup.com/guidelines/code-of-conduct)
+* Class website: [link](link)
+* Email us any time:
+  - [webpack-workshop@bocoup.com](mailto:webpack-workshop@bocoup.com)
+
+???
+All Bocoup events follow our Code of Conduct, Here is the quick version:
+
+Bocoup is dedicated to providing a harassment-free experience for everyone, regardless of gender, sexual orientation, disability, age, physical appearance, body size, race, or religion. We do not tolerate harassment of event participants in any form. Sexual language and imagery is not appropriate for any venue, including talks. Participants violating these rules may be sanctioned or expelled from the event without a refund at the discretion of the event organizers.
+
+We have all the slides for todays class online here (follow the link), and please e-mail us at any time if you have questions.
+
+---
+
+# Introductions
+
+- Your Name
+- What do you do?
+- Who do you do it for?
+- Experience with webpack or related tools?
+- What do you hope to get out of the class?
+
+???
+
+We only have a few hours with you today but let's go around very briefly and introduce ourselves.  Starting with myself ...
+
+(go around the room!)
+
+---
+
+# Chapter 1: Webpack Core
+
+???
+
+In the first chapter of our webpack class, we will be covering a few topics to get you familiar with webpack's core concepts.
+
+--
+
+### 1. Introduction to webpack and module bundlers
+
+???
+
+First we will describe what webpack is, what problems it solves, and teach some very simple basics of setting up webpack with an example application.
+
+--
+### 2. Webpack Loaders
+
+???
+
+The second section we will study in more detail one of webpacks extremely powerful features, loaders.  We will be building upon our previous example application to include some loaders.
+
+--
+
+### 3. Webpack Plugins
+
+???
+
+After we've practiced with loaders, we will learn how to further enhance our projects with webpack plugins.
+
+---
+
+# Questions before we get started?
+
+???
+Are there any questions, before we get started?
+
+---
+
+class: center, middle
+name: ch1
+
+# Part 1: Introduction to webpack
+
+### A short history of module bundlers
+### M.E.CH.A.
+### Installing webpack with basic configurations
+### Exercise: My First App
+### Development Server
+### Exercise: Dev Server
+
+???
+In the first section we will cover a short history of module bundlers,
+this thing called "M.E.CH.A" which isn't as cool as it sounds (heh), and the basic configuration for webpack and it's development server.
+
+(This section will take about 30 minutes)
+
+---
+
+class: center, middle
+name: ch1-sec1
+
+# In a land before JavaScript Modules...
+
+Illustration??
+
+???
+
+Before modules became popular, applications were written mostly on the server. Users interacting with an application would request new pages from the server. This went on for a time and it was good. Well not really, but it was the best we had.
+
+JavaScript was written in script tags in the HTML, or as smaller individual files. Time went on and client side scripts became more complex, we had more of them, and we realized requesting 20 scripts on page load was a bad thing.
+
+So we wrote custom build processes to construct a single file from the larger set of files that would be loaded instead of an army of script tags.
+
+---
+
+# Module bundlers: A Definition
+
+**Module bundler**: Software that _bundles modules_ together into a smaller set of files.
+
+???
+
+The "custom" part of the processes was a lot of work to construct and maintain.
+So developers started collaborating on tools that, with some minimal configuration, could bundle our smaller files into a single file to deliver to the user.
+
+We called these Module Bundlers.
+
+---
+
+# Module bundlers: Well-known Examples
+
+Some well-known module bundlers include:
+
+- [RequireJS](http://requirejs.org/)
+- [Browserify](http://browserify.org/)
+???
+
+In the "Module Bundler" category, we have RequireJS and Browserify, and...
+--
+
+- **Webpack!**
+
+???
+
+Webpack!
+
+---
+
+# RequireJS: The Basics
+
+- One of the earliest well-known bundlers
+???
+
+One of the most well known module bundlers is RequireJS.
+...
+
+--
+
+- Supports _Asynchronous Module Definition_ (AMD)
+???
+
+It uses the AMD format—__Asynchronous__ Module Definition—to describe modules
+and their dependencies. ...
+
+--
+
+- Asynchronously loads individual modules for development
+???
+
+RequireJS uses this format to load modules in the browser with some
+configuration. ...
+
+--
+
+- Companion tool **r.js** performs the bundling for production
+???
+
+Its companion r.js "optimizes" an application into a smaller set of files.
+
+The many hundreds of files that make up web applications in the client now
+is convenient for a developer to debug locally as multiple files,
+but from a production server it can be bundled into a single file.
+
+---
+
+# AMD Module Syntax
+
+- One of to write a JavaScript _module_
+
+???
+
+AMD defines modules in JavaScript so that a tool like RequireJS can determine
+any dependencies and execute them before their dependent modules. ...
+
+--
+
+### AMD Syntax Example
+
+Note the use of `define`.
+
+```javascript
+// This is an AMD format module
+define(['./dependency.js'], function(dependency) {
+  return {
+    render: function() {
+      dependency.render();
+    },
+  };
+});
+```
+
+???
+
+This format uses the function `define`, supplied by RequireJS, which is passed
+an array of dependencies and callback function which receives the dependencies
+and returns the module.
+
+---
+
+# Browserify: The Basics
+
+???
+
+RequireJS used the AMD format for defining modules, but around this time
+Node.js was gaining in popularity, and its module format (CommonJS) was not
+supported by other bundlers. ...
+
+--
+
+- Supports the __CommonJS__ module format
+???
+
+Browserify uses CommonJS, which allows most node modules to be used inside the
+browser. ...
+
+--
+
+- _Shims_ some of the "common" node modules
+???
+
+Browserify also provides some builtin node modules so they also work in the browser.
+
+---
+
+# CommonJS Module Syntax
+
+CommonJS is the format that [Node modules](https://nodejs.org/docs/v0.4.1/api/modules.html#modules) are written in.
+
+???
+RequireJS uses the AMD format for defining modules and Browserify uses CommonJS.
+
+--
+
+### CommonJS Syntax Example
+
+Note the use of `require` and `module.exports`:
+
+```javascript
+var dependency = require('./dependency');
+module.exports = {
+  render: function() {
+    dependency.render();
+  },
+};
+```
+
+???
+
+Here is an example CommonJS module that uses `require` to include dependencies, and `module.exports` to export the module.  Note that this format is **synchronous**, it implies that all dependencies can be synchronously loaded.
+
+---
+
+# Webpack: The Basics
+
+???
+
+In very large applications, bundling everything could easily create bundles that were tens or hundreds of megabytes of JavaScript.  Browserify and Require eventually had ways to separate chunks of the output into loadable "feature" bundles, but the configuration was hard to automate. ...
+
+--
+
+- Smart code splitting
+
+???
+
+Webpack can analyze the code and be **smarter** about outputting multiple bundles. Webpack also includes a syntax for splitting bundles very intelligently, allowing you to load critical bits of JavaScript only on the first pass, and ensure the additional scripts are loaded before you need to use them. ...
+
+--
+
+- Smaller output bundles
+
+???
+
+Since webpack is capable of analyzing and transforming JavaScript, it is also able to produce output bundles that are smaller and more portable, not relying on details like file paths to operate at runtime. ...
+
+--
+
+- Supports AMD...
+- _and_ Supports CommonJS
+
+???
+
+It also supports both AMD and CommonJS modules, allowing us to consume a wide variety of javascript modules.  By renaming the `define` and `require` statements to its own syntax, we can be sure that its output bundles may be consumed by requirejs or browserify as well. ...
+
+--
+
+- Plugin-able
+- Portable
+
+???
+
+Webpack can also be further extended to understand other module formats and features.
+
+---
+
+# Webpack is more than JavaScript Modules
+
+### "modules" in webpack
+
+- Source Code
+- HTML
+- Templates (e.g. Handlebars, Lodash)
+- Styles (e.g. CSS, SASS, Stylus, Less)
+- Images (e.g. PNG, JPG, GIF)
+- Other assets (MP3, MPEG)
+- Data (JSON)
+
+???
+
+Webpack also allows you to bundle static content like HTML, CSS, and images.  This allows you to bundle the non-javascript dependencies with our javascript.
+
+Webpack goes way beyond just packing scripts, in webpack you can use loaders and plugins to enhance your development workflows.
+
+(((pause on this for a few seconds)))
+---
+
+# Module Bundlers (recap)
+
+- RequireJS
+- Browserify
+- **Webpack**
+
+-------
+
+### Bundlers provide:
+- Developer Experience
+- User Experience
+- Module Formats
+- Efficient Bundles
+
+???
+
+So we have covered the three common module bundlers.
+
+We've also talked about why...
+
+- Module bundlers improve developer and user experience
+- and should support the module formats we need
+- and should help us build the most efficient bundles for our users
+
+---
+
+class: center, middle
+name: ch1-sec2
+
+# M.E.CH.A.
+Illustration? Voltronish thing
+???
+
+In webpack, there are 4 core concepts at work that when combined form the ultimate robot module bundler
+
+---
+
+# The webpack _M.E.CH.A._ Metaphor
+
+- __M__odules
+- __E__ntry
+- __CH__unks
+- __A__ssets
+
+???
+Mecha: Modules, entry, chunks, and assets.
+
+Let's discuss each of these terms in more detail...
+
+---
+
+# MEChA: Modules
+
+A _module_:
+
+- Single smallest unit in webpack output
+- Is executable JavaScript
+- Declares dependencies it needs
+- Dependencies leads to more modules
+
+???
+
+A __module__ is a unit in webpack output. Sometimes they are just input files
+but loaders and plugins can produce modules without an existing file.
+
+Webpack determines from the module any dependencies and includes them as
+modules. ...
+
+--
+
+### Module Example
+
+```javascript
+module.exports = function Application(options) {
+  this.options = options;
+  this.render();
+};
+
+Application.prototype.render = function() {
+  document.querySelector(this.options.root).innerHtml = '<h1>Hello World</h1>';
+};
+```
+
+???
+
+In this example module, we are exporting our application via the CommonJS
+`module.exports`.
+
+---
+
+# MEChA: Entry
+
+Every webpack configuration must contain an __entry__ module, which is where webpack "starts" its work.
+
+???
+
+The "Entry" is the first module to be loaded and executed in a script using
+webpack. It then loads its dependencies, which loads its dependencies, etc. ...
+
+--
+
+### Entry **cannot** be a depended on
+
+No other module may `require()` the entry module.
+
+???
+
+Entries are special in that no other module may depend on them.
+
+Every other module may refer to any module, even circularly, though we wouldn't
+suggest it. ...
+
+--
+
+### Entry Example
+
+```javascript
+var Application = require('./application');
+
+new Application({
+  root: '#root',
+});
+```
+
+???
+In this example entry, we use `require` to get the application we created in the previous slide, and start it.
+
+---
+
+# MEChA: Chunks
+
+Webpack organizes modules into __chunks__, which are collections of modules.
+
+???
+
+Webpack collects modules into chunks. They are really just that -- a collection of modules. Most often they use a filename template but plugins can transform them to be output in other ways to help with optimizing an application for users.
+
+---
+
+# MEChA: Assets
+
+An __asset__ is any file (e.g. String or Buffer) that webpack outputs, but has not yet been written to an output directory.
+
+### Examples of Things Webpack Transforms to Assets
+
+- Required files
+- Required images
+- Chunks of modules
+- CSS (by using a plugin)
+
+???
+
+A webpack asset is a file that has yet to be written to the output directory. Webpack builds up a list of assets through modules, chunks, and plugins. Modules can create assets like images and data files, and Webpack and plugins create assets from chunks and other groups of information.
+
+---
+
+# Reviewing the M.E.CH.A
+
+- __M__odules are input
+- __E__ntry is the starting module
+- __Ch__unks are the collected modules
+- __A__ssets are output, built from chunks, etc.
+
+???
+
+So just to briefly cover each of these again, Modules are input, Entry is the starting module, Chunks are collections of modules, and Assets are output.
+
+There is a lot of nuance to each of these terms, but we hope that having a general level of knowledge will help you understand how webpack works as we continue through this course.
+
+-------
+
+Are there any questions before we continue on to installing webpack?
+
+---
+
+class: center, middle
+name: ch1-sec3
+
+# Installing webpack with basic configurations
+
+???
+
+Enough of the background knowledge, let's go how we install and configure webpack the first time.  We have a short excercise to practice this process after this section.
+
+---
+
+# Installing webpack for a Project
+
+1. __Pre-Reqs__:
+  Install Node.js and `npm`
+
+2. __Initialize `package.json`__:
+  If your project doesn't already have an `npm` `package.json` configuration, initialize one:
+
+    `npm init --yes`
+
+3. __Install webpack__:
+  Install webpack locally for your project (and save it to `devDependencies` in the `package.json`):
+
+    `npm install --save-dev webpack`
+
+???
+We've talked a little about how webpack works, but lets talk about how to install it.
+
+Webpack installation is done through npm, you will need a `package.json` for your project which you can create very quickly with `npm init --yes`  We use `--yes` to skip a bunch of questions it would normally ask, all of this information you can change by editing `package.json`
+
+In order to install the `webpack` package, we want to install via NPM and make sure to save it as a development depenedency.
+
+---
+
+# Using webpack: Option 1
+
+### Take Advantage of `scripts` in `package.json`
+
+Add a `build` entry to the `scripts` field in `package.json`, e.g.:
+
+```json
+"scripts": {
+  "build": "webpack"
+}
+```
+
+Then you can use the command:
+
+`npm run build`
+
+???
+
+After installing webpack, you should define a script in your `package.json` to launch it.  This creates an `npm run` command, and is the most cross-platform, and self-documenting way to run npm packages.
+
+Webpack can be used as its own tool creating a standalone build process for simple projects.
+
+---
+
+# Using Webpack: Option 2
+
+### Combine webpack with your favorite task runner
+
+If you already use `grunt`, `gulp`, or `broccoli`, you can integrate webpack into your existing toolchain.
+
+???
+
+For complex projects webpack can be integrated into existing toolchains like grunt, gulp, and broccoli.
+
+---
+
+# Webpack configuration: Ultra Basic Example
+
+By default, webpack looks for a file called `webpack.config.js` in your project.
+
+### `webpack.config.js`
+
+```js
+module.exports = {
+  // Base directory
+  context: __dirname,
+  // The "first" module - requires the `./`
+  entry: './src/main.js',
+  output: {
+    path: 'dist',
+    filename: 'main.js',
+  },
+};
+```
+
+???
+
+By default, webpack will look for the `webpack.config.js`, so we name our configuration file that.
+
+We have to tell webpack the "context" (base directory) of our project, NodeJS provides us `__dirname` constant to mean the name of the directory of the current file, so this is very convenient value for that context.
+
+Again, Entry, from the M.E.CH.A means "where we start", so we point this at whatever contains our "main application", in our exercise this will be `src/main.js`.  Note we need the `./` to indicate it is a relative path.
+
+The output configuration is fairly simple at this point, we want to provide a path and a filename.
+
+---
+
+# Webpack Setup (Recap)
+
+???
+
+Here's a recap of how to set up webpack. ...
+
+--
+
+1. Install webpack for the project and save to `package.json`
+???
+
+Add webpack by installing it with npm and saving it to the package's list of
+developere dependencies. ...
+
+--
+
+2. Create a `scripts` entry (`build`) in `package.json` or integrate webpack with your task runner
+???
+
+Setup a build process with webpack through an npm build script or with your task runner of choice. ...
+
+--
+
+3. Create a webpack configuration, default filename `webpack.config.js`
+???
+
+Add a configuration file for webpack called `webpack.config.js`. ...
+
+--
+
+4. In config object, make sure to define _at least_ these properties:
+    * `context`: base directory
+    * `entry`: "first" module
+    * `output`: with `path` and `filename` properties
+
+------
+???
+
+Fill in the config file with values for context, entry, and output. ...
+
+--
+???
+
+That sums up how we install and get a simple webpack configuration running, are there any questions before we move onto the exercise?
+
+---
+
+class: center, middle
+name: ch1-ex1
+# Exercise Time!
+Illustration: The app running?
+
+???
+
+Section 4
+
+---
+
+# Bundling a Meme-Generating App
+
+All of the exercises in this workshop build upon each other, improving the bundling for our application.
+
+The application involved is a _meme generator_, built by our JavaScript team in the days before module bundlers.
+
+???
+
+Throughout the exercises in this course we build upon our previous work to improve our bundling for our application.  Our application is a meme generator that our JavaScript team had written in the days before module bundlers.
+
+---
+
+# Exercise Prep
+
+You only perform these steps once!
+
+### 1. Install `serve`
+
+Install the `serve` module (basic webserver for viewing the app) globally:
+
+`npm install -g serve`
+
+### 2. Initialize the Project and Install webpack
+
+1. `cd` to the `exercise` directory
+2. `npm init --yes` to create an initial `package.json`
+3. `npm install --save-dev webpack` to install webpack
+
+???
+
+
+These steps will only need to be taken once today to prepare your working directory (the `exercise` directory in this repository).
+
+- `npm init` will create a package.json for us
+- `npm install` with the save dev option will install webpack
+
+---
+
+# Exercise
+
+The first exercise will get webpack going using a basic configuration. It will result in a distribution folder structure like this:
+
+```
+└── dist
+    ├── img
+    ├── index.html
+    ├── main.js
+    └── styles
+```
+
+???
+
+The goal of each exercise in this course is to create a folder you could publish to a server. Given that at the end of each exercise you can run a local server with a tool like `serve` in the built (i.e. output) folder to see what it'd be like published.
+
+---
+
+# Pre-Exercise Recap
+
+* To prepare modules for use with webpack, we'll use CommonJS syntax (**`module.exports`** to export).
+* We will use **`require`** to import. (`./` for relative path)
+
+### Recap of Basic Webpack Configuration
+
+```js
+module.exports = {
+  context: __dirname,
+  entry: './src/main.js',
+  output: {
+    path: 'dist',
+    filename: 'main.js',
+  },
+};
+```
+
+???
+
+Just to recap the last section very quickly
+- `module.exports` exports things in commonjs
+- `require` requires other modules, you need to use a relative path
+- ... and the basic webpack.config.js will contain a context, entry and output options
+
+---
+
+# Exercise 01 - My First App
+
+1. **Preview the application**: From your project directory, run `serve` and open a browser to `localhost:8080`
+2. **Prepare modules for webpack**: Convert `main.js` and `canvas.js` to CommonJS syntax (use `require` and `module.exports`)
+3. **Alter `index.html`**: `index.html` should reference only `main.js` from its `<script>` tag
+4. **Configure webpack**: Create a basic configuration in `webpack.config.js` to bundle the application and output it to `dist/main.js`
+5. **Set up `build`**: Add a `build` script to the `package.json`'s `scripts` field. The script should run webpack _and_ copy non-JS files to the distribution directory:
+
+    `"build": "webpack && cp -R index.html img styles dist"`
+
+6. **Build with webpack**! `npm run build`
+7. **Test** the output bundle: `cd dist; serve` (Remember, webpack-built output is in `dist`)
+
+???
+
+We expect this exercise to take around 5 to 10 minutes
+
+Before you get to working on the first goal run a webserver in the exercise folder to see what the app does, and get used to using serve.
+
+After that move through these steps to convert this project to webpack, run it, and see the output.
+
+For now, we will need to manually copy a few of the "additional files" since webpack will only be packing our JavaScript, our goal by the end of this core chapter will be to remove all these copied assets.
+
+---
+
+# Exercise 1 Answer: Prepare Modules
+
+**`main.js`**: Require the drawMeme and jQuery, instead of relying on global scope
+```js
+var drawMeme = require('./canvas').drawMeme;
+var jQuery = require('../vendor/jquery-3.1.0');
+```
+
+**`canvas.js`**: Added an export to the bottom
+
+```js
+module.exports = {
+  drawMeme: drawMeme,
+};
+```
+
+???
+
+Let's go over each of the changes we made.  There are a couple of variations on how
+you could have exported `drawMeme`, but either way, you'll want to `require` the canvas and jquery files from `main.js`
+
+---
+# Exercise 1 Answer: Alter `index.html`
+
+**`index.html`**: Replaced three script tags with
+
+```html
+<script src="main.js"></script>
+```
+
+???
+
+We also replaced the 3 script tags in our HTML with our output bundle
+
+---
+# Exercise 1 Answer: Set up `build` Script
+
+**`package.json`**: Created with `npm init`, and added this script
+
+```json
+"scripts": {
+  "build": "webpack && cp -R index.html img styles dist"
+}
+```
+
+???
+
+... and have given ourselves our first `build` command in package.json
+
+The only thing left is the basic webpack configuration
+
+---
+
+# Exercise 1 Answer: Webpack configuration
+
+**`webpack.config.js`**: Basic setup:
+```js
+module.exports = {
+  context: __dirname,
+  entry: './src/main.js',
+  output: {
+    path: 'dist',
+    filename: 'main.js',
+  },
+};
+```
+
+???
+
+which looks like this.
+
+Any questions about anything we've covered so far before we move on to adding the development server?
+
+---
+
+class: center, middle
+name: ch1-sec5
+# Dev Server
+Illustate me?
+???
+
+Section 5
+
+---
+
+# Webpack Dev Server
+
+`webpack-dev-server` is a module that can:
+
+* watch input files for changes
+* cause a rebuild to happen when input files are changed
+* serve the "web application" for us
+
+???
+
+Webpack dev server is a great addition to the ecosystem.  It allows us to watch
+our source code for changes, rebuild automatically, and see those changes in the browser.
+
+It also acts as webserver for us while developing, hosting static content like images and html alongside the built output bundle.
+
+---
+
+# Installing webpack-dev-server
+
+Inside of your project directory (`exercise`), run:
+
+```shell
+npm install --save-dev webpack-dev-server
+```
+
+### package.json `dev` Script
+
+```json
+{
+  "scripts": {
+    "build": "webpack && cp -R index.html img styles dist",
+    "dev": "webpack-dev-server"
+  }
+}
+```
+
+`npm run dev` will run `webpack-dev-server`
+
+???
+
+Here is how we setup webpack-dev-server.  We need to `npm install` it just like we did with webpack, and setup a `script` to run it in the package.json.
+
+---
+
+# Configuring dev server
+
+### Option 1: Command line arguments
+
+```shell
+webpack-dev-server --port 3000 --host 0.0.0.0
+```
+
+### Option 2: Configuration file
+
+`webpack-dev-server` will pick up configuration in `webpack.config.js`:
+
+```js
+module.exports = {
+  devServer: {
+    host: '0.0.0.0',
+    port: 3000,
+  },
+  // ... the rest of the normal configuration stuff
+};
+```
+
+???
+
+Webpack dev server has quite a few options that are documented on the website, for the purpose of our exercise, we shouldn't need these, but we would like to show you how anyway.
+
+In our example slide here, `host` and `port` are reconfigured to listen on port 3000, and allow outside connections (the default only listens on localhost).
+
+We can either pass these options as command line arguments, or, we can set some values on the `devServer` property of our webpack config.
+
+-------
+
+Does anyone have any questions before we try adding dev server to our meme generator?
+
+---
+
+class: middle
+name: ch1-ex2
+# Exercise Time!
+
+```
+> 01-my-first-app@ dev-server /Users/gnarf/Projects/webpack-workshop/exercise
+> webpack-dev-server
+
+ http://localhost:8080/webpack-dev-server/
+webpack result is served from /
+content is served from /Users/gnarf/Projects/webpack-workshop/exercise
+Hash: d929dd8f7f2bc08c866e
+Version: webpack 1.13.2
+Time: 316ms
+  Asset    Size  Chunks             Chunk Names
+main.js  298 kB       0  [emitted]  main
+chunk    {0} main.js (main) 288 kB [rendered]
+    [0] ./src/main.js 566 bytes {0} [built]
+    [1] ./src/canvas.js 1.08 kB {0} [built]
+    [2] ./vendor/jquery-3.1.0.js 286 kB {0} [built]
+```
+???
+
+Section 6
+
+---
+
+# Exercise 02 - Add Dev Server
+
+### Recap
+
+`webpack-dev-server` runs wepback in a server and serves static files. It provides fast rebuilds by using a memory cache.
+
+#### Goals
+
+* Install the **`webpack-dev-server`** package in our app
+* Add `scripts` entry package.json for **`npm run dev`**
+  (this command doesn't need to copy files)
+* Start the dev server and open **`localhost:8080`**
+* Change the default meme text in `src/main.js` and watch it rebuild (terminal)
+* Refresh and see your change in the browser!
+
+???
+
+Even though the last section was already very quick, lets quickly review dev server.
+
+We need to install it with `npm install --save-dev` and add a script to package json.
+
+That's it.  Let's try it!
+
+---
+
+# Exercise 2 Answer: Dev Server Setup Steps
+
+1. **Install `webpack-dev-server`**:
+
+    ```shell
+    npm install webpack-dev-server --save-dev
+    ```
+
+2. **Configure `dev` script in `package.json`**:
+
+    ```json
+    "scripts": {
+      "build": "webpack && cp -R index.html img styles dist",
+      "dev": "webpack-dev-server",
+    }
+    ```
+3. **Start dev server**: `npm run dev` starts our dev server
+4. **View app in browser**:  Visit http://localhost:8080/
+5. **Change meme text**: Edit `main.js`:
+
+    ```js
+    var currentText = "Work hard, Meme hard";
+    ```
+6. **Save the changes**: Watch the rebuild in console; refresh browser to see changes
+
+???
+
+We needed to install `webpack-dev-server`, add a `script` to our package.json, `npm run dev` and we had a development server up and running at `localhost:8080`
+
+Congratulations, you've setup your webpack development environment, and completed the "Introduction to webpack" section of Chapter 1.  Are there any questions?
+
+Let's take a quick 5 minute break?
+
+---
+
+class: center, middle, dark
+name: ch1.2
+
+# Part 2. Loaders
+
+Illustration??
+
+???
+In the second part we are going to talk about loaders.
+
+(This section will take about 30 minutes)
+
+---
+
+# The loaders transform your world
+
+- Webpack only understands JavaScript.
+
+???
+Webpack is flexible, but it only understands and parses _JavaScript_. ...
+
+--
+
+- Webpack **loaders** transform various other (input) content into (output) JavaScript
+
+???
+Webpack **loaders** transform various kinds of input content into output JavaScript that webpack _can_ understand—files, images, CSS...you name it.
+
+**Loaders** allow you to modify _how_ modules are loaded—that is, they can _preprocess_ the files you require or "load".
+
+---
+
+# What Loaders can Do: An Example
+
+
+```js
+const highlightedHtml = require('syntax-loader!docblock-loader!./source.js');
+```
+
+- Applies the `docblock-loader` and `syntax-loader` when loading `./source.js`
+
+???
+One way to apply a loader or multiple loaders to a file is to explicitly define which loaders should be used within a `require` statement.
+
+Let's break that down...
+
+---
+
+# Loaders: Breaking it Down
+
+```js
+const highlightedHtml = require('syntax-loader!docblock-loader!./source.js');
+```
+
+- loaders are `!`-separated, listed before required resource
+
+???
+
+Each loader is separated with a `!` and listed before the resource being required. ...
+
+--
+
+- loaders are applied right to left
+
+???
+
+Loaders are applied _right to left_: the `docblock-loader` is applied first and _then_ `syntax-loader`.
+
+---
+
+# Loaders: Breaking it Down
+
+```js
+const highlightedHtml = require('syntax-loader!docblock-loader!./source.js');
+```
+
+In this hypothetical example:
+
+- `docblock-loader` gets applied to `source.js`
+
+???
+
+`docblock-loader` would first parse `source.js`, returning a string that only contained the doc blocks in the file ...
+--
+
+- `syntax-loader` then applies syntax highlighting to the doc blocks...
+
+???
+`syntax-loader` would then apply syntax highlighting to the doc blocks ...
+--
+
+- `highlightedHtml` value: string of syntax-highlighted doc-blocks from `./source.js`
+
+???
+
+This ultimately results in `highlightedHhtml` being assigned a JavaScript string of syntax-highlighted doc blocks from `./source.js`
+---
+
+# Loaders are Flexible
+
+Loaders can modify individual modules in many ways, e.g. they can:
+
+- Parse files
+- Return objects
+- Return urls
+- Emit assets
+
+???
+
+Loaders are webpack extensions which allow you to modify how modules are loaded.
+
+Loaders manipulate modules in some way, parse CSV, inline a data-uri, etc. Its fairly open ended so these are just some of the possibilities.
+
+---
+
+# Single Responsibility Loaders
+
+Each loader module should do one thing, and do it well.
+
+In the previous example:
+
+```js
+const highlightedHtml = require('syntax-loader!docblock-loader!./source.js');
+```
+
+Functionality is composed from `docblock-loader` _and_ `syntax-loader`—not a single loader that attempts to do multiple things at once.
+
+???
+
+Loaders are capable of doing many things, however loaders should do one thing and do it well.  You may of heard this principle used in other software development, and the ideal for loaders is the same.
+
+Just like you can combine multiple functions to build more complex behaviour in an application, you can easily combine multiple loaders in a chain.
+
+---
+
+# Common Loaders
+
+### `file-loader`
+### `style-loader`
+### `css-loader`
+
+???
+
+In the next section we are going to focus on 3 very common loaders and how to configure them.
+
+Our goal is to take some of the non-JavaScript assets we have in our meme generator and bundle them in with our `dist/` folder.
+
+-----
+
+Any questions before we dive into `file-loader`?
+
+---
+
+name: ch1.2-sec1
+# File Loader
+
+- `file-loader` (npm: `file-loader`) generates a URL for an asset
+- Returns URL, not file
+
+???
+
+The file loader (npm: `file-loader`) generates a runtime-relative URL for an asset (image, font, mp3, etc).
+
+`file-loader` won't return a file—instead, it:
+
+* Emits the file itself as an asset to the output directory and
+* Returns a relative URL to the file's output location
+
+---
+
+# File Loader: In Practice
+
+Instead of:
+
+```js
+var imageURL = 'img/bunny-725x544.jpg';
+```
+???
+
+Instead of referring to a url in JavaScript ...
+
+--
+
+With file-loader, you `require` the asset:
+
+```js
+var imageURL = require('./img/bunny-725x544.jpg');
+// This will bundle the file as an asset to the output folder
+// and give us the relative URL, something like
+// 'cbbb18816b6ef832d2498a285503e663.jpg'
+```
+
+???
+We require with a relative path to the file.
+
+A module created for that file is transformed by file loader. The transformed module returns a url so that imageURL can be used as it may have already been. For that url to point at the file, file loader will emit the file as an asset in the output directory.
+
+--
+
+It's as if you just required a module that does this:
+
+```js
+module.exports = 'cbbb18816b6ef832d2498a285503e663.jpg';
+```
+
+???
+
+You can use `file-loader` to emit any files including images and fonts.
+
+---
+
+# Setting up `file-loader`
+
+### Install with npm:
+```shell
+npm install file-loader --save-dev
+```
+
+???
+
+Installing file loader follows our common pattern of installing the `file-loader` package with npm and saving it as a dev dependency...
+
+--
+### `module.loaders` in `webpack.config.js`
+
+```js
+module.exports = {
+  // entry, context, output same as before
+  module: {
+    loaders: [
+      {
+        test: /\.(jpg|png)$/,
+        loader: 'file-loader',
+      },
+    ],
+  },
+};
+```
+
+???
+Next we need to setup a `module.loaders` array in the webpack config file.
+
+We define a `test` that is a regular expression matching the filename, in this case
+we want to match files ending with `.jpg` or `.png`, and then we tell webpack which
+loader to use automatically for the files that pass the test.
+
+---
+
+# What is this really doing?
+
+```js
+var imageUrls = [
+  require('./img/bunny-725x544.jpg'),
+  require('./img/funky-monkey-725x544.jpg'),
+  require('./img/guinea-pigs-725x544.jpg'),
+];
+console.log(imageURLs);
+// ['cbbb18816b6ef832d2498a285503e663.jpg', '864ebd1e430c50612eac9ebd4db1faf8.jpg',
+//  'f3db6422367750ca9c3711498d83e0f2.jpg']
+```
+
+----
+
+```
+Hash: 9acbf8845506cd7f4e3b
+Version: webpack 1.13.2
+Time: 1356ms
+                               Asset     Size  Chunks             Chunk Names
+cbbb18816b6ef832d2498a285503e663.jpg  33.3 kB          [emitted]
+864ebd1e430c50612eac9ebd4db1faf8.jpg  88.7 kB          [emitted]
+f3db6422367750ca9c3711498d83e0f2.jpg  89.2 kB          [emitted]
+                             main.js   310 kB       0  [emitted]  main
+```
+
+???
+
+Let's take a look at how file-loader works again.
+
+We can see here in the JavaScript we are requireing 3 images.  If we were to console.log the variable, we will get 3 urls back.
+
+We also see that when we `npm run build` we are emitting 3 `.jpg` files that correspond to the three images we used in the JavaScript.
+
+This also has lovely side-effect of generating errors while compiling if your images are missing, the same way as if your JavaScript file is missing (or mis-spelt)
+
+------
+
+It's a very interesting loader to start with, it will allow us to remove the `img` directory from the things we are copying manually in our build step!
+
+Does anyone have any questions before we try it out with our meme generator?
+
+---
+
+class: center, middle
+name: ch1.2-ex1
+
+# Exercise 03 - Require Files!
+
+---
+
+# Exercise 03 - Require Files!
+
+### Recap
+
+- Loaders should do one thing
+- `file-loader` outputs the file to the output directory and returns a URL
+
+???
+For review, loaders should do one thing!  Our `file-loader` outputs a file, and gives us the url!
+
+---
+# Exercise 03 - Require Files!
+
+### Goals
+
+- **Install `file-loader`**
+- **Configure `module.loaders`** in webpack.config:
+    ```js
+    { test: /\.(jpg|png)$/, loader: 'file-loader' }
+    ```
+- **Restart `npm run dev`**
+- **Edit `main.js`**: `require('../img/filename.jpg')` images from `img` folder
+- **Edit `package.json`**: Remove `img` part of `cp` command in `build` script
+- **Clean and build**: Clean the dist (`rm -rf dist`) and run a new build
+- **Notice the image files** in `dist`
+- **Check application** with `serve` from `dist`
+
+???
+
+We need to install `file-loader`, and define `module.loaders` in our webpack config, it is an array which will contain one loader for now.
+
+Whenever we change webpack.config we need to restart our dev server.
+
+We now want to require our images from `main.js` instead of using the `img/` urls.
+
+After making these changes, clean the the dist folder up, and create a new build.  Check the output directory for your images, and try the appplication in `serve`
+
+---
+
+# Exercise 03 - Answer Overview
+
+**`webpack.config.js`**
+
+```js
+module: {
+  loaders: [
+    {
+      test: /\.(jpg|png)$/,
+      loader: 'file-loader',
+    },
+  ],
+},
+```
+
+**`main.js`**
+
+```js
+var imageUrls = [
+  require('../img/bunny-725x544.jpg'),
+  require('../img/funny-monkey-725x544.jpg'),
+  require('../img/guinea-pigs-725x544.jpg'),
+];
+```
+
+**`package.json`**
+```
+  "build": "webpack && cp -R index.html style dist"
+```
+
+???
+
+To review the changes we made, we added `module.loaders` to our webpack config, changed the `imageUrls` to use `require`, and removed `img` from our `build` command.
+
+-------
+
+Any questions?
+
+Onto style and css loaders!
+
+---
+
+name: ch1.2-sec3
+# `style-loader` and `css-loader`
+
+- `css-loader` parses CSS, handling `@import` and `url()` statements within CSS, as well
+- `style-loader` dynamically adds `<style>` tags to the DOM at runtime
+
+???
+
+The style and css loaders are a perfect example of one loader consuming another loader's output.
+
+`css-loader` will evaluate the CSS.  It translates `@import` and URLs to use `require`s and creates a module.  That module exports an object that has a `toString` method that outputs the css as a string!
+
+`style-loader` can then use the module from `css-loader` and create a module that adds a `<style>` tag to the DOM.
+
+The result in the end, is that `require('./style.css')` will allow our css to become a module in webpack's output chunks, and be stored in our `dist/` folder.
+
+---
+
+# How the CSS Loader Works
+
+Let's say you have some CSS in `styles.css`:
+
+```css
+@import 'reset.css';
+
+.image { background: url('image.png'); }
+/* more css... */
+```
+
+And you `require` that CSS in a module:
+
+```js
+require('styles.css');
+```
+
+`css-loader` fulfills this `require` with (roughly):
+
+```js
+module.exports = require('./reset.css') + '\n\n'
+  + '.image { background: url("' + require('./image.png') + '"); }\n'
+  + '/* more css */';
+```
+
+Note how the `@import` and `url()` have been handled.
+
+???
+
+Using the `css-loader` in this way, you can also count on webpack to bundle your css dependencies through `@import` lines.
+
+This line will be handled like a require and will inject the contents of `require('reset.css')` in the eventual output chunks.
+
+`css-loader` also lets `url('image.png')` be required. This lets webpack handle images and other files to include them in the build and transform them like any other module built with webpack.
+
+---
+# How the Styles Loader Works
+
+* `style-loader` injects CSS directly into the DOM
+* No need for `<style>` tags in the HTML
+
+???
+* `style-loader` generates JavaScript that will inject the CSS it parses directly into the DOM dynamically at runtime
+* This eliminates the need for `<style>` tags at all in the HTML
+* The JavaScript returned by `style-loader` (within `main.js` in our case) will create `<style>` nodes and populate them with the CSS
+
+
+---
+# Installing the Loaders
+
+```shell
+npm install style-loader css-loader --save-dev
+```
+
+???
+
+These loaders are also predictably named on npm, and we save them to our dev dependencies.
+
+---
+
+# Configuring the Loaders
+
+### webpack.config.js
+```js
+module.exports = {
+  // ...
+  module: {
+    loaders: [
+      // file-loader here... ,
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader',
+      },
+    ],
+  },
+};
+```
+
+???
+
+To use the loaders, we need to add another test and loader to our `module.loaders` in our webpack config.  Note that we use an exlamation point (bang) to separate and chain the loader output.  This style-bang-css means that style loader loads the output from css loader loading the file...
+
+--
+
+### src/main.js
+```js
+require('../styles/all.css');
+```
+
+???
+Now you can import that module from your `src/main.js`:
+
+Done! This will add a style tag to your document, directly from your JS bundle.
+
+---
+
+# Why no `.css` file?
+
+```
+Hash: 9acbf8845506cd7f4e3b
+Version: webpack 1.13.2
+Time: 1356ms
+                               Asset     Size  Chunks             Chunk Names
+cbbb18816b6ef832d2498a285503e663.jpg  33.3 kB          [emitted]
+864ebd1e430c50612eac9ebd4db1faf8.jpg  88.7 kB          [emitted]
+f3db6422367750ca9c3711498d83e0f2.jpg  89.2 kB          [emitted]
+                             main.js   310 kB       0  [emitted]  main
+```
+
+???
+
+Note that unlike `file-loader` which emitted the assests, `css-loader` and `style-loader` export modules!
+
+This means that the `.css` code is embedded inside of our `.js` code now!  We will be able to remove the `<link>` tag from our HTML, and `style-loader` will inject a `<style>` for us at runtime!
+
+-------
+
+Any questions before we try this out in our meme generator?
+
+---
+
+name: ch1.2-ex2
+# Exercise 04 - Building styles
+
+### Recap
+
+- `css-loader` transforms CSS into JavaScript that `require`s `@import`s and `url`s
+- `style-loader` evaluates the JavaScript from `css-loader` and places it in a `style` tag
+
+### Goals
+
+- Install **`style-loader`** and **`css-loader`**
+- Configure **`.css`** to be loaded by `style-` and `css-loader`
+- Restart `dev` server script if it was already running
+- Move **`styles`** folder into `src`
+- **`require()`** the css file from `main.js`
+- Remove the `<link>` tag from `index.html`
+- Remove the **`styles`** part of the `cp` command in the build script
+- Clean `dist/`
+- `npm run build` and try `serve` from `dist`
+
+???
+
+In this exercise, we want you to bundle the css with the javascript.  You'll need to install the loaders, configure them in webpack.config, and then update the source code to require the css.
+
+You can also remove the link tag from the index.html and and remove another
+thing from our copy command in the build script.
+
+After you do that, make sure your output bundle still has the proper styles!
+
+---
+
+# Exercise 04 - Answer Overview
+
+### Install the Loaders
+
+**`npm install --save-dev style-loader css-loader`**
+
+### Add Configuration
+
+**`webpack.config.js`**: add a loader for `.css` files
+
+```js
+module: {
+  loaders: [
+    // other loaders
+    {
+      test: /\.css$/,
+      loader: 'style-loader!css-loader',
+    },
+  ],
+},
+```
+
+???
+
+To recap what we did in this exercise, we installed our loaders, configured them in webpack.config...
+
+---
+
+# Exercise 04 - Answer Overview (cont.)
+
+### Require the Styles
+
+In `main.js`:
+
+```js
+require('../styles/all.css');
+```
+
+
+### Remove `<link>`
+
+**`index.html`**: edit to remove the `<link>` tag
+
+
+### Update `build` script
+
+Updated `package.json` `build` script (`styles` removed from `cp`):
+
+```js
+"build": "webpack && cp -R index.html dist"
+```
+
+???
+required the style from our script, removed the link from our html, and removed the styles from our build script since they are now bundled with our javascript.
+
+We are very close to removing the copy command entirely, and having the whole application bundled with webpack.
+
+In order to remove that last `.html` file, we will need to go into a new realm of webpackery, Plugins.
+
+Before we go into that, let's recap what we learned about loaders so far.
+
+---
+
+name: ch1.2-sec5
+# Loaders Recap
+
+### Do one thing well
+
+webpack only understands and parses Javascript. Through **loaders** it can take any file format that can in some way be translated to JavaScript.
+
+- **`file-loader`** emits an asset and returns the URL to where the emitted asset is.
+- **`css-loader`** transforms CSS into code that concatenates strings of the original CSS together to become one string of CSS.
+- **`style-loader`** outputs a small script to take that runtime string of CSS and inject it into the page in a `<style>` tag.
+
+This way webpack uses JavaScript as an intermediate format for any content.
+
+???
+
+Though webpack only parses and understands JavaScript, loaders are capable of converting many things into modules.  Our file loader gives us URLs for instance, and css loader parses a css file!  The style loader generates a module that executes at runtime and includes our css files!
+
+There are many more loaders we will learn about soon, but our quest to bundle our entire application with webpack is not yet complete.  We will need to move onto plugins, but before we do that, let's take 5 or 10 minutes.
+
+---
+
+class: center, middle, dark
+name: ch1.3
+
+# Plugins
+Illustration?
+
+???
+
+Welcome to the last part of the Core Chapter, Plugins
+
+(This section should take 30 minutes)
+
+---
+
+# Loaders: Recap
+
+* Loaders let webpack understand and include files that aren't JavaScript.
+* Loaders work on modules.
+
+???
+
+Loaders work while loading modules, and allow webpack to include files that aren't javascript, and change how that javascript is parsed or exported.
+
+In order to do more complicated things, webpack has given us plugins.
+
+---
+
+# Plugins change everything
+
+Plugins allow considerable customization of the build process. With a plugin you can:
+
+- change parser details
+- write custom transformations
+- utilize the module graph in other ways
+
+### Plugins Used Here
+
+We'll use the following four plugins today to bundle our application:
+
+- `ExtractTextWebpackPlugin`
+- `HtmlWebpackPlugin`
+- `DefinePlugin`
+- `UglifyJsPlugin`
+
+???
+
+Plugins allow much more customization of the overall build process.  It will allow you to change details about the code while parsing, write custom transformations, and utilize the module graph in other ways.
+
+In our quest to bundle our whole application for deployment, we will be including these 4 example plugins into our build process.
+
+---
+
+# NPM Naming convention
+
+### Loaders
+
+Named with suffix of `-loader`, e.g. `file-loader`
+
+### Plugins
+
+Named with suffix of `-webpack-plugin`, e.g. `extract-text-webpack-plugin`
+
+### Tags
+
+* `webpack`
+* `loader`
+* `plugin`
+* etc...
+
+???
+
+__Loaders__ can be found on npm with the name `loader` in their package name while __plugins__ on npm have `webpack-plugin` in the package name to help identify from them from plugins for other packages.
+
+They are also conventionally identified within package.json keywords using `webpack` and `loader` for loaders and `webpack` and `plugin` for plugins.
+
+Remember this is a convention and not strictly followed by every plugin.
+
+---
+
+class: center, middle
+name: ch1.3-sec1
+# Extracting Text
+Illustration?
+
+???
+
+We introduced two loaders earlier - `style-loader` and `css-loader` - that combined our css into the JS package. This is useful during development, but for deploying to a web server, loading a `.css` file is preferred.
+
+---
+
+# The Extract Text plugin
+
+* The __ExtractTextWebpackPlugin__ extracts the source of target modules into a file separate from the JavaScript.
+* Most often it is used to extract css handled by `css-loader` into a CSS file.
+
+???
+
+The __ExtractTextWebpackPlugin__ extracts the source of target modules into a file separate from the JavaScript. Most often it is used to extract css handled by `css-loader` into a css file.  The output bundle can have this css loaded in a page before the javascript, so any server rendered content in the page can be styled as desired while the javascript loads.
+
+---
+
+# Extracting Text
+
+```shell
+npm install extract-text-webpack-plugin --save-dev
+```
+
+???
+
+This plugin is called extract text webpack plugin on npm...
+
+--
+**`webpack.config.js`:**
+```js
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+```
+
+???
+
+In order to use our plugin, we need to `require` it using node in our webpack.config.js...
+
+---
+
+# Extracting Text
+
+### webpack.config.js
+
+```js
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+module.exports = {
+  /* ... */,
+  module: {
+    loaders: [
+      /* ... */,
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
+      },
+    ],
+  },
+  plugins: [
+    new ExtractTextPlugin("bundle.css"),
+  ],
+};
+```
+
+???
+
+And we'll need to update the `loaders` and add a `plugins` property.
+
+---
+
+# Extracting Text: Breaking it Down
+
+```js
+module: {
+  loaders: [
+    /* ... */,
+    {
+      test: /\.css$/,
+      loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
+    },
+  ],
+},
+```
+
+### `ExtractTextPlugin.extract` Arguments
+
+```js
+ExtractTextPlugin.extract("style-loader", "css-loader")
+```
+
+* The first argument is a _fallback loader_, which gets used if the extraction fails
+* The second argument is the loader used to extract the result
+
+???
+
+We need to change the loader for our `.css` files to be marked by the ExtractTextPlugin, and we need to add a new key to the config called `plugins` which will hold an instance of the `ExtractTextPlugin`
+
+In this example, we call `ExtractTextPlugin.extract` with 2 arguments.
+
+The first one is a fallback loader, it will be used when the css text is not extracted, which is an option we will be describing in further detail in another Chapter.
+
+The second argument is the loader that will be used by the plugin to extract its result.
+
+---
+
+# Extracting Text: Breaking it Down
+
+```js
+plugins: [
+  new ExtractTextPlugin("bundle.css"),
+],
+```
+
+`"bundle.css"` is the filename we'd like to create from the extracted text.
+
+???
+
+On the new plugins list, we initialize the ExtractTextPlugin with the filename we want to create. In this case it will be `bundle.css`.
+
+We are now able to extract the `css` into it's own file when we build, but our HTML file won't reference it.
+
+---
+
+class: center, middle
+name: ch1.3-sec2
+# html-webpack-plugin
+
+# Can I have HTML as my entry?
+
+???
+We might find ourselves asking if we can have html as an entry in webpack. The answer to this is no.
+
+However, the common use case can be fulfilled with a plugin.
+
+---
+
+# Well, yes...with a plugin
+
+`html-webpack-plugin` renders a given (HTML) template and inserts `<script>` and `<link>` tags for inclusion of JavaScript and CSS assets.
+
+???
+
+`html-webpack-plugin` renders a given (HTML) template and inserts `<script>` and `<link>` tags for inclusion of JavaScript and CSS assets.
+
+This provides a great way to define the shape of html your app needs to boot into, then connect that HTML to the necessary js and css files automatically.  It also provides the last thing we need to remove the copy from our meme generator.
+---
+
+# Simplest config
+
+```shell
+npm install --save-dev html-webpack-plugin
+```
+
+```javascript
+var HtmlPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  // ...
+  plugins: [
+    // extract text,
+    new HtmlPlugin({
+      template: 'index.html',
+      filename: 'index.html',
+    }),
+  ],
+};
+```
+
+This will render the template at `index.html` and output the results to `index.html` (in the `dist` directory).
+???
+
+To configure the html plugin we need to refer to a template and output filename.
+
+With only these simple lines of configuration, we can remove the copy command for the HTML from our build, and the link and script tags will now be added to our html automatically, so we can remove the `<script>` tag from that html as well.
+
+---
+
+# Now we can hash!
+
+Webpack and the HTML plugin both provide some useful _hashes_ that can be used in filenames for cache-busting and versioning:
+
+* `[hash]`: Webpack generates a `hash` for a given _build_
+* `[contentHash]`: The HTML plugin generates a hash based on the content of assets
+
+Both of these can be referenced from the configuration...
+
+???
+
+Now that we have webpack generating an `index.html` in our `dist` folder, we can take advantage of using the `hash` output features for other output chunks like JavaScript, and CSS.
+
+This lets you create builds with cache busting and per-version file names. The only file that would not be hashed in this example is your `index.html`.
+
+---
+
+# Now we can hash!
+
+```javascript
+module.exports = {
+  // ...
+  output: {
+    // ...
+    filename: '[hash].js',
+  },
+  plugins: [
+    new ExtractTextPlugin('[contenthash].css'),
+    new HtmlPlugin({
+      template: 'src/index.html',
+      filename: 'index.html',
+    }),
+  ],
+};
+```
+
+The HTML plugin will automatically create `script` and `link` tags referencing the correct (hashed) filenames once the config is updated as shown.
+
+???
+
+You can now deploy on top of a previous deploy without interrupting users using the last version. Users on the last version (until they refresh the page) can still load images for example, getting the right image even if the updated image is different for the same original file path because the old version and the new version will have different output paths.
+
+This also works for the JavaScript and CSS. As soon as the user loads the page it will continue to work as long as the hashed files of that version persist on the server.
+
+----
+
+Are there any questions about Extract Text or Html plugins before we implement them in our meme generator?
+
+---
+
+class: center, middle
+name: ch1.3-ex1
+
+# Exercise!
+
+---
+
+# Recap - CSS and HTML files
+
+## ExtractTextWebpackPlugin
+
+- Uses loaders to determine CSS to extract
+- Uses a plugin _instance_ to determine what to call the CSS file
+- `[contenthash].css` as the file name will output a CSS file named via a hash of the content
+
+--
+
+## HtmlWebpackPlugin
+
+- Renders a template
+- Injects `<link>` and `<script>` tags into the rendered HTML
+- Outputs the HTML to the output directory
+
+???
+
+
+
+---
+
+# Exercise 05 - Extract CSS & HTML File
+
+### Goals
+
+- **Install plugins**: `extract-text-webpack-plugin` and `html-webpack-plugin`
+- **Configure** those plugins in the webpack config file
+- **Restart** the `dev` server if its running
+- **Remove `<link>` and `<script>`**: Remove **`<link>`** and **`<script>`** tags in the HTML file
+- **Refresh the browser** window (notice the script is working thanks to `HtmlWebpackPlugin`)
+- **Update the `build` command**: Remove `cp` from the build script
+- **Run a build** — you'll have a CSS file output this time
+- **Use `[hash]`**: Switch filenames to **`[hash]`** and **`[contenthash]`**
+- **Run another build** and, then, open the index.html file in a text editor
+- Notice `<link>` and `<script>` tags are added pointing to the right files
+
+---
+
+# Exercise 05 - Answer Overview
+
+**`webpack.config.js`**
+
+```js
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlPlugin = require('html-webpack-plugin');
+// ....
+module: {
+  loaders: [
+    // other loaders
+    {
+      test: /\.css$/,
+      loader: ExtractTextPlugin.extract('style-loader', 'css-loader'),
+    },
+  ],
+},
+plugins: [
+  new ExtractTextPlugin('[contenthash].css'),
+  new HtmlPlugin({
+    template: 'index.html',
+    filename: 'index.html',
+  }),
+],
+```
+
+---
+# Exercise 05 - Answer Overview (cont.)
+
+**`package.json`**
+
+```json
+"scripts": {
+  "build": "webpack",
+  /* ... */
+}
+```
+
+???
+
+------
+
+Any questions before we move on to some final details on "production builds" and optimizations?
+
+---
+
+name: ch1.3-sec4
+# Minifying JS w/ UglifyJS
+
+### Built-in optimization plugin
+
+__UglifyJS__ is a well-known tool for minifying and compressing JavaScript. It is _built in_ to webpack.
+
+???
+__UglifyJS__ is a known tool to minify and compress JS code. This is a common and important step for any web application, and a minified output is smaller in bytes transferred (and gets even smaller when gzipped).
+
+Webpack has a built-in __UglifyJSPlugin__ you can use to minify your output source. This integration is important as webpack provides some leverage to the minifier to get better results than running UglifyJS manually or through another tool.
+
+---
+
+# Configuring uglify plugin
+
+```js
+var webpack = require('webpack'); // Require webpack...
+
+// .... other modules stuffs
+  plugins: [
+    // ... other plugins,
+    new webpack.optimize.UglifyJsPlugin(),
+  ],
+```
+???
+
+As the __UglifyJSPlugin__ is a built-in plugin, we don't need to install any npm package, we can find it in the webpack namespace as `webpack.optimize.UglifyJsPlugin`.
+
+We need to require `webpack` in our `webpack.config.js`, and add a call to construct __UglifyJSPlugin__ in our plugins list.
+
+The next time you run webpack, you will get a minified bundle!
+
+---
+
+# Removing warnings
+
+```js
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+      },
+    }),
+  ],
+```
+
+Make Uglify's output less overwhelming...and we're done!
+
+???
+
+
+Sometimes the UglifyJSPlugin can overwhelm you with warnings. These warnings
+are not necessarily errors, and there might be a time you want to silence them.
+
+This is a configuration option we can pass to the plugin.  Just keep in mind that using it might hide other important warnings in the future...
+
+----
+
+Now that we've gotten our build minified, lets take a look at the last plugin we will cover in the Core Chapter.
+
+---
+
+name: ch1.3-sec5
+# The Define Plugin
+
+The built-in __DefinePlugin__ lets you provide static values that webpack's parser can use to replace specific identifiers within your code.
+
+
+???
+
+Our last plugin to cover isn't an optimization plugin normally, but has a similar effect.
+
+The __DefinePlugin__ lets you provide static values that webpack's parser can use to replace specific identifiers within your code...
+
+--
+
+```js
+if (process.env.NODE_ENV !== "production") {
+  ...
+}
+```
+
+???
+
+A growing number of libraries have debug assertions behind simple tests, often looking like this.  These assertions are great while developing to add extra code to ensure you are using things correctly.
+
+Once you're ready to ship a feature, since those tests have already done their job and slow down your app, __DefinePlugin__ allows you to remove these tests.
+
+---
+
+# The Define Plugin
+
+This addition to `webpack.config.js`:
+```js
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production'),
+    }),
+  ],
+```
+----
+
+will cause this source:
+
+```js
+if (process.env.NODE_ENV !== "production") {
+  ...
+}
+```
+
+to become:
+```js
+if (false) {
+  ...
+}
+```
+
+???
+
+To use the plugin, we add the define plugin in our plugins list, and pass it an object of identifiers to replace.
+
+In this example, we will replace `process.env.NODE_ENV` with the string *quote* **production** *quote* - a string literal in JSON format.
+
+From this expression, webpack will replace the value in the if expression, recognize that it is a static condition, and evaluate it.  Our code now says `if (false)`
+
+---
+
+# DefinePlugin + UglifyJSPlugin
+
+This never runs!
+
+```js
+if (false) { /* ... */ }
+```
+
+Uglify knows this and removes "dead code"
+
+???
+
+Combined with UglifyJS, this code is then removed from our output bundle because it will never run, and we have optimized our production builds.
+
+(let it sink in)
+
+---
+
+# Configs for Production and Development
+
+### webpack.config.js
+
+For our development builds
+
+### webpack.production.js
+
+For our production builds. Tell `webpack` to use this build in production:
+
+> `webpack --config webpack.production`
+
+
+???
+
+These features are great for production builds, but only complicate your development process.  We need a way to disable them for our development builds.
+
+We need one config to build, and one config to develop.
+
+So what we can do is create a second configuration file, and tell our build process to use it.
+
+----
+
+Any questions before we try these two plugins in our meme generator?
+
+---
+
+class: center, middle
+name: ch1.3-ex2
+
+# Exercise 06 - Production
+
+---
+
+# Recap - Uglify and Define
+
+- `Uglify` and `Define` plugins are built-in (provided by webpack)
+
+--
+
+## Uglify
+
+- Runs `uglify` on output
+- Smaller output than running `uglify` separately
+- warnings can be turned off in config with `{compress: {warnings: false}}`
+
+--
+
+## Define
+
+- Defines constant values
+- Those values can resolve tests to be always true or always false
+- Paired with Uglify, code under if/else blocks that are always false are removed from output
+
+--
+
+_Define makes code never run, Uglify makes code never download_
+
+---
+
+# Exercise 06 - Production
+
+### Goals
+
+- **require webpack**: Add new `require` statement at top of config
+- **Add plugin configuration** for `UglifyJsPlugin` and `DefinePlugin`
+- **Restart `dev`** server if running
+- (Notice how much longer it takes now?)
+- **Create a production config**: Add configuration for `ExtractText`, `Uglify` and `Define`
+- **Remove** `ExtractText`, `Uglify` and `Define` from (dev) `webpack.config.js`
+- **Update `build` script** in `package.json` to use
+
+    ```shell
+    webpack --config webpack.config.production.js
+    ```
+- Note that the "debug mode" console log in our main.js doesn't exist in the `dist` output
+
+---
+
+# Exercise 06 - Answer Overview
+
+**`webpack.config.js`**
+
+```js
+plugins: [
+  new HtmlPlugin(/* options */),
+],
+```
+
+--
+
+**`webpack.config.production.js`**
+```js
+plugins: [
+  new ExtractTextPlugin('[contenthash].css'),
+  new HtmlPlugin(/* options */),
+  new webpack.optimize.UglifyJsPlugin(/* options */),
+  new webpack.DefinePlugin(/* options */),
+],
+```
+
+--
+
+**`package.json`**
+```json
+"build": "webpack --config webpack.config.production.js",
+```
+
+---
+
+# Exercise 06 - Answer Overview (cont.)
+
+**`main.js`**
+```js
+if (process.env.NODE_ENV !== 'production') {
+  console.log('in development mode');
+}
+else {
+  console.log('in production mode');
+}
+```
+
+---
+
+class: center, middle
+name: ch2
+
+# Working around incompatibilities.
+
+### (A.K.A.) Teaching webpack to load JavaScript
+
+???
+
+Not all modules are created equal.  Not all modules work immediately within a webpack project.  It's unfortunate when you run into these situations, and they are pretty common.
+
+This is true of all module bundlers, and one of the most famous "incompatible things" are older versions of jQuery 1.x, and plugins for jQuery.
+
+In this next section we are going to talk about the techniques you have as a webpack user to handle importing JavaScript modules that don't quite behave.
+
+
+---
+
+name: ch2-sec1
+# Resolving `require()`
+
+### How webpack Finds the Things you `require`
+
+There are three types of `require`s:
+
+???
+
+Let's start off this section by talking about how webpack handles `require`.
+
+The first step is to figure out what type of request we are dealing with.  If you are familiar with how node looks for modules, this should look very familiar.
+
+There are many ways you can configure how webpack searches for files to match these requests...
+--
+
+- Absolute:
+```js
+require('/home/me/file');
+require('C:\\home\\me\\file');
+```
+
+???
+- Absolute, when you call require with an absolute path...
+--
+
+- Relative:
+```js
+require('./file');
+require('../file');
+```
+
+???
+- Relative, a path staring with `.` or `..` ...
+--
+
+- Module:
+```js
+require('module');
+require('module/file');
+```
+
+???
+- And lastly, everything else is treated as a Module.
+
+---
+# Resolving `require()`: Relative Paths
+
+```js
+require('./file');
+require('../file');
+```
+
+- Resolve the relative path into a absolute one using the context of the loaded file
+
+???
+
+Let's start with an easy one...  In order to handle relative paths, webpack converts them to absolute paths.
+
+---
+
+# Resolving `require()`: Absolute Paths
+
+
+```js
+require('/home/me/directory');
+```
+
+To resolve this `require`, webpack will:
+
+1. Look for a `package.json` for the module in `/home/me/directory`
+2. Determine a `main` from that `package.json`
+
+???
+
+Let's talk about what happens when we try to require a directory... First webpack is going to look for a `package.json` file, and try to infer the name of the file to include from it.
+
+---
+
+# Resolving `require()`: Absolute Paths
+
+```js
+require('/home/me/directory');
+```
+
+### Default Behavior
+
+* If no `package.json` file is found that applies to `directory` OR
+* The `package.json` doesn't define a recognizable `main`
+
+???
+If webpack can't find a `package.json` for the module being requested, OR if that `package.json` doesn't have a field that can be used to derive `main`...
+
+--
+
+Look for a file named `index` \*:
+
+`/home/me/directory/index`
+
+\* No extension...yet. Hang on!
+
+???
+
+webpack will default to looking for a file named `index`...we'll look at how it determines extension in a couple of minutes.
+
+---
+
+# Resolving `require()`: Absolute Paths
+
+### `package.json` and `main`
+
+If `/home/me/package/package.json` **does** exist and contains:
+
+```js
+{
+  /* ... */
+  "browser": "dist/bundle.js"
+}
+```
+
+This `require`:
+
+```js
+require('/home/me/package');
+```
+
+Becomes this:
+
+```js
+require('/home/me/package/dist/bundle.js');
+```
+
+???
+
+In our example here, we are trying to include the `package` directory, which has a `package.json` who has a "browser" key defined, so we append that path to the directory, and require that file.
+
+---
+
+## Resolving `require()`: `packageMains`
+
+Huh? Why is it using the `browser` field??
+
+???
+You can configure which fields are most important to the resolver in your webpack config.
+
+--
+
+### `packageMains` Configuration
+
+- **`resolve.packageMains`** webpack config
+- Defines a list of _fields_ in `package.json` files that webpack will look at to determine the `main`.
+
+???
+
+`packageMains` is a list of fields that webpack looks for on package.json to find the module's "main entry"
+
+---
+
+## Resolving `require()`: `packageMains`
+
+- Default value of `packageMains`:
+
+(`webpack.config.js`)
+```js
+module.exports = {
+  resolve: {
+    packageMains: ["webpack", "browser", "web", "browserify",
+      ["jam", "main"], "main"],
+  }
+};
+```
+
+???
+The value shown here is the default setting of `resolve.packageMains`
+...and you can see, even by default, webpack searches pretty hard for this main file.
+
+---
+
+## Resolving `require()`: Extensions
+
+```js
+require('/home/me/directory/index');
+```
+
+Becomes this:
+
+```js
+require('/home/me/directory/index.js');
+```
+
+---
+
+### Resolving `require()`: `resolve.extensions`
+
+- **`resolve.extensions`**: string extensions that webpack will try to append to `require`'d files
+- Default value of `resolve.extensions`:
+
+```js
+module.exports = {
+  resolve: {
+    extensions: ['', '.webpack.js', '.web.js', '.js'],
+  }
+};
+```
+
+???
+- Every type of require eventually end up giving us a path to a file.
+- **`resolve.extensions`** is a webpack config that lists string extensions that webpack will try to append to `require`'d files
+- At this point webpack will check its list of extensions for the FIRST MATCH and use it.
+
+--
+
+- `''` allows extensions to be used explicitly
+- __Without__ `''`, `require('./index.js')` will __break__
+- __With__ `''`, `require('./style.css')` will __work__
+- Add, e.g., `.css` to make `require('./style')` work
+
+???
+
+Note that an empty string is used as the first extension here, this allows webpack to find `require('style.css')` without trouble, but you can leave off the '.css' if you add the extension to this configuration.
+
+- The first `''` is important—it allows extensions to be explicitly used in `require`
+- Without `''`, `require('./index')` will work but `require('./index.js')` won't
+- `''` will cause `require('./style.css')` to work (or any other explicit extension)
+- Add `'.css'` to make `require('./style')` work, e.g.
+
+You'll probably want to add 'jsx' to this list if you're working on a react project.
+
+---
+
+## Resolving `require()`: modules
+
+```js
+require('module');
+require('module/with/path/to/file');
+```
+
+- To resolve _modules_, webpack will check **`resolve.alias`** configuration
+- `resolve.alias` lets you _alias_ specific modules to other places than the `node_modules` directory
+
+???
+
+All right, now that we know what happens when you have a relative or absolute path from webpack, lets talk about how webpack gets to a path from a "module" require path.
+
+`resolve.alias` lets you _alias_ specific modules to other places than the `node_modules` directory
+
+---
+
+#### Resolving `require()`: `resolve.alias`
+
+For example:
+
+```js
+module.exports = {
+  resolve: {
+    alias: {
+      jquery$: path.resolve('./vendor/jquery-3.1.0')
+      //   `$` indicates "exact" match
+    }
+  }
+}
+```
+
+- Syntax: the `$` signifies _exact match_ instead of _partial_
+- `require('jquery/src/file'); // --> ERROR (because of $)`
+- `require('jquery'); // --> '/full/path/vendor/jquery-3.1.0'`
+- [`resolve.alias` documentation](https://webpack.github.io/docs/configuration.html#resolve-alias) has a table that details this more
+
+
+???
+
+First, webpack will look in the `resolve.alias` configuration for a match.  Each key on this configuration object represents a "module name".  In our example here, we are making `require('jquery')` find jquery in our vendor folder.  Note that it is important to use an absolute path here.  This is a pretty simple search and replace operation.  If you use a relative path, it will be relative based on where the `require` is called, not the webpack config.
+
+The `$` is a bit tricky, when you have a `$` webpack looks for EXACT MATCH only.  You should use the `$` if your alias points to a single file, or leave it off if you want to be able to require files within the module directory.
+
+It is possible to alias one module to another module path as well as relative and absolute paths.
+
+This is a very useful technique to have available to you...
+
+---
+
+## Example: `resolve.alias` can help with testing
+
+Test code should be written as if you are a consumer of the library.
+```js
+// "bad"
+const method = require('../src/library/method');
+// "good"
+const method = require('mylibrary').method;
+```
+
+```js
+  resolve: {
+    alias: {
+      // In a "dev mode" configuration, use the unbundled src folder
+      mylibrary: path.resolve('./src/index.js'),
+      // In a "post-build test mode" config you can test against minified output:
+      mylibrary: path.resolve('./dist/mylibrary.min.js'),
+    }
+  },
+
+
+```
+
+???
+
+Another very strong use case for creating resolve alias for modules is testing.
+
+If we are using webpack to produce a library, we should write our tests as if we were consumers of our library.  We shouldn't require realative paths to `src` to get to our methods to test, we should test the publicly exported API.
+
+Using resolve aliases, we can write our tests using `require('mylibrary')` and still have the advantage of using the `src` files in dev mode, but be able to easily swap out that dependency and run tests against the minified production version.
+
+---
+
+# Resolving modules:
+
+```js
+require('module');
+require('module/with/path/to/file');
+```
+
+- First: Check Aliases
+  - Result is a new path, which is resolved (absolute, relative, or module)
+
+???
+
+So we check aliases, and this new path that we get is then resolved.  If we didn't find an alias...
+
+---
+
+# Resolve configuration: There's More!
+
+No alias? Keep hunting, using more `resolve` config properties:
+
+Hunting order:
+
+1. [`root`](https://webpack.github.io/docs/configuration.html#resolve-root)
+2. [`modulesDirectories`](https://webpack.github.io/docs/configuration.html#resolve-modulesdirectories)
+3. [`fallback`](https://webpack.github.io/docs/configuration.html#resolve-fallback)
+
+```js
+// default: only modulesDirectories: ['node_modules']
+resolve: {
+  root: [path.resolve('./vendor'), path.resolve('./module_override')],
+  modulesDirectories: ['node_modules', 'bower_components'],
+  // ./node_modules, ./bower_components, ../node_modules, ../bower_components, ../../
+  fallback: [path.resolve('./last-place-to-look')],
+}
+```
+
+???
+
+we need to hunt for it!
+
+In both of our requires here - the "module" name is `module`, in order to look for it, webpack looks for a file or directory of the same name in multiple places.
+
+First it hunts `resolve.root`, which is a way you can define locations to look BEFORE trying the module directories.
+
+modules directories defines a list of directory names, not paths, and this is an important distinction. It checks every directory on the way up to the "root" context for a folder matching these names and looks inside it for the module.  In this example here, we've taught webpack to also look for bower_components directories.
+
+`fallback` exists so you can define a "last ditch" place to look for modules. You're unlikely to need this distinction, ever.
+
+---
+
+# Resolving modules
+
+## Found the directory!
+
+```js
+require('module') === require('../../node_modules/module');
+require('module/path') === require('../../node_modules/module/path');
+```
+
+???
+
+Now that it's found the directory for the module, webpack will treat it like an absolute path, looking for package.json, mains, extensions, and all the other configuration we've talked about.
+
+---
+
+# Recap: Resolving
+
+Config properties under `resolve`:
+
+- `packageMains` - defaults are fine!
+- `extensions` - add `jsx` or `coffee` etc, -- keep `''` first!!!
+- `alias` - "trick" module locations
+- `root`, `modulesDirectories`, `fallback` - help with the "hunt"
+
+???
+
+To recap the options we have available to teach webpack how to resolve requires.
+
+`packageMains` - We showed you this setting mainly to describe how webpack finds the "main file" for a given package, the defaults will most likely be correct for your projects.
+
+`extensions` is a useful way to add more things to the auto-resolver capabilities.  This is where you'd add `jsx` or `coffee` extensions to be auto-resolved.
+
+`alias` is a way to rewrite the resolution of a module name to something else.  we talked about how this was useful for testing, but it has other uses.
+
+The last three options here `root`, `modulesDirectories` and `fallback` all configure how webpack will hunt for modules when you require them.  We talked about how to use this to include modules from bower as an example.
+
+------
+
+Excercise Possibility: switch to using `require('jquery')` in the meme gen, and teach webpack to find it.
+
+---
+
+class: center, middle
+name: ch2-sec2
+
+# Module Problems
+
+Illustration??
+
+???
+
+Now that we've talked a bit about how to train webpack to find your modules, lets talk a bit about the problems we run into with the modules themselves.
+
+---
+
+# Module Problems
+
+### Not all libraries are modules
+
+jQuery <= 1.9, and many, many more
+
+???
+
+Let's start off with a fairly obvious problem.  Not all JavaScript libraries were written as modules!  If you're porting an old site that used jQuery 1.9, and upgrading everything to use require immediately isn't possible, there are tricks we can use that we will cover in the upcoming sections...
+
+--
+
+### Not all modules "play well"
+```js
+var isNode = typeof module !== 'undefined';
+```
+
+???
+
+Even when they are modules, not every JavaScript module you will find will make sane assumptions about it's environment.
+
+The bit of code on screen here is just one example of how this can go wrong, where the library author incorrectly assumed that the presence of `module` means we are in node, and gives up on important browser functionality.
+
+We've also seen modules which when using AMD format define things incorrectly and the exports get messed up.  Luckily there are ways we can solve this problem as well.
+
+---
+
+# Shimming modules
+
+Webpack docs: [shimming modules](https://webpack.github.io/docs/shimming-modules.html)
+
+### Techniques:
+
+- `script-loader`
+- `exports-loader`
+- `imports-loader`
+- `ProvidePlugin`
+???
+
+Webpack has a page on the documentation devoted to this whole class of problems.  In the next few sections, we are going to take a moment to focus on each of these techniques, talk about the problems they solve or create in more detail.
+
+---
+
+name: ch2-sec3
+# Shimming Techniques: `script-loader`
+
+- In, e.g., `app.js`:
+
+```js
+require('script-loader!../vendor/jquery-1.9.min.js');
+```
+
+- This is equivalent to the following in HTML:
+
+```html
+<script src="vendor/jquery-1.9.min.js"></script>
+```
+
+- `script-loader` approximates loading the script in a global `<script>` tag in HTML.
+
+???
+
+Script loader is a technique that we can use to run a script in the "main global context".  It is almost as if we use a `<script>` tag in the HTML...
+--
+
+- `require`, `define`, etc. are `undefined`
+
+???
+
+This means that we are running outside of webpacks `require` and `define` land...  They are evaluated in the global context...
+
+--
+
+- uses `eval()`
+- the script loaded can not be minified!
+
+> (think about using `.min.js` extension in production)
+
+???
+
+Using `eval`... This might seem ugly, but it is the closest we get to a real `<script>` tag, and becomes very useful for evaluating a "global module" like jQuery 1.9 which is not in any module syntax.
+
+This also means that the script is stored as a STRING in your javascript, and webpack will be unable to parse or modify your code.  Be sure to combine this with the `extensions` or `alias` resolver options we just learned about to use the `.min.js` version of your bundle.
+
+---
+
+# `script-loader`
+
+- Assuming `jquery` has been installed via `npm` (`npm install jquery@1.9`)
+- In `app.js`:
+
+```js
+require('script-loader!jquery');
+console.log(jQuery); // Works because jQuery exported to global context!
+```
+
+Or, configure your webpack config to use `script-loader` for jQuery:
+```js
+module.exports = {
+  module: {
+    loaders: [
+      {
+        // we usually only use "test" for extensions
+        test: /\.js$/,
+        // only include files in this directory
+        include: [path.resolve('./node_modules/jquery')],
+        loader: 'script-loader',
+      }
+    ]
+  }
+}
+```
+
+???
+
+In order to use script loader, you can either define the loader with a specific test (like node_modules/jquery), or you can also use the `!` syntax to tell webpack which loader to use.
+
+In this example here, we are loading jQuery through the script loader, which then exports `jQuery` to the global window, and we can access jQuery immediately after.
+
+---
+
+name: ch2-sec4
+## Shimming Techniques: `exports-loader`
+
+### Need a `module.exports`?
+
+```js
+var jQuery = require('exports-loader?window.jQuery!script-loader!jQuery');
+```
+
+- Result: Global jQuery from `script-loader` is assigned to `jQuery`
+
+???
+
+In our previous example, we didn't use the result of calling `require` script loader jquery, because it didn't return anything.  It ran as a global script!
+
+In this example, we are using the `exports-loader` to capture the value of `jQuery` from the window.
+
+---
+
+# `exports-loader`
+
+In our meme generator we *could* have done this:
+
+```js
+var drawMeme = require('exports-loader?drawMeme!./canvas');
+```
+
+(Instead of adding `module.exports`)
+
+???
+
+So this basically adds a `module.exports` to the bottom of the script, in our meme generator example, we could have told the require statement which function we wanted to load from our canvas script, however, adding the `module.exports` to the file is **way easier**.  This techinque can be used to "fix" external modules.
+
+---
+
+name: ch2-sec5
+# `imports-loader`
+
+### Add a local variable to the top of the file
+
+- Example: You've got a third-party jQuery plugin (`./file.js`) that assumes that `$` is defined.
+- `imports-loader` can be used when a file has dependencies, but doesn't have module syntax.
+- In, e.g., `app.js`, this:
+
+    ```js
+    require('imports-loader?$=jquery!./file.js');
+    ```
+
+    causes the rough equivalent of this:
+
+    ```js
+    var $ = require('jquery');
+    ```
+
+    to be injected at the top of `./file.js`
+
+???
+
+When we use imports-loader, we are defining variables for the file to have in scope!  Here is a quick example where some file assumes that `$` is jQuery, but doesn't require it...
+
+---
+
+# `imports-loader`
+
+### Can also fix broken AMD/CommonJS
+
+```js
+require('imports-loader?define=>undefined!./broken-amd.js');
+require('imports-loader?require=>undefined!./broken-common.js');
+```
+
+- Syntax:
+    - `$=jquery`: Within target file, set `$` to the result of `require('jquery')`
+    - `$=>window.jQuery`: Within target file, set `$` to `window.jQuery`
+
+???
+
+if we switch to use the arrow instead of just an equal here, we can set vars to any javascript value.  We can use this to help us solve the problems when AMD or CommonJS exports incorrectly... If the script breaks when `require` is present, you can undefine it in the require statement!
+
+---
+
+## `ProvidePlugin`: imports at a whole new level
+
+- Make global things available everywhere with minimal fuss
+
+```js
+{
+  plugins: [
+    new webpack.ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery",
+        "window.jQuery": "jquery"
+    })
+  ]
+}
+```
+
+- e.g., roughly, for modules that assume the global presence of `$`, webpack will "provide" `var $ = require('jquery');`
+
+???
+
+There is also `ProvidePlugin` which is like the `imports-loader` but does so at a "global context" in the output bundle as opposed to having to prepend every module included, this prepends the output bundle itself with the defined variables.
+
+If you want something to be global everywhere, `ProvidePlugin` is your goto.  This is really useful in test suites to give you your test helpers without boilerplate requires for every suite.
+
+It can also be really useful when converting old sites to use modules.  At first none of your code will know to look for `jQuery` on the window, but provide plugin can let you install a global shim helping you track down places that assume global context.
+
+
+---
+
+## `ProvidePlugin` (cont.)
+
+Using `ProvidePlugin` is similar to, but way better than:
+
+```js
+{
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        loader: 'imports-loader?$=jquery&jQuery=jquery&window.jQuery=jquery',
+      }
+    ]
+  }
+}
+```
+
+???
+Imports loader will inject these 3 vars in every js file we load, provide plugin injects it in the output bundle itself, a lot less code!
+
+---
+
+name: ch2-sec6
+# "Incompatibilities" Review
+
+- Resolver configuration
+  - Most importantly:
+  - `extensions` - add `jsx` or `coffee` etc, -- keep `''` first!!!
+  - `alias` - "trick" module locations
+  - `moduleDirectories` - need to add `"bower_components"`
+
+- Shimming Modules
+
+  - `script-loader` load globally, but as a string, so use minified js
+  - `exports-loader` when the module you include doesn't export anything, but should
+  - `imports-loader` when it doesn't require something it should
+  - `ProvidePlugin` when the whole webpack world needs to know
+
+---
+
+class: center, middle
+
+# More Loaders and Plugins
+
+### Including other modern developer tools and baking HTML
+
+???
+
+Having covered the basics and how to work with libraries and tools that misbehave lets look at filling in more knowledge about webpack and adding more common modern tools and techniques. For that lets consider using:
+
+- CSS Supersets like Sass, Less, and Stylus
+- Post CSS for more CSS utility
+- Working with ECMAScript 6 through Babel
+- And Building Pages or Part of pages statically with HTML Plugin
+
+---
+
+name: ch3-sec1
+class: center, middle
+
+# Super CSS
+
+### Preprocessing
+
+???
+
+Many projects use CSS super sets to make writing the style for an application easier or to reduce repetition. We can include those technologies and techniques while using webpack.
+
+---
+
+# Installing ...
+
+### sass-loader
+
+```js
+npm install sass-loader node-sass --save-dev
+```
+
+### less-loader
+
+```js
+npm install less-loader less --save-dev
+```
+
+### stylus-loader
+
+```js
+npm install stylus-loader stylus --save-dev
+```
+
+???
+
+CSS super sets all having supporting loaders for webpack. They each fill the same role for their related library. They statically compile their CSS super set into CSS. As such css super set loaders keep to the loader ideal of single responsibility. To use the resulting CSS further you can pair it with style-loader and css-loader or an ExtractText plugin setup.
+
+We need to install the webpack loader, as well as the library that provides the processor.  The webpack loader does not depend on stylus directly, it requires the consumer, you, to have a dependency,  we call this a peer dependency.
+
+SASS, Less, and stylus APIs change less frequently, and with a peer dependency, the loaders can stay the same and the webpack user can pick and choose the version of the css compilier and loader instead of being restricted forced to use the version a loader may have required in its package.json.
+
+---
+
+# Config
+
+```js
+module.exports = {
+  stylus: {
+    use: [/* stylus plugins */],
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.styl$/,
+        loader: 'style-loader!css-loader!stylus-loader',
+      },
+    ],
+  },
+};
+```
+
+???
+
+Let's focus on stylus.
+
+CSS super set libraries and their loaders open a new need for configuration. Loaders let you perform lots of configuration through query parameters to each loader in the loader sequence. The query param approach is pretty expressive but it doesn't support functions or objects with methods. For that webpack has another idiom.
+
+Loaders are allowed to have configuration set on the main webpack config object by a key to their name. So for stylus configuration you store it on an object called stylus in the webpack config. In reference to need to configure with functions for example, stylus plugins can be configured on the stylus use config. Those plugins will be functions to modify the stylus compiler. ...
+
+--
+
+Configured for extraction
+
+```js
+{
+  test: /\.styl$/,
+  loader: ExtractTextPlugin.extract(
+    'style-loader',
+    'css-loader!stylus-loader'
+  ),
+},
+```
+
+???
+
+Configuring for extraction with ExtractTextPlugin we can see an example of its API that hopefully clears up what may be a little confusing. Now that we have three loaders instead of making that three arguments to ExtractText its two arguments. The first as early mentioned is the fallback loader, a loader used in addition to the rest if ExtractText does not extract. The second argument lists the loaders that are always applied.
+
+---
+
+class: center, middle
+
+# Post CSS
+
+### Auto prefixing and more
+
+???
+
+Most css super sets have neighboring libraries that provide a lot of addtional functaionality. One common utility is auto prefixing. Adding prefixs like `webkit-` and `moz-` before newer css properties that are available only under the prefix version for certain browsers.
+
+Many webpack users have moved away from libraries for a specific super set and now use postcss-loader to apply that common functionality.
+
+---
+
+# Install
+
+```shell
+npm install postcss-loader autoprefixer --save-dev
+```
+
+???
+
+Installing postcss-loader we need to also install postcss plugins. postcss takes the approach of parsing once, letting plugins modify the parsed css and then outputing those modifications.
+
+autoprefixer is one such plugin for postcss and automatically prefixes newer css properties. One of its benefits is configuring it so that it keeps the scope of prefixed properties to a smaller set such as excluding browsers X versions back so that the outgoing CSS is smaller. ...
+
+--
+
+# Config
+
+```js
+var autoprefixer = require('autoprefixer');
+
+module.exports = {
+  postcss: function() {
+    return [autoprefixer];
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.styl$/,
+        loader: 'style-loader!css-loader!postcss-loader!stylus-loader',
+      },
+    ],
+  },
+};
+```
+
+???
+
+The config to postcss works like stylus and other loaders, some options can be passed by query params but the main one is on the postcss config field where you state the postcss plugins that will modify your css.
+
+---
+
+# Recap
+
+- Install super set library with its loader (e.g. `stylus` with `stylus-loader`)
+- In the loader config `stylus-loader` feeds into `css-loader`
+```js
+loader: 'style-loader!css-loader!stylus-loader',
+```
+- Use `postcss-loader` for autoprefixing and other css modifications
+
+???
+
+Lets pause for a moment before we get to babel. Any questions?
+
+---
+
+name: ch3-sec2
+class: center, middle
+
+# ES2015+ via Babel Loader
+
+???
+
+How CSS super sets provide utility that lets developers write less to perform the same result, we can get that in JavaScript through the Babel transpiler. Babel works with a large family of plugins and plugin presets to provide features like transpiling ECMAScript 6 features into ECMAScript 5 so it can run virtually anywhere JavaScript now runs.
+
+---
+
+# Harmony Modules
+
+```js
+export default class Application {
+  constructor(options) {
+    this.options = options;
+  }
+  template() {
+    return '<h1>Hello World</h1>';
+  }
+  render() {
+    document.querySelector(this.options.root).innerHtml = this.template();
+  }
+}
+```
+
+```js
+import Application from './application';
+
+new Application({
+  root: '#root',
+});
+```
+
+???
+
+Alongside AMD and CommonJS modules there is also a module format defined by JavaScript. This module format is called many names, Harmony modules, ES6 modules, ES2015 modules, etc.
+
+We don't need to dig too deep on the syntax. To cover it a little you can use `export default` like module.exports. And you can require and assign to a variable with `import`.
+
+---
+
+# Installing babel
+
+```shell
+npm install babel-loader babel-core babel-preset-es2015 --save-dev
+```
+
+???
+
+Babel loader like CSS super set loaders needs a companion library, babel-core, and plugins or presets of plugins like babel-preset-es2015. Using babel-preset-es2015 you get harmony modules and every other feature in the 2015 ECMAScript standard. ...
+
+--
+
+# Config
+
+```js
+module.exports = {
+  babel: {
+    env: {
+      presets: ['es2015'],
+    },
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        loader: 'babel-loader',
+      },
+    ],
+  },
+};
+```
+
+???
+
+Like CSS super set loaders we can configure babel in webpack with the babel config field. `babel-loader` also works with babelrc files and the `BABEL_ENV` and `NODE_ENV` environment keys. Configuring the webpack config provides a way to be more specific given the config's needs.
+
+(Pause before baking html.)
+
+---
+
+name: ch3-sec3
+class: center, middle
+
+# Static HTML with Client JS
+
+### Baking Sites or Structure with HTML Plugin
+
+???
+
+Earlier we brought in a plugin, ExtractText, to optimize delivery of an app. We can use the HTML plugin to do that too.
+
+We can take our JavaScript recipie, and use it to generate a "baked" HTML chunk.  This chunk will be embedded in our HTML!
+
+---
+
+# Let the browser download assets before JS
+
+Frontend code looks for:
+```html
+<div id="root"></div>
+```
+
+Optimized, speedy loading, search-indexable sites need:
+```html
+<div id="root">
+  <div class="header">
+    <img src="logo.png" />
+    Fast Site.com
+  </div>
+  <div class="nav"><!-- nav things --></div>
+  <div class="content"><!-- content fluff --></div>
+</div>
+```
+
+???
+
+A lot of "application frameworks" inject their HTML into a "root element" on the page, but for our application to be fast loading, and indexable by search engines, we should be generating the HTML and links to our important assests (like the logo).
+
+With ExtractText and the HTML plugin the css can load before our script loads. We can also get the web page to load other assets like images with the HTML plugin.
+
+The two blocks here represent what a client rendered page wants as a base to render into and what its output might be. We can also render that output when we webpack so that images and some other page elements can start loading before or while our script loads.
+
+---
+
+# Templatings with Template Strings
+
+```js
+module.exports = `<html>
+  <head>
+    <title>Production App</title>
+  </head>
+  <body>
+    <div id="root">${require('./server-render').default}</div>
+  </body>
+</html>
+`;
+```
+
+???
+
+For this we can use ES6 template strings through babel-loader to render the bulk of our html structure.  While we may have a main.js to kick off the client render we can have server-render.js kick off a server render since that is what we are doing with this technique. ...
+
+--
+
+```js
+import Application from './application';
+
+export default new Application({
+  root: '#root',
+}).template();
+```
+
+```js
+export default class Application {
+  // ...
+  template() {
+    return '<h1>Hello World</h1>';
+  }
+}
+```
+
+???
+
+Instead of building or changing DOM the baked version needs to return a string that can be placed in the html file.
+
+---
+
+# HTML Plugin Config
+
+The config change is fairly simple.
+
+```js
+new HTMLPlugin({
+  template: './index.html.js',
+  filename: 'index.html',
+}),
+```
+
+???
+
+The configuration isn't very different for using the plugin this way. We overlooked it earlier but the plugin generates a script from the template, evaluates that in node, and used the returned content in the output asset. To do this the simpler use of HTML plugin takes html and parses it as a lodash template. You can go around the lodash template parse by using a file ending with a js extension or prefix the path with loaders.
+
+---
+
+# Be Careful
+
+This is rendering a file in Node so some things aren't available
+
+- window
+- The DOM
+- Canvas
+- XmlHTTPRequest
+- Many other browser APIs
+
+### But it's using webpack for `require`
+
+- Feels like node require
+- BUT - lets you use loaders like file-loader for images.
+
+???
+
+Since this rendering in Node, its basically server rendering and many browser APIs are not available. You don't necessarily need your entire code base to work in this environment, you could be rendering a part of the app like the header, navigation and footer, leaving the content for the client to render. For those parts you do render you either need to build the content in a browser agnostic way or simulate a browser through tools like js-dom and selenium, rendering a DOM and then taking the text version.
+
+---
+
+# Recap
+
+- Render a page of an app or part of the structure during webpack
+- Allows the browser to load content before the script can load and execute
+- Building the content needs to result in a string
+- Many browser APIs aren't available and need to be tested for, simulated, or not used
+
+???
+
+Any questions before we get to the exercise?
+
+---
+
+name: ch3-sec4
+class: center, middle
+
+# Exercise
+
+### Static Image URLs
+
+???
+
+Lets use what we just covered with babel-loader and html plugin to include the Image URLs in our build into the html to start.
+
+---
+
+# Goals
+
+- Install `babel-loader`, `babel-core`, and `babel-preset-es2015`
+
+### In the production config
+
+- Add the babel loader configuration and babel options to webpack
+
+```js
+babel: {
+  env: {
+    presets: ['es2015'],
+  },
+},
+```
+- Write `index.html.js` with template strings
+- Write a method to render the images
+
+#### Extra credit
+
+- Setup and use a CSS super set loader
+
+---
+
+# Answers: JS Template
+
+`index.html.js`
+
+```js
+module.exports = `
+// ...
+      <section>
+        <h2>Select image:</h2>
+        <ul class="image-selector">
+          ${require('./server')}
+        </ul>
+      </section>
+// ...
+`;
+```
+
+???
+
+Like the earlier template we can repeat most our index file and insert some output from a server version of the app.
+
+In this approach we created a template for the production build, but you could use it in the development build as well. You want to use DefinePlugin or other details in your config to keep build time lower for development by defining a test to whether the server code should be run.
+
+---
+
+# Answers: Node Ready Code
+
+`server.js`
+
+```js
+var imageUrls = [
+  require('./img/bunny-725x544.jpg'),
+  require('./img/funny-monkey-725x544.jpg'),
+  require('./img/guinea-pigs-725x544.jpg'),
+];
+
+module.export = imageUrls.map(url => `
+  <li><a href="#" class="select-image">
+    <img src="${url}" width="120" height="90">
+  </a></li>
+`}).join('');
+```
+
+???
+
+This is a simple version. You can do more to share most of this with the frontend client. The urls could be in a file by themselves and building the list elements could be a common function.
+
+---
+
+class: center, middle
+
+# Fin
+
+???
+
+And that brings us to the end. Any questions?
+</textarea>
+	  </body>
+	</html>
+	
