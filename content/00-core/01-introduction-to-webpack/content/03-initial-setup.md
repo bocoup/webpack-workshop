@@ -76,13 +76,15 @@ By default, webpack looks for a file called `webpack.config.js` in your project.
 ### `webpack.config.js`
 
 ```js
+const path = require('path');
 module.exports = {
   // Base directory
   context: __dirname,
   // The "first" module - requires the `./`
   entry: './src/main.js',
   output: {
-    path: 'dist',
+    // Must be absolute:
+    path: path.join(__dirname, 'dist'),
     filename: 'main.js',
   },
 };
@@ -96,7 +98,7 @@ We have to tell webpack the "context" (base directory) of our project, NodeJS pr
 
 Again, Entry, from the M.E.CH.A means "where we start", so we point this at whatever contains our "main application", in our exercise this will be `src/main.js`.  Note we need the `./` to indicate it is a relative path.
 
-The output configuration is fairly simple at this point, we want to provide a path and a filename.
+The output configuration is fairly simple at this point, we want to provide a path and a filename, note that the path must be absolute.  Webpack 1 for compatibility reasons used to allow relative paths, but for webpack 2 it must be absolute.
 
 ---
 

@@ -41,11 +41,11 @@ After you do that, make sure your output bundle still has the proper styles!
 
 ```js
 module: {
-  loaders: [
+  rules: [
     // other loaders
     {
       test: /\.css$/,
-      loader: 'style-loader!css-loader',
+      use: ['style-loader', 'css-loader'],
     },
   ],
 },

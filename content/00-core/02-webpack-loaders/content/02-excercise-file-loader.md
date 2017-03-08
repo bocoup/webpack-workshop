@@ -21,9 +21,9 @@ For review, loaders should do one thing!  Our `file-loader` outputs a file, and 
 ### Goals
 
 - **Install `file-loader`**
-- **Configure `module.loaders`** in webpack.config:
+- **Configure `module.rules`** in webpack.config:
     ```js
-    { test: /\.(jpg|png)$/, loader: 'file-loader' }
+    [{ test: /\.(jpg|png)$/, loader: 'file-loader' }]
     ```
 - **Restart `npm run dev`**
 - **Edit `main.js`**: `require('../img/filename.jpg')` images from `img` folder
@@ -50,7 +50,7 @@ After making these changes, clean the the dist folder up, and create a new build
 
 ```js
 module: {
-  loaders: [
+  rules: [
     {
       test: /\.(jpg|png)$/,
       loader: 'file-loader',
@@ -76,7 +76,7 @@ var imageUrls = [
 
 ???
 
-To review the changes we made, we added `module.loaders` to our webpack config, changed the `imageUrls` to use `require`, and removed `img` from our `build` command.
+To review the changes we made, we added `module.rules` to our webpack config, changed the `imageUrls` to use `require`, and removed `img` from our `build` command.
 
 -------
 

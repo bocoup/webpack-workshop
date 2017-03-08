@@ -52,11 +52,12 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
   /* ... */,
   module: {
-    loaders: [
+    rules: [
       /* ... */,
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader", use: "css-loader" }),
       },
     ],
   },
@@ -76,34 +77,38 @@ And we'll need to update the `loaders` and add a `plugins` property.
 
 ```js
 module: {
-  loaders: [
+  rules: [
     /* ... */,
     {
       test: /\.css$/,
-      loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
+      use: ExtractTextPlugin.extract({
+        fallback: "style-loader", use: "css-loader" })
     },
   ],
 },
 ```
 
-### `ExtractTextPlugin.extract` Arguments
+### `ExtractTextPlugin.extract` options
 
 ```js
-ExtractTextPlugin.extract("style-loader", "css-loader")
+use: ExtractTextPlugin.extract({
+  fallback: "style-loader", use: "css-loader" }),
 ```
 
-* The first argument is a _fallback loader_, which gets used if the extraction fails
-* The second argument is the loader used to extract the result
+* First we specified a _fallback loader_.  This will use the style-loader as a backup if the css file was excluded from extraction.
+* We also specify the loaders to `use` when generating the content to be extracted.
 
 ???
 
 We need to change the loader for our `.css` files to be marked by the ExtractTextPlugin, and we need to add a new key to the config called `plugins` which will hold an instance of the `ExtractTextPlugin`
 
-In this example, we call `ExtractTextPlugin.extract` with 2 arguments.
+In this example, we call `ExtractTextPlugin.extract` with some options.
 
 The first one is a fallback loader, it will be used when the css text is not extracted, which is an option we will be describing in further detail in another Chapter.
 
-The second argument is the loader that will be used by the plugin to extract its result.
+The `use` option is the loader that will be used by the plugin to extract its result.
+
+Either of these `use` could of course be Arrays as we saw before in the loaders section.
 
 ---
 

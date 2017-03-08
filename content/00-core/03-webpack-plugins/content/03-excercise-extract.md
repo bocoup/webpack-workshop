@@ -53,11 +53,12 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlPlugin = require('html-webpack-plugin');
 // ....
 module: {
-  loaders: [
+  use: [
     // other loaders
     {
       test: /\.css$/,
-      loader: ExtractTextPlugin.extract('style-loader', 'css-loader'),
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader', use: 'css-loader' }),
     },
   ],
 },

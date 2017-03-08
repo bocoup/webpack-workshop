@@ -77,7 +77,7 @@ module.exports = {
   context: __dirname,
   entry: './src/main.js',
   output: {
-    path: 'dist',
+    path: path.join(__dirname, 'dist'),
     filename: 'main.js',
   },
 };
@@ -178,7 +178,7 @@ module.exports = {
   context: __dirname,
   entry: './src/main.js',
   output: {
-    path: 'dist',
+    path: path.join(__dirname, 'dist'),
     filename: 'main.js',
   },
 };

@@ -57,7 +57,7 @@ With only these simple lines of configuration, we can remove the copy command fo
 Webpack and the HTML plugin both provide some useful _hashes_ that can be used in filenames for cache-busting and versioning:
 
 * `[hash]`: Webpack generates a `hash` for a given _build_
-* `[contentHash]`: The HTML plugin generates a hash based on the content of assets
+* `[contenthash]`: The HTML plugin generates a hash based on the content of assets
 
 Both of these can be referenced from the configuration...
 
