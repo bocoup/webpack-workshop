@@ -1,0 +1,33 @@
+/* Base CSS */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font: 16px 'Helvetica Neue', helvetica, sans-serif;
+  background-color: #666;
+  color: #fff;
+  padding-bottom: 50px;
+}
+
+#canvas {
+  background-color: #fff;
+}
+
+.wrapper {
+  max-width: 720px;
+  margin: auto;
+}
+
+.canvas-wrapper {
+  margin: auto;
+}
+
+h1 {
+  line-height: 2em;
+}
+
+.edit-subtitle {
+  width: 100%;
+  padding: 4px;
+  font-size: 1.4em;
+}
