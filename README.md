@@ -20,6 +20,10 @@
 - Hot Module Replacement (HMR)
 - Code Splitting
 
+### Some Content is a Work In Progress
+
+Look for the folders labeled `-WIP` for work in progress content.
+
 ### License
 - All content contained within the `content`, `exercise`, `exercise-answer` directories is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License; see LICENSE-CC-BY-SA
 - All code contained with the `slides/` directory is copyright 2016 Bocoup LLC.,

@@ -59,8 +59,8 @@ Welcome to the class!  Today we are going to learn about webpack, but before we 
 ## Info:
 
 * Code of Conduct: [https://bocoup.com/guidelines/code-of-conduct](https://bocoup.com/guidelines/code-of-conduct)
-* Class website: [https://bocoup.github.io/webpack-workshop](https://bocoup.github.io/webpack-workshop)
-* Clone repo: [https://github.com/bocoup/webpack-workshop](https://github.com/bocoup/webpack-workshop)
+* Class website: [https://bocoup-education.github.io/webpack-workshop](https://bocoup-education.github.io/webpack-workshop)
+* Clone repo: [https://github.com/bocoup-education/webpack-workshop](https://github.com/bocoup-education/webpack-workshop)
 * Email us any time:
   - [webpack-workshop@bocoup.com](mailto:webpack-workshop@bocoup.com)
 
