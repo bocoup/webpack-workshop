@@ -30,7 +30,7 @@ For review, loaders should do one thing!  Our `file-loader` outputs a file, and 
 - **Edit `package.json`**: Remove `img` part of `cp` command in `build` script
 - **Clean and build**: Clean the dist (`rm -rf dist`) and run a new build
 - **Notice the image files** in `dist`
-- **Check application** with `serve` from `dist`
+- **Check application** with `serve dist`
 
 ???
 
