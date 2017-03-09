@@ -34,7 +34,7 @@ name: ch1.3-ex1
 - **Install plugins**: `extract-text-webpack-plugin` and `html-webpack-plugin`
 - **Configure** those plugins in the webpack config file
 - **Restart** the `dev` server if its running
-- **Remove `<link>` and `<script>`**: Remove **`<link>`** and **`<script>`** tags in the HTML file
+- **Remove `<script>`**: Remove **`<script>`** tag in the HTML file
 - **Refresh the browser** window (notice the script is working thanks to `HtmlWebpackPlugin`)
 - **Update the `build` command**: Remove `cp` from the build script
 - **Run a build** — you'll have a CSS file output this time
