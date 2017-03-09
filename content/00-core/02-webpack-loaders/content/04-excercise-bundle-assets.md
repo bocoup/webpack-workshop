@@ -11,7 +11,7 @@ name: ch1.2-ex2
 - Install **`style-loader`** and **`css-loader`**
 - Configure **`.css`** to be loaded by `style-` and `css-loader`
 - Restart `dev` server script if it was already running
-- Move **`styles`** folder into `src`
+- Move **`styles`** and **`img`** folder into `src`
 - **`require()`** the css file from `main.js`
 - Remove the `<link>` tag from `index.html`
 - Remove the **`styles`** part of the `cp` command in the build script
@@ -41,11 +41,11 @@ After you do that, make sure your output bundle still has the proper styles!
 
 ```js
 module: {
-  loaders: [
+  rules: [
     // other loaders
     {
       test: /\.css$/,
-      loader: 'style-loader!css-loader',
+      use: ['style-loader', 'css-loader'],
     },
   ],
 },

@@ -39,14 +39,14 @@ _Define makes code never run, Uglify makes code never download_
 - **Add plugin configuration** for `UglifyJsPlugin` and `DefinePlugin`
 - **Restart `dev`** server if running
 - (Notice how much longer it takes now?)
-- **Create a production config**: Add configuration for `ExtractText`, `Uglify` and `Define`
+- **Create a production config**: `cp webpack.config.js webpack.production.js`
 - **Remove** `ExtractText`, `Uglify` and `Define` from (dev) `webpack.config.js`
 - **Update `build` script** in `package.json` to use
 
     ```shell
-    webpack --config webpack.config.production.js
+    webpack --config webpack.production.js
     ```
-- Note that the "debug mode" console log in our main.js doesn't exist in the `dist` output
+- Note that the "debug mode" `Hello, developers!` in our main.js doesn't exist in the `dist` output
 
 ---
 
@@ -55,6 +55,7 @@ _Define makes code never run, Uglify makes code never download_
 **`webpack.config.js`**
 
 ```js
+// You can update .css to `use: ['style-loader', 'css-loader']` again.
 plugins: [
   new HtmlPlugin(/* options */),
 ],
@@ -77,18 +78,4 @@ plugins: [
 **`package.json`**
 ```json
 "build": "webpack --config webpack.config.production.js",
-```
-
----
-
-# Exercise 06 - Answer Overview (cont.)
-
-**`main.js`**
-```js
-if (process.env.NODE_ENV !== 'production') {
-  console.log('in development mode');
-}
-else {
-  console.log('in production mode');
-}
 ```

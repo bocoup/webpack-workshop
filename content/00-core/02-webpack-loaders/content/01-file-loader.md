@@ -68,13 +68,13 @@ npm install file-loader --save-dev
 Installing file loader follows our common pattern of installing the `file-loader` package with npm and saving it as a dev dependency...
 
 --
-### `module.loaders` in `webpack.config.js`
-
+### `module.rules` in `webpack.config.js`
+(`module.loaders` in webpack 1.x)
 ```js
 module.exports = {
   // entry, context, output same as before
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.(jpg|png)$/,
         loader: 'file-loader',
@@ -85,7 +85,7 @@ module.exports = {
 ```
 
 ???
-Next we need to setup a `module.loaders` array in the webpack config file.
+Next we need to setup a `module.rules` array in the webpack config file.
 
 We define a `test` that is a regular expression matching the filename, in this case
 we want to match files ending with `.jpg` or `.png`, and then we tell webpack which

@@ -1,7 +1,6 @@
 class: center, middle
 name: ch1-ex1
 # Exercise Time!
-Illustration: The app running?
 
 ???
 
@@ -42,7 +41,7 @@ Install the `serve` module (basic webserver for viewing the app) globally:
 
 These steps will only need to be taken once today to prepare your working directory (the `exercise` directory in this repository).
 
-- `npm init` will create a package.json for us
+- `npm init --yes` will create a package.json for us
 - `npm install` with the save dev option will install webpack
 
 ---
@@ -73,11 +72,12 @@ The goal of each exercise in this course is to create a folder you could publish
 ### Recap of Basic Webpack Configuration
 
 ```js
+const path = require('path');
 module.exports = {
   context: __dirname,
   entry: './src/main.js',
   output: {
-    path: 'dist',
+    path: path.join(__dirname, 'dist'),
     filename: 'main.js',
   },
 };
@@ -94,16 +94,16 @@ Just to recap the last section very quickly
 
 # Exercise 01 - My First App
 
-1. **Preview the application**: From your project directory, run `serve` and open a browser to `localhost:8080`
+1. **Preview the application**: From your project directory, run `serve` and open a browser to `localhost:3000`
 2. **Prepare modules for webpack**: Convert `main.js` and `canvas.js` to CommonJS syntax (use `require` and `module.exports`)
-3. **Alter `index.html`**: `index.html` should reference only `main.js` from its `<script>` tag
+3. **Alter `index.html`**: `index.html` should reference only `main.js` from its `<script>` tag (no path, index.html is copied to `dist/`)
 4. **Configure webpack**: Create a basic configuration in `webpack.config.js` to bundle the application and output it to `dist/main.js`
 5. **Set up `build`**: Add a `build` script to the `package.json`'s `scripts` field. The script should run webpack _and_ copy non-JS files to the distribution directory:
 
     `"build": "webpack && cp -R index.html img styles dist"`
 
 6. **Build with webpack**! `npm run build`
-7. **Test** the output bundle: `cd dist; serve` (Remember, webpack-built output is in `dist`)
+7. **Test** the output bundle: `serve dist` (Remember, webpack-built output is in `dist`)
 
 ???
 
@@ -174,11 +174,12 @@ The only thing left is the basic webpack configuration
 
 **`webpack.config.js`**: Basic setup:
 ```js
+const path = require('path');
 module.exports = {
   context: __dirname,
   entry: './src/main.js',
   output: {
-    path: 'dist',
+    path: path.join(__dirname, 'dist'),
     filename: 'main.js',
   },
 };

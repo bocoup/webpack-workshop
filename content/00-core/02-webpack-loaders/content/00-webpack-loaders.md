@@ -3,8 +3,6 @@ name: ch1.2
 
 # Part 2. Loaders
 
-Illustration??
-
 ???
 In the second part we are going to talk about loaders.
 
@@ -38,6 +36,7 @@ const highlightedHtml = require('syntax-loader!docblock-loader!./source.js');
 ```
 
 - Applies the `docblock-loader` and `syntax-loader` when loading `./source.js`
+- Note: These are not actual loaders as far as we know, we made them up for this example.
 
 ???
 One way to apply a loader or multiple loaders to a file is to explicitly define which loaders should be used within a `require` statement.
@@ -56,7 +55,7 @@ const highlightedHtml = require('syntax-loader!docblock-loader!./source.js');
 
 ???
 
-Each loader is separated with a `!` and listed before the resource being required. ...
+Each loader is separated with a `!` and listed before the resource being required. [webpack1] allowed skipping `-loader`...
 
 --
 

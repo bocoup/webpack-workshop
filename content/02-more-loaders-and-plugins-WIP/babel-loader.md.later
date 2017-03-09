@@ -1,0 +1,163 @@
+# What is `babel-loader`?
+
+Babel is a Transpiler.
+???
+This section is a work in progress!
+
+`babel-loader` follows a common pattern for loaders. It takes an input source and passes it through through an external library (Babel) and then returns the output.
+
+--
+
+```javascript
+import dependency from './dependency';
+
+const render = () => dependency.render();
+
+export default { render };
+```
+
+???
+
+Commonly used with `babel-preset-es2015`, Babel can convert __ES2015+__ syntax, including the ES Modules syntax `import` and `export`, to a compatible __ES5__ + CommonJS modules syntax output.
+
+Webpack can then parse this translated output for dependencies.
+
+
+---
+
+# Using Babel with Webpack
+
+```shell
+npm install babel-loader babel-core babel-preset-es2015 --save-dev
+```
+
+???
+
+Webpack uses loaders as common npm packages. [`babel-loader`](https://github.com/babel/babel-loader) is not an exception.
+
+It needs to be installed with `babel-core` and we will include the ES2015 preset as well:
+
+Since `babel-loader` passes its input to babel, `babel-loader` lets you determine the version of babel and its plugins to be used.
+
+--
+
+```js
+module.exports = {
+  // other configuration here
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+      },
+    ],
+  },
+  babel: {
+    presets: [ 'es2015' ],
+  },
+};
+```
+
+???
+Now that we have the babel loader, and the relevant packages installed, we can just declare it in the projects `webpack.config.js` file,
+
+We also need to include the ES2015 preset in the webpack options
+
+The next time we run Webpack, it will load the input source transpiling it with Babel using the ES2015 plugin set!
+
+TK exclude vendor too to help the class
+
+---
+
+# Loader options
+
+```js
+module.exports = {
+  // ...
+  babel: {
+    presets: ['es2015'],
+  },
+};
+```
+
+```js
+module.exports = {
+  // ...
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015'],
+        },
+      },
+    ],
+  },
+};
+```
+
+???
+
+There are two common ways to set the options for loaders. Most loaders look for a key on the webpack options object as well as query parameters in the "require request". It is up to each loader how to consume options from these two providers. You will usually define the default options on the webpack config, and only use the query parameters for overrides.
+
+---
+
+# Loader query options
+
+```js
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015'],
+        },
+      },
+    ],
+```
+
+```js
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader?presets[]=es2015',
+      },
+    ],
+```
+
+???
+
+You can also use a URL query parameter style syntax
+
+---
+
+# Using Babel to transpile React
+
+Babel can also be used to transpile __React's JSX syntax__! You only need to include an extra preset module called `babel-preset-react`.
+
+```shell
+npm install babel-preset-react --save-dev
+```
+
+```js
+module.exports = {
+  /* ... */,
+  babel: {
+    presets: ['es2015', 'react'],
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.jsx?$/, // Catching .js and .jsx files
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+      },
+    ],
+  },
+};
+```

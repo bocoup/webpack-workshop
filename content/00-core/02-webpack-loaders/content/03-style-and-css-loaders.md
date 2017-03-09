@@ -83,11 +83,11 @@ These loaders are also predictably named on npm, and we save them to our dev dep
 module.exports = {
   // ...
   module: {
-    loaders: [
-      // file-loader here... ,
+    rules: [
+      { test: /\.(jpg|png)$/, loader: 'file-loader'}
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader',
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
@@ -96,7 +96,7 @@ module.exports = {
 
 ???
 
-To use the loaders, we need to add another test and loader to our `module.loaders` in our webpack config.  Note that we use an exlamation point (bang) to separate and chain the loader output.  This style-bang-css means that style loader loads the output from css loader loading the file...
+To use the loaders, we need to add another test and loader to our `module.rules` in our webpack config.  Note that we use `use` with an array to chain the loader output.  This style loader loads the output from css loader loading the file...
 
 --
 

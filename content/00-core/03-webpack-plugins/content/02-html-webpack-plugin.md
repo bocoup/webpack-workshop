@@ -48,7 +48,7 @@ This will render the template at `index.html` and output the results to `index.h
 
 To configure the html plugin we need to refer to a template and output filename.
 
-With only these simple lines of configuration, we can remove the copy command for the HTML from our build, and the link and script tags will now be added to our html automatically, so we can remove the `<script>` tag from that html as well.
+With only a few lines of configuration, we can remove the copy command for the HTML from our build, and the link and script tags will now be added to our html automatically, so we can remove the `<script>` tag from that html as well.
 
 ---
 
@@ -57,7 +57,7 @@ With only these simple lines of configuration, we can remove the copy command fo
 Webpack and the HTML plugin both provide some useful _hashes_ that can be used in filenames for cache-busting and versioning:
 
 * `[hash]`: Webpack generates a `hash` for a given _build_
-* `[contentHash]`: The HTML plugin generates a hash based on the content of assets
+* `[contenthash]`: The HTML plugin generates a hash based on the content of assets
 
 Both of these can be referenced from the configuration...
 

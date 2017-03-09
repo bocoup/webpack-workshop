@@ -1,0 +1,12 @@
+{
+  "name": "meme-generator",
+  "version": "1.0.0",
+  "description": "excercise for bocoup/webpack-workshop",
+  "main": "webpack.config.js",
+  "scripts": {
+    "build": "webpack && cp -R index.html img styles dist"
+  },
+  "devDependencies": {
+    "webpack": "^2.2.1"
+  }
+}

@@ -91,7 +91,7 @@ For our development builds
 
 For our production builds. Tell `webpack` to use this build in production:
 
-> `webpack --config webpack.production`
+> `webpack --config webpack.production.js`
 
 
 ???
