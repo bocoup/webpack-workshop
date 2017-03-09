@@ -15,7 +15,7 @@
 	      }
 	      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
 	    </style>
-	  <script type="text/javascript" src="2ba82734eaed0ad641e1.js"></script></head>
+	  <script type="text/javascript" src="ca0d195e3b23b8e2663e.js"></script></head>
 	  <body>
 	    <textarea id="source" style="visibility: hidden"># Table of Contents (home to return)
 
@@ -43,7 +43,8 @@
 
 ---
 
-# Table of Contents (cont.)
+# Table of Contents (Part 2)
+### Work In Progress (may not be updated for webpack 2)
 
 - [Chapter 2 - Working with Incompatibilities](#ch2)
   - [Resolving Require](#ch2-sec1)
@@ -58,6 +59,8 @@
   - [Static HTML with Client JS](#ch3-sec3)
   - [Exercise: Bake HTML](#ch3-sec4)
 
+???
+
 ---
 
 class: center, middle
@@ -65,12 +68,11 @@ class: center, middle
 # webpack workshop
 ## How does one pack the web?
 
-Illustration Thoughts: Someone trying to pack a www "globe" into a small box for shipping with some pictures, books and stuff
-
 ???
 
 Welcome to the class!  Today we are going to learn about webpack, but before we get started, let's handle some introductions and share some important information.
 
+(Illustration Thoughts: Someone trying to pack a www "globe" into a small box for shipping with some pictures, books and stuff)
 ---
 
 ## Info:
@@ -118,7 +120,7 @@ In the first chapter of our webpack class, we will be covering a few topics to g
 
 ???
 
-First we will describe what webpack is, what problems it solves, and teach some very simple basics of setting up webpack with an example application.
+First we will describe what webpack is, what problems it solves, and teach the basics of setting up webpack with an example application.
 
 --
 ### 2. Webpack Loaders
@@ -168,8 +170,6 @@ class: center, middle
 name: ch1-sec1
 
 # In a land before JavaScript Modules...
-
-Illustration??
 
 ???
 
@@ -430,10 +430,11 @@ class: center, middle
 name: ch1-sec2
 
 # M.E.CH.A.
-Illustration? Voltronish thing
 ???
 
 In webpack, there are 4 core concepts at work that when combined form the ultimate robot module bundler
+
+(Illustration? Voltronish thing)
 
 ---
 
@@ -630,7 +631,7 @@ Then you can use the command:
 
 After installing webpack, you should define a script in your `package.json` to launch it.  This creates an `npm run` command, and is the most cross-platform, and self-documenting way to run npm packages.
 
-Webpack can be used as its own tool creating a standalone build process for simple projects.
+Webpack can be used as its own tool creating a standalone build process for  projects.
 
 ---
 
@@ -653,13 +654,15 @@ By default, webpack looks for a file called `webpack.config.js` in your project.
 ### `webpack.config.js`
 
 ```js
+const path = require('path');
 module.exports = {
   // Base directory
   context: __dirname,
   // The "first" module - requires the `./`
   entry: './src/main.js',
   output: {
-    path: 'dist',
+    // Must be absolute:
+    path: path.join(__dirname, 'dist'),
     filename: 'main.js',
   },
 };
@@ -673,7 +676,7 @@ We have to tell webpack the "context" (base directory) of our project, NodeJS pr
 
 Again, Entry, from the M.E.CH.A means "where we start", so we point this at whatever contains our "main application", in our exercise this will be `src/main.js`.  Note we need the `./` to indicate it is a relative path.
 
-The output configuration is fairly simple at this point, we want to provide a path and a filename.
+The output configuration is fairly basic at this point, we want to provide a path and a filename, note that the path must be absolute.  Webpack 1 for compatibility reasons used to allow relative paths, but for webpack 2 it must be absolute.
 
 ---
 
@@ -720,14 +723,13 @@ Fill in the config file with values for context, entry, and output. ...
 --
 ???
 
-That sums up how we install and get a simple webpack configuration running, are there any questions before we move onto the exercise?
+That sums up how we install and get a basic webpack configuration running, are there any questions before we move onto the exercise?
 
 ---
 
 class: center, middle
 name: ch1-ex1
 # Exercise Time!
-Illustration: The app running?
 
 ???
 
@@ -768,7 +770,7 @@ Install the `serve` module (basic webserver for viewing the app) globally:
 
 These steps will only need to be taken once today to prepare your working directory (the `exercise` directory in this repository).
 
-- `npm init` will create a package.json for us
+- `npm init --yes` will create a package.json for us
 - `npm install` with the save dev option will install webpack
 
 ---
@@ -799,11 +801,12 @@ The goal of each exercise in this course is to create a folder you could publish
 ### Recap of Basic Webpack Configuration
 
 ```js
+const path = require('path');
 module.exports = {
   context: __dirname,
   entry: './src/main.js',
   output: {
-    path: 'dist',
+    path: path.join(__dirname, 'dist'),
     filename: 'main.js',
   },
 };
@@ -820,16 +823,16 @@ Just to recap the last section very quickly
 
 # Exercise 01 - My First App
 
-1. **Preview the application**: From your project directory, run `serve` and open a browser to `localhost:8080`
+1. **Preview the application**: From your project directory, run `serve` and open a browser to `localhost:3000`
 2. **Prepare modules for webpack**: Convert `main.js` and `canvas.js` to CommonJS syntax (use `require` and `module.exports`)
-3. **Alter `index.html`**: `index.html` should reference only `main.js` from its `<script>` tag
+3. **Alter `index.html`**: `index.html` should reference only `main.js` from its `<script>` tag (no path, index.html is copied to `dist/`)
 4. **Configure webpack**: Create a basic configuration in `webpack.config.js` to bundle the application and output it to `dist/main.js`
 5. **Set up `build`**: Add a `build` script to the `package.json`'s `scripts` field. The script should run webpack _and_ copy non-JS files to the distribution directory:
 
     `"build": "webpack && cp -R index.html img styles dist"`
 
 6. **Build with webpack**! `npm run build`
-7. **Test** the output bundle: `cd dist; serve` (Remember, webpack-built output is in `dist`)
+7. **Test** the output bundle: `serve dist` (Remember, webpack-built output is in `dist`)
 
 ???
 
@@ -900,11 +903,12 @@ The only thing left is the basic webpack configuration
 
 **`webpack.config.js`**: Basic setup:
 ```js
+const path = require('path');
 module.exports = {
   context: __dirname,
   entry: './src/main.js',
   output: {
-    path: 'dist',
+    path: path.join(__dirname, 'dist'),
     filename: 'main.js',
   },
 };
@@ -1100,8 +1104,6 @@ name: ch1.2
 
 # Part 2. Loaders
 
-Illustration??
-
 ???
 In the second part we are going to talk about loaders.
 
@@ -1135,6 +1137,7 @@ const highlightedHtml = require('syntax-loader!docblock-loader!./source.js');
 ```
 
 - Applies the `docblock-loader` and `syntax-loader` when loading `./source.js`
+- Note: These are not actual loaders as far as we know, we made them up for this example.
 
 ???
 One way to apply a loader or multiple loaders to a file is to explicitly define which loaders should be used within a `require` statement.
@@ -1153,7 +1156,7 @@ const highlightedHtml = require('syntax-loader!docblock-loader!./source.js');
 
 ???
 
-Each loader is separated with a `!` and listed before the resource being required. ...
+Each loader is separated with a `!` and listed before the resource being required. [webpack1] allowed skipping `-loader`...
 
 --
 
@@ -1318,13 +1321,13 @@ npm install file-loader --save-dev
 Installing file loader follows our common pattern of installing the `file-loader` package with npm and saving it as a dev dependency...
 
 --
-### `module.loaders` in `webpack.config.js`
-
+### `module.rules` in `webpack.config.js`
+(`module.loaders` in webpack 1.x)
 ```js
 module.exports = {
   // entry, context, output same as before
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.(jpg|png)$/,
         loader: 'file-loader',
@@ -1335,7 +1338,7 @@ module.exports = {
 ```
 
 ???
-Next we need to setup a `module.loaders` array in the webpack config file.
+Next we need to setup a `module.rules` array in the webpack config file.
 
 We define a `test` that is a regular expression matching the filename, in this case
 we want to match files ending with `.jpg` or `.png`, and then we tell webpack which
@@ -1410,16 +1413,16 @@ For review, loaders should do one thing!  Our `file-loader` outputs a file, and 
 ### Goals
 
 - **Install `file-loader`**
-- **Configure `module.loaders`** in webpack.config:
+- **Configure `module.rules`** in webpack.config:
     ```js
-    { test: /\.(jpg|png)$/, loader: 'file-loader' }
+    [{ test: /\.(jpg|png)$/, loader: 'file-loader' }]
     ```
 - **Restart `npm run dev`**
 - **Edit `main.js`**: `require('../img/filename.jpg')` images from `img` folder
 - **Edit `package.json`**: Remove `img` part of `cp` command in `build` script
 - **Clean and build**: Clean the dist (`rm -rf dist`) and run a new build
 - **Notice the image files** in `dist`
-- **Check application** with `serve` from `dist`
+- **Check application** with `serve dist`
 
 ???
 
@@ -1439,7 +1442,7 @@ After making these changes, clean the the dist folder up, and create a new build
 
 ```js
 module: {
-  loaders: [
+  rules: [
     {
       test: /\.(jpg|png)$/,
       loader: 'file-loader',
@@ -1465,7 +1468,7 @@ var imageUrls = [
 
 ???
 
-To review the changes we made, we added `module.loaders` to our webpack config, changed the `imageUrls` to use `require`, and removed `img` from our `build` command.
+To review the changes we made, we added `module.rules` to our webpack config, changed the `imageUrls` to use `require`, and removed `img` from our `build` command.
 
 -------
 
@@ -1560,11 +1563,11 @@ These loaders are also predictably named on npm, and we save them to our dev dep
 module.exports = {
   // ...
   module: {
-    loaders: [
-      // file-loader here... ,
+    rules: [
+      { test: /\.(jpg|png)$/, loader: 'file-loader'}
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader',
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
@@ -1573,7 +1576,7 @@ module.exports = {
 
 ???
 
-To use the loaders, we need to add another test and loader to our `module.loaders` in our webpack config.  Note that we use an exlamation point (bang) to separate and chain the loader output.  This style-bang-css means that style loader loads the output from css loader loading the file...
+To use the loaders, we need to add another test and loader to our `module.rules` in our webpack config.  Note that we use `use` with an array to chain the loader output.  This style loader loads the output from css loader loading the file...
 
 --
 
@@ -1627,7 +1630,7 @@ name: ch1.2-ex2
 - Install **`style-loader`** and **`css-loader`**
 - Configure **`.css`** to be loaded by `style-` and `css-loader`
 - Restart `dev` server script if it was already running
-- Move **`styles`** folder into `src`
+- Move **`styles`** and **`img`** folder into `src`
 - **`require()`** the css file from `main.js`
 - Remove the `<link>` tag from `index.html`
 - Remove the **`styles`** part of the `cp` command in the build script
@@ -1657,11 +1660,11 @@ After you do that, make sure your output bundle still has the proper styles!
 
 ```js
 module: {
-  loaders: [
+  rules: [
     // other loaders
     {
       test: /\.css$/,
-      loader: 'style-loader!css-loader',
+      use: ['style-loader', 'css-loader'],
     },
   ],
 },
@@ -1733,7 +1736,6 @@ class: center, middle, dark
 name: ch1.3
 
 # Plugins
-Illustration?
 
 ???
 
@@ -1811,7 +1813,6 @@ Remember this is a convention and not strictly followed by every plugin.
 class: center, middle
 name: ch1.3-sec1
 # Extracting Text
-Illustration?
 
 ???
 
@@ -1862,11 +1863,12 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
   /* ... */,
   module: {
-    loaders: [
+    rules: [
       /* ... */,
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader", use: "css-loader" }),
       },
     ],
   },
@@ -1886,34 +1888,38 @@ And we'll need to update the `loaders` and add a `plugins` property.
 
 ```js
 module: {
-  loaders: [
+  rules: [
     /* ... */,
     {
       test: /\.css$/,
-      loader: ExtractTextPlugin.extract("style-loader", "css-loader"),
+      use: ExtractTextPlugin.extract({
+        fallback: "style-loader", use: "css-loader" })
     },
   ],
 },
 ```
 
-### `ExtractTextPlugin.extract` Arguments
+### `ExtractTextPlugin.extract` options
 
 ```js
-ExtractTextPlugin.extract("style-loader", "css-loader")
+use: ExtractTextPlugin.extract({
+  fallback: "style-loader", use: "css-loader" }),
 ```
 
-* The first argument is a _fallback loader_, which gets used if the extraction fails
-* The second argument is the loader used to extract the result
+* First we specified a _fallback loader_.  This will use the style-loader as a backup if the css file was excluded from extraction.
+* We also specify the loaders to `use` when generating the content to be extracted.
 
 ???
 
 We need to change the loader for our `.css` files to be marked by the ExtractTextPlugin, and we need to add a new key to the config called `plugins` which will hold an instance of the `ExtractTextPlugin`
 
-In this example, we call `ExtractTextPlugin.extract` with 2 arguments.
+In this example, we call `ExtractTextPlugin.extract` with some options.
 
 The first one is a fallback loader, it will be used when the css text is not extracted, which is an option we will be describing in further detail in another Chapter.
 
-The second argument is the loader that will be used by the plugin to extract its result.
+The `use` option is the loader that will be used by the plugin to extract its result.
+
+Either of these `use` could of course be Arrays as we saw before in the loaders section.
 
 ---
 
@@ -1985,7 +1991,7 @@ This will render the template at `index.html` and output the results to `index.h
 
 To configure the html plugin we need to refer to a template and output filename.
 
-With only these simple lines of configuration, we can remove the copy command for the HTML from our build, and the link and script tags will now be added to our html automatically, so we can remove the `<script>` tag from that html as well.
+With only a few lines of configuration, we can remove the copy command for the HTML from our build, and the link and script tags will now be added to our html automatically, so we can remove the `<script>` tag from that html as well.
 
 ---
 
@@ -1994,7 +2000,7 @@ With only these simple lines of configuration, we can remove the copy command fo
 Webpack and the HTML plugin both provide some useful _hashes_ that can be used in filenames for cache-busting and versioning:
 
 * `[hash]`: Webpack generates a `hash` for a given _build_
-* `[contentHash]`: The HTML plugin generates a hash based on the content of assets
+* `[contenthash]`: The HTML plugin generates a hash based on the content of assets
 
 Both of these can be referenced from the configuration...
 
@@ -2075,7 +2081,7 @@ name: ch1.3-ex1
 - **Install plugins**: `extract-text-webpack-plugin` and `html-webpack-plugin`
 - **Configure** those plugins in the webpack config file
 - **Restart** the `dev` server if its running
-- **Remove `<link>` and `<script>`**: Remove **`<link>`** and **`<script>`** tags in the HTML file
+- **Remove `<script>`**: Remove **`<script>`** tag in the HTML file
 - **Refresh the browser** window (notice the script is working thanks to `HtmlWebpackPlugin`)
 - **Update the `build` command**: Remove `cp` from the build script
 - **Run a build** — you'll have a CSS file output this time
@@ -2094,11 +2100,12 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlPlugin = require('html-webpack-plugin');
 // ....
 module: {
-  loaders: [
+  use: [
     // other loaders
     {
       test: /\.css$/,
-      loader: ExtractTextPlugin.extract('style-loader', 'css-loader'),
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader', use: 'css-loader' }),
     },
   ],
 },
@@ -2287,7 +2294,7 @@ For our development builds
 
 For our production builds. Tell `webpack` to use this build in production:
 
-> `webpack --config webpack.production`
+> `webpack --config webpack.production.js`
 
 
 ???
@@ -2345,14 +2352,14 @@ _Define makes code never run, Uglify makes code never download_
 - **Add plugin configuration** for `UglifyJsPlugin` and `DefinePlugin`
 - **Restart `dev`** server if running
 - (Notice how much longer it takes now?)
-- **Create a production config**: Add configuration for `ExtractText`, `Uglify` and `Define`
+- **Create a production config**: `cp webpack.config.js webpack.production.js`
 - **Remove** `ExtractText`, `Uglify` and `Define` from (dev) `webpack.config.js`
 - **Update `build` script** in `package.json` to use
 
     ```shell
-    webpack --config webpack.config.production.js
+    webpack --config webpack.production.js
     ```
-- Note that the "debug mode" console log in our main.js doesn't exist in the `dist` output
+- Note that the "debug mode" `Hello, developers!` in our main.js doesn't exist in the `dist` output
 
 ---
 
@@ -2361,6 +2368,7 @@ _Define makes code never run, Uglify makes code never download_
 **`webpack.config.js`**
 
 ```js
+// You can update .css to `use: ['style-loader', 'css-loader']` again.
 plugins: [
   new HtmlPlugin(/* options */),
 ],
@@ -2387,20 +2395,6 @@ plugins: [
 
 ---
 
-# Exercise 06 - Answer Overview (cont.)
-
-**`main.js`**
-```js
-if (process.env.NODE_ENV !== 'production') {
-  console.log('in development mode');
-}
-else {
-  console.log('in production mode');
-}
-```
-
----
-
 class: center, middle
 name: ch2
 
@@ -2408,7 +2402,11 @@ name: ch2
 
 ### (A.K.A.) Teaching webpack to load JavaScript
 
+##### (Section is Work in Progress and may not be updated for webpack 2)
+
 ???
+
+This section is a work in progress!
 
 Not all modules are created equal.  Not all modules work immediately within a webpack project.  It's unfortunate when you run into these situations, and they are pretty common.
 
@@ -2829,8 +2827,6 @@ class: center, middle
 name: ch2-sec2
 
 # Module Problems
-
-Illustration??
 
 ???
 
@@ -3533,12 +3529,10 @@ babel: {
   },
 },
 ```
-- Write `index.html.js` with template strings
-- Write a method to render the images
-
-#### Extra credit
-
-- Setup and use a CSS super set loader
+- Remove the generation of the HTML from `src/main.js`
+- Write a `server.js` that outputs the `<li><a><img></a></li>` tags for the images
+- Write `index.html.js` with template strings that uses `require('./server.js')` to fill in `.image-selector`
+- **Extra Credit:** Setup and use a CSS super set loader
 
 ---
 
