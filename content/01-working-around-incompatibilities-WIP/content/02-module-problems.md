@@ -3,8 +3,6 @@ name: ch2-sec2
 
 # Module Problems
 
-Illustration??
-
 ???
 
 Now that we've talked a bit about how to train webpack to find your modules, lets talk a bit about the problems we run into with the modules themselves.

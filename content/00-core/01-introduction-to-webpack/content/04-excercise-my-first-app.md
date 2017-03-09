@@ -1,7 +1,6 @@
 class: center, middle
 name: ch1-ex1
 # Exercise Time!
-Illustration: The app running?
 
 ???
 

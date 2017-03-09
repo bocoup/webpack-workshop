@@ -24,7 +24,8 @@
 
 ---
 
-# Table of Contents (cont.)
+# Table of Contents (Part 2)
+### Work In Progress (may not be updated for webpack 2)
 
 - [Chapter 2 - Working with Incompatibilities](#ch2)
   - [Resolving Require](#ch2-sec1)
@@ -39,6 +40,8 @@
   - [Static HTML with Client JS](#ch3-sec3)
   - [Exercise: Bake HTML](#ch3-sec4)
 
+???
+
 ---
 
 class: center, middle
@@ -46,12 +49,11 @@ class: center, middle
 # webpack workshop
 ## How does one pack the web?
 
-Illustration Thoughts: Someone trying to pack a www "globe" into a small box for shipping with some pictures, books and stuff
-
 ???
 
 Welcome to the class!  Today we are going to learn about webpack, but before we get started, let's handle some introductions and share some important information.
 
+(Illustration Thoughts: Someone trying to pack a www "globe" into a small box for shipping with some pictures, books and stuff)
 ---
 
 ## Info:

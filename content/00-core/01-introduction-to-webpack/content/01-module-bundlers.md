@@ -3,8 +3,6 @@ name: ch1-sec1
 
 # In a land before JavaScript Modules...
 
-Illustration??
-
 ???
 
 Before modules became popular, applications were written mostly on the server. Users interacting with an application would request new pages from the server. This went on for a time and it was good. Well not really, but it was the best we had.

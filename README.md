@@ -5,7 +5,6 @@
 
 - install [Node.js](https://nodejs.org)
 - `npm install`
-- `npm install -g webpack`
 
 ### Setup and Run Workshop Presentation
 

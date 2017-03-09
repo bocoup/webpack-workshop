@@ -5,7 +5,11 @@ name: ch2
 
 ### (A.K.A.) Teaching webpack to load JavaScript
 
+##### (Section is Work in Progress and may not be updated for webpack 2)
+
 ???
+
+This section is a work in progress!
 
 Not all modules are created equal.  Not all modules work immediately within a webpack project.  It's unfortunate when you run into these situations, and they are pretty common.
 
