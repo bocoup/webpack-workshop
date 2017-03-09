@@ -13,7 +13,7 @@ canvasImageCopy.onload = function() {
   context.drawImage(canvasImageCopy, 60, 60, 600, 450);
 };
 
-module.exports = function drawMeme(image, text) {
+function drawMeme(image, text) {
   var width = canvas.getAttribute('width');
   var height = canvas.getAttribute('height');
   var borderPadding = 2;
@@ -37,4 +37,7 @@ module.exports = function drawMeme(image, text) {
   }
 }
 
+module.exports = {
+  drawMeme: drawMeme,
+};
 

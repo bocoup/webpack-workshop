@@ -1,4 +1,4 @@
-var drawMeme = require('./canvas');
+var drawMeme = require('./canvas').drawMeme;
 var jQuery = require('../vendor/jquery-3.1.0');
 
 jQuery(function($) {
