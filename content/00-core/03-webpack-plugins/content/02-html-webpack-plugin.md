@@ -48,7 +48,7 @@ This will render the template at `index.html` and output the results to `index.h
 
 To configure the html plugin we need to refer to a template and output filename.
 
-With only these simple lines of configuration, we can remove the copy command for the HTML from our build, and the link and script tags will now be added to our html automatically, so we can remove the `<script>` tag from that html as well.
+With only a few lines of configuration, we can remove the copy command for the HTML from our build, and the link and script tags will now be added to our html automatically, so we can remove the `<script>` tag from that html as well.
 
 ---
 

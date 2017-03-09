@@ -53,7 +53,7 @@ Then you can use the command:
 
 After installing webpack, you should define a script in your `package.json` to launch it.  This creates an `npm run` command, and is the most cross-platform, and self-documenting way to run npm packages.
 
-Webpack can be used as its own tool creating a standalone build process for simple projects.
+Webpack can be used as its own tool creating a standalone build process for  projects.
 
 ---
 
@@ -98,7 +98,7 @@ We have to tell webpack the "context" (base directory) of our project, NodeJS pr
 
 Again, Entry, from the M.E.CH.A means "where we start", so we point this at whatever contains our "main application", in our exercise this will be `src/main.js`.  Note we need the `./` to indicate it is a relative path.
 
-The output configuration is fairly simple at this point, we want to provide a path and a filename, note that the path must be absolute.  Webpack 1 for compatibility reasons used to allow relative paths, but for webpack 2 it must be absolute.
+The output configuration is fairly basic at this point, we want to provide a path and a filename, note that the path must be absolute.  Webpack 1 for compatibility reasons used to allow relative paths, but for webpack 2 it must be absolute.
 
 ---
 
@@ -145,4 +145,4 @@ Fill in the config file with values for context, entry, and output. ...
 --
 ???
 
-That sums up how we install and get a simple webpack configuration running, are there any questions before we move onto the exercise?
+That sums up how we install and get a basic webpack configuration running, are there any questions before we move onto the exercise?

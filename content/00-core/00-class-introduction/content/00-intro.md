@@ -101,7 +101,7 @@ In the first chapter of our webpack class, we will be covering a few topics to g
 
 ???
 
-First we will describe what webpack is, what problems it solves, and teach some very simple basics of setting up webpack with an example application.
+First we will describe what webpack is, what problems it solves, and teach the basics of setting up webpack with an example application.
 
 --
 ### 2. Webpack Loaders
