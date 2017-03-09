@@ -1,0 +1,14 @@
+/* selector.css */
+
+.image-selector {
+  list-style: none;
+  display: flex;
+}
+
+.image-selector li {
+  flex: 1;
+}
+
+.select-image {
+  display: inline-block;
+}
