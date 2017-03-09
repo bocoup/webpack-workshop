@@ -19,3 +19,8 @@
 - Convenience Modules
 - Hot Module Replacement (HMR)
 - Code Splitting
+
+### License
+- All content contained within the `content`, `exercise`, `exercise-answer` directories is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License; see LICENSE-CC-BY-SA
+- All code contained with the `slides/` directory is copyright 2016 Bocoup LLC.,
+  licensed under the GNU General Public License v3.0; see LICENSE-GPL
