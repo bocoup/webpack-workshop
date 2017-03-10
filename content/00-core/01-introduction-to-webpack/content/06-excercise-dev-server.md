@@ -29,7 +29,7 @@ Section 6
 
 ### Recap
 
-`webpack-dev-server` runs wepback in a server and serves static files. It provides fast rebuilds by using a memory cache.
+`webpack-dev-server` runs webpack in a server and serves static files. It provides fast rebuilds by using a memory cache.
 
 #### Goals
 
