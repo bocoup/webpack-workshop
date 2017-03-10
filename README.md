@@ -3,7 +3,7 @@
 
 ## Setup Instructions
 
-- install [Node.js](https://nodejs.org)
+- install [Node.js](https://nodejs.org) (We need at least node v6, run `node --version` to check your own)
 - `npm install`
 
 ### Setup and Run Workshop Presentation
