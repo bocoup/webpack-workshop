@@ -53,38 +53,24 @@ Webpack!
 One of the most well known module bundlers is RequireJS.
 ...
 
---
+---
 
+# RequireJS: The Basics
+
+- One of the earliest well-known bundlers
 - Supports _Asynchronous Module Definition_ (AMD)
+
 ???
 
-It uses the AMD format—__Asynchronous__ Module Definition—to describe modules
-and their dependencies. ...
+Require uses a module syntax called AMD, one of the first standardized ways to define a module of functionality in JavaScript
 
---
-
-- Asynchronously loads individual modules for development
-???
-
-RequireJS uses this format to load modules in the browser with some
-configuration. ...
-
---
-
-- Companion tool **r.js** performs the bundling for production
-???
-
-Its companion r.js "optimizes" an application into a smaller set of files.
-
-The many hundreds of files that make up web applications in the client now
-is convenient for a developer to debug locally as multiple files,
-but from a production server it can be bundled into a single file.
+To clarify what we mean by module, let's look at AMD briefly...
 
 ---
 
 # AMD Module Syntax
 
-- One of to write a JavaScript _module_
+- One of the first ways to write a JavaScript _module_
 
 ???
 
@@ -110,9 +96,31 @@ define(['./dependency.js'], function(dependency) {
 
 ???
 
+The AMD format was one of the first standardized ways to define a module of functionality and specify what other modules that functionality depended upon
+
 This format uses the function `define`, supplied by RequireJS, which is passed
 an array of dependencies and callback function which receives the dependencies
 and returns the module.
+
+---
+
+# RequireJS: The Basics
+
+- One of the earliest well-known bundlers
+- Supports _Asynchronous Module Definition_ (AMD)
+- Asynchronously loads individual modules for development
+???
+
+Returning to RequireJS, RequireJS uses this format to load modules asynchronously in the browser as they are requested, an ensures the code executes as ordered.
+
+--
+
+- Companion tool **r.js** performs the bundling for production
+???
+
+Requesting all those files individually is inefficient in a production website, so RequireJS's companion tool r.js "optimizes" an application into a smaller set of files.
+
+This makes it easy for a developer to debug the many hundreds of files that make up their web applications as multiple files locally, but from a production server it can be bundled into a single file.
 
 ---
 
