@@ -52,8 +52,12 @@ name: ch1.3-ex1
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlPlugin = require('html-webpack-plugin');
 // ....
+output: {
+    // other properties
+    filename: '[hash].js',
+},
 module: {
-  use: [
+  rules: [
     // other loaders
     {
       test: /\.css$/,

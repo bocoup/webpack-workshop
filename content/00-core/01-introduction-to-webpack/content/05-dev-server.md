@@ -1,7 +1,6 @@
 class: center, middle
 name: ch1-sec5
 # Dev Server
-Illustate me?
 ???
 
 Section 5

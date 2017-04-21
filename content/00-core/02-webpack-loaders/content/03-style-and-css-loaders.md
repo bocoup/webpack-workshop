@@ -52,7 +52,7 @@ This line will be handled like a require and will inject the contents of `requir
 `css-loader` also lets `url('image.png')` be required. This lets webpack handle images and other files to include them in the build and transform them like any other module built with webpack.
 
 ---
-# How the Styles Loader Works
+# How the Style Loader Works
 
 * `style-loader` injects CSS directly into the DOM
 * No need for `<style>` tags in the HTML
