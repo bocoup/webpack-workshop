@@ -19,7 +19,7 @@ So we wrote custom build processes to construct a single file from the larger se
 
 ???
 
-The "custom" part of the processes was a lot of work to construct and maintain.
+The "custom" parts of those processes were a lot of work to construct and maintain.
 So developers started collaborating on tools that, with some minimal configuration, could bundle our smaller files into a single file to deliver to the user.
 
 We called these Module Bundlers.
@@ -34,7 +34,7 @@ Some well-known module bundlers include:
 - [Browserify](http://browserify.org/)
 ???
 
-In the "Module Bundler" category, we have RequireJS and Browserify, and...
+In the "Module Bundler" category, we have RequireJS and Browserify, and also...
 --
 
 - **Webpack!**
@@ -43,46 +43,45 @@ In the "Module Bundler" category, we have RequireJS and Browserify, and...
 
 Webpack!
 
+Although later on we'll see how Webpack does a lot more than module bundling, and really represents different, new kind of tool.
+
 ---
 
 # RequireJS: The Basics
 
 - One of the earliest well-known bundlers
+
 ???
 
-One of the most well known module bundlers is RequireJS.
-...
+One of the most well known module bundlers is RequireJS. ...
 
----
-
-# RequireJS: The Basics
-
-- One of the earliest well-known bundlers
+--
 - Supports _Asynchronous Module Definition_ (AMD)
 
 ???
 
-Require uses a module syntax called AMD, one of the first standardized ways to define a module of functionality in JavaScript
+It uses the AMD format—**Asynchronous** Module Definition—to describe modules and their dependencies. ...
 
-To clarify what we mean by module, let's look at AMD briefly...
+--
+- Asynchronously loads individual modules for development
+???
+
+RequireJS uses this format to load modules asynchronously in the browser as they are requested, an ensures the code executes as ordered.
+
+--
+
+- Companion tool **r.js** performs the bundling for production
+???
+
+Requesting all those files individually is inefficient in a production website, so RequireJS's companion tool r.js "optimizes" an application into a smaller set of files.
+
+This makes it easy for a developer to debug the many hundreds of files that make up their web applications as multiple files locally, while still sending a single bundled file to their production server.
 
 ---
 
 # AMD Module Syntax
 
-- One of the first ways to write a JavaScript _module_
-
-???
-
-AMD defines modules in JavaScript so that a tool like RequireJS can determine
-any dependencies and execute them before their dependent modules. ...
-
---
-
-### AMD Syntax Example
-
-Note the use of `define`.
-
+Note the use of `define`:
 ```javascript
 // This is an AMD format module
 define(['./dependency.js'], function(dependency) {
@@ -96,69 +95,35 @@ define(['./dependency.js'], function(dependency) {
 
 ???
 
-The AMD format was one of the first standardized ways to define a module of functionality and specify what other modules that functionality depended upon
+The AMD format itself wraps a module in the `define` function supplied by RequireJS
 
-This format uses the function `define`, supplied by RequireJS, which is passed
-an array of dependencies and callback function which receives the dependencies
-and returns the module.
-
----
-
-# RequireJS: The Basics
-
-- One of the earliest well-known bundlers
-- Supports _Asynchronous Module Definition_ (AMD)
-- Asynchronously loads individual modules for development
-???
-
-Returning to RequireJS, RequireJS uses this format to load modules asynchronously in the browser as they are requested, an ensures the code executes as ordered.
-
---
-
-- Companion tool **r.js** performs the bundling for production
-???
-
-Requesting all those files individually is inefficient in a production website, so RequireJS's companion tool r.js "optimizes" an application into a smaller set of files.
-
-This makes it easy for a developer to debug the many hundreds of files that make up their web applications as multiple files locally, but from a production server it can be bundled into a single file.
+Define is passed an array of dependencies, and a callback function which receives those dependencies
+and returns a module.
 
 ---
 
 # Browserify: The Basics
 
-???
-
-RequireJS used the AMD format for defining modules, but around this time
-Node.js was gaining in popularity, and its module format (CommonJS) was not
-supported by other bundlers. ...
-
---
-
 - Supports the __CommonJS__ module format
+
 ???
 
-Browserify uses CommonJS, which allows most node modules to be used inside the
-browser. ...
+AMD was designed for the browser, but while RequireJS was being developed, Node.js was also gaining in popularity
+
+Node's module format, called CommonJS, was not supported by the other bundlers of the time. ...
+
+So a tool called Browserify was created to let you write front-end web code using the CommonJS module format,
 
 --
 
 - _Shims_ some of the "common" node modules
 ???
 
-Browserify also provides some builtin node modules so they also work in the browser.
+and Browserify also provides some builtin shims for core node modules so that code written for Node will also work in front-end web applications.
 
 ---
 
 # CommonJS Module Syntax
-
-CommonJS is the format that [Node modules](https://nodejs.org/docs/v0.4.1/api/modules.html#modules) are written in.
-
-???
-RequireJS uses the AMD format for defining modules and Browserify uses CommonJS.
-
---
-
-### CommonJS Syntax Example
 
 Note the use of `require` and `module.exports`:
 
@@ -170,10 +135,13 @@ module.exports = {
   },
 };
 ```
+CommonJS is the format that [Node modules](https://nodejs.org/docs/v0.4.1/api/modules.html#modules) are written in.
 
 ???
 
 Here is an example CommonJS module that uses `require` to include dependencies, and `module.exports` to export the module.  Note that this format is **synchronous**, it implies that all dependencies can be synchronously loaded.
+
+Because CommonJS requires less verbose boilerplate than AMD, Node-style modules have become more popular.
 
 ---
 
@@ -181,9 +149,13 @@ Here is an example CommonJS module that uses `require` to include dependencies, 
 
 ???
 
+So where does Webpack come in? Browserify and AMD were useful, but did not solve all our problems.
+
 In very large applications, bundling everything could easily create bundles that were tens or hundreds of megabytes of JavaScript.  Browserify and Require eventually had ways to separate chunks of the output into loadable "feature" bundles, but the configuration was hard to automate. ...
 
---
+---
+
+# Webpack: The Basics
 
 - Smart code splitting
 
@@ -193,7 +165,7 @@ Webpack can analyze the code and be **smarter** about outputting multiple bundle
 
 --
 
-- Smaller output bundles
+- Smaller, more portable output bundles
 
 ???
 
@@ -201,25 +173,23 @@ Since webpack is capable of analyzing and transforming JavaScript, it is also ab
 
 --
 
-- Supports AMD...
-- _and_ Supports CommonJS
+- Supports AMD _and_ CommonJS
 
 ???
 
-It also supports both AMD and CommonJS modules, allowing us to consume a wide variety of javascript modules.  By renaming the `define` and `require` statements to its own syntax, we can be sure that its output bundles may be consumed by requirejs or browserify as well. ...
+It also supports both AMD and CommonJS modules, allowing us to consume a wide variety of JS modules. And by renaming the `define` and `require` statements to Webpack's own internal syntax, Webpack's output bundles may be consumed by RequireJS or Browserify as well. ...
 
 --
 
 - Plugin-able
-- Portable
 
 ???
 
-Webpack can also be further extended to understand other module formats and features.
+And most interestingly, Webpack can also be further extended to understand other module formats and features.
 
 ---
 
-# Webpack is more than JavaScript Modules
+# Webpack bundles more than JavaScript
 
 ### "modules" in webpack
 
@@ -233,9 +203,9 @@ Webpack can also be further extended to understand other module formats and feat
 
 ???
 
-Webpack also allows you to bundle static content like HTML, CSS, and images.  This allows you to bundle the non-javascript dependencies with our javascript.
+This means Webpack also allows you to bundle static content like HTML, CSS, and images.  This allows you to bundle the non-javascript dependencies right alongside your javascript code, using the same tool.
 
-Webpack goes way beyond just packing scripts, in webpack you can use loaders and plugins to enhance your development workflows.
+Webpack goes way beyond just packing scripts: in webpack you can use loaders and plugins to enhance your development workflows beyond what you can achieve with more basic module bundlers.
 
 (((pause on this for a few seconds)))
 ---
