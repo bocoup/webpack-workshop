@@ -11,7 +11,7 @@ However, the common use case can be fulfilled with a plugin.
 
 ---
 
-# Well, yes...with a plugin
+# Well, yes&hellip; with a plugin
 
 `html-webpack-plugin` renders a given (HTML) template and inserts `<script>` and `<link>` tags for inclusion of JavaScript and CSS assets.
 

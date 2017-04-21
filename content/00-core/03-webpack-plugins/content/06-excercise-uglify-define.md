@@ -1,7 +1,7 @@
 class: center, middle
 name: ch1.3-ex2
 
-# Exercise 06 - Production
+# Exercise 6 - Production
 
 ---
 
@@ -31,7 +31,7 @@ _Define makes code never run, Uglify makes code never download_
 
 ---
 
-# Exercise 06 - Production
+# Exercise 6 - Production
 
 ### Goals
 
@@ -50,7 +50,7 @@ _Define makes code never run, Uglify makes code never download_
 
 ---
 
-# Exercise 06 - Answer Overview
+# Exercise 6 - Answer Overview
 
 **`webpack.config.js`**
 
@@ -63,7 +63,7 @@ plugins: [
 
 --
 
-**`webpack.config.production.js`**
+**`webpack.production.js`**
 ```js
 plugins: [
   new ExtractTextPlugin('[contenthash].css'),
@@ -77,5 +77,5 @@ plugins: [
 
 **`package.json`**
 ```json
-"build": "webpack --config webpack.config.production.js",
+"build": "webpack --config webpack.production.js",
 ```

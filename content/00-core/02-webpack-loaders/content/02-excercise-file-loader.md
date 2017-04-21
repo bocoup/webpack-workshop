@@ -1,11 +1,11 @@
 class: center, middle
 name: ch1.2-ex1
 
-# Exercise 03 - Require Files!
+# Exercise 3 - Require Files!
 
 ---
 
-# Exercise 03 - Require Files!
+# Exercise 3 - Require Files!
 
 ### Recap
 
@@ -16,14 +16,16 @@ name: ch1.2-ex1
 For review, loaders should do one thing!  Our `file-loader` outputs a file, and gives us the url!
 
 ---
-# Exercise 03 - Require Files!
+# Exercise 3 - Require Files!
 
 ### Goals
 
 - **Install `file-loader`**
-- **Configure `module.rules`** in webpack.config:
+- **Configure `module.rules`** in webpack.config to be an **array of rule objects**:
     ```js
-    [{ test: /\.(jpg|png)$/, loader: 'file-loader' }]
+    rules: [
+        { test: /\.(jpg|png)$/, loader: 'file-loader' },
+    ]
     ```
 - **Restart `npm run dev`**
 - **Edit `main.js`**: `require('../img/filename.jpg')` images from `img` folder
@@ -44,7 +46,7 @@ After making these changes, clean the the dist folder up, and create a new build
 
 ---
 
-# Exercise 03 - Answer Overview
+# Exercise 3 - Answer Overview
 
 **`webpack.config.js`**
 

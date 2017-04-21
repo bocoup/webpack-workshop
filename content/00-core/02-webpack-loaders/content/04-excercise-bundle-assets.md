@@ -1,5 +1,5 @@
 name: ch1.2-ex2
-# Exercise 04 - Building styles
+# Exercise 4 - Building styles
 
 ### Recap
 
@@ -29,7 +29,7 @@ After you do that, make sure your output bundle still has the proper styles!
 
 ---
 
-# Exercise 04 - Answer Overview
+# Exercise 4 - Answer Overview
 
 ### Install the Loaders
 
@@ -57,7 +57,7 @@ To recap what we did in this exercise, we installed our loaders, configured them
 
 ---
 
-# Exercise 04 - Answer Overview (cont.)
+# Exercise 4 - Answer Overview (cont.)
 
 ### Require the Styles
 

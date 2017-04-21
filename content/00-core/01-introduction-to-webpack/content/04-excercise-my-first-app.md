@@ -92,7 +92,7 @@ Just to recap the last section very quickly
 
 ---
 
-# Exercise 01 - My First App
+# Exercise 1 - My First App
 
 1. **Preview the application**: From your project directory, run `serve` and open a browser to `localhost:3000`
 2. **Prepare modules for webpack**: Convert `main.js` and `canvas.js` to CommonJS syntax (use `require` and `module.exports`)

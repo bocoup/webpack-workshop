@@ -25,7 +25,7 @@ Section 6
 
 ---
 
-# Exercise 02 - Add Dev Server
+# Exercise 2 - Add Dev Server
 
 ### Recap
 
