@@ -1,11 +1,11 @@
 class: center, middle
 name: ch1.2-ex1
 
-# Exercise 03 - Require Files!
+# Exercise 3 - Require Files!
 
 ---
 
-# Exercise 03 - Require Files!
+# Exercise 3 - Require Files!
 
 ### Recap
 
@@ -16,7 +16,7 @@ name: ch1.2-ex1
 For review, loaders should do one thing!  Our `file-loader` outputs a file, and gives us the url!
 
 ---
-# Exercise 03 - Require Files!
+# Exercise 3 - Require Files!
 
 ### Goals
 
@@ -46,7 +46,7 @@ After making these changes, clean the the dist folder up, and create a new build
 
 ---
 
-# Exercise 03 - Answer Overview
+# Exercise 3 - Answer Overview
 
 **`webpack.config.js`**
 

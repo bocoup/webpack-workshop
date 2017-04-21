@@ -27,7 +27,7 @@ name: ch1.3-ex1
 
 ---
 
-# Exercise 05 - Extract CSS & HTML File
+# Exercise 5 - Extract CSS & HTML File
 
 ### Goals
 
@@ -44,7 +44,7 @@ name: ch1.3-ex1
 
 ---
 
-# Exercise 05 - Answer Overview
+# Exercise 5 - Answer Overview
 
 **`webpack.config.js`**
 
@@ -76,7 +76,7 @@ plugins: [
 ```
 
 ---
-# Exercise 05 - Answer Overview (cont.)
+# Exercise 5 - Answer Overview (cont.)
 
 **`package.json`**
 
