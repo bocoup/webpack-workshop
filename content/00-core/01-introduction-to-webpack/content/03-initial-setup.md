@@ -57,7 +57,7 @@ Webpack can be used as its own tool creating a standalone build process for  pro
 
 ---
 
-# Using Webpack: Option 2
+# Using webpack: Option 2
 
 ### Combine webpack with your favorite task runner
 

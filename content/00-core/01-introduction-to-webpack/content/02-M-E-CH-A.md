@@ -1,8 +1,10 @@
 class: center, middle
 name: ch1-sec2
 
-# M.E.CH.A.
+# M.E.Ch.A.
 ???
+
+Let's move on to how Webpack works.
 
 In webpack, there are 4 core concepts at work that when combined form the ultimate robot module bundler
 
@@ -10,11 +12,11 @@ In webpack, there are 4 core concepts at work that when combined form the ultima
 
 ---
 
-# The webpack _M.E.CH.A._ Metaphor
+# The webpack _M.E.Ch.A._ Metaphor
 
 - __M__odules
 - __E__ntry
-- __CH__unks
+- __Ch__unks
 - __A__ssets
 
 ???
@@ -129,7 +131,7 @@ A webpack asset is a file that has yet to be written to the output directory. We
 
 ---
 
-# Reviewing the M.E.CH.A
+# Reviewing the M.E.Ch.A
 
 - __M__odules are input
 - __E__ntry is the starting module

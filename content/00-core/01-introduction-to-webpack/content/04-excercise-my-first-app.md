@@ -66,10 +66,34 @@ The goal of each exercise in this course is to create a folder you could publish
 
 # Pre-Exercise Recap
 
-* To prepare modules for use with webpack, we'll use CommonJS syntax (**`module.exports`** to export).
-* We will use **`require`** to import. (`./` for relative path)
+### CommonJS Modules
 
-### Recap of Basic Webpack Configuration
+To prepare modules for use with webpack, we'll use CommonJS syntax (**`module.exports`** to export).
+
+```javascript
+// dependency.js
+module.exports = {
+  render = function() { /* ... */ }
+};
+```
+We will use **`require`** to import. (`./` for relative path)
+
+```javascript
+var dependency = require('./dependency');
+dependency.render();
+```
+
+???
+
+Just to recap the last section very quickly
+- `module.exports` exports things in commonjs
+- `require` requires other modules, you need to use a relative path
+
+---
+
+# Pre-Exercise Recap
+
+### Basic Webpack Configuration
 
 ```js
 const path = require('path');
@@ -85,9 +109,6 @@ module.exports = {
 
 ???
 
-Just to recap the last section very quickly
-- `module.exports` exports things in commonjs
-- `require` requires other modules, you need to use a relative path
 - ... and the basic webpack.config.js will contain a context, entry and output options
 
 ---
@@ -119,18 +140,18 @@ For now, we will need to manually copy a few of the "additional files" since web
 
 # Exercise 1 Answer: Prepare Modules
 
-**`main.js`**: Require the drawMeme and jQuery, instead of relying on global scope
-```js
-var drawMeme = require('./canvas').drawMeme;
-var jQuery = require('../vendor/jquery-3.1.0');
-```
-
 **`canvas.js`**: Added an export to the bottom
 
 ```js
 module.exports = {
   drawMeme: drawMeme,
 };
+```
+
+**`main.js`**: Require the drawMeme and jQuery, instead of relying on global scope
+```js
+var drawMeme = require('./canvas').drawMeme;
+var jQuery = require('../vendor/jquery-3.1.0');
 ```
 
 ???
