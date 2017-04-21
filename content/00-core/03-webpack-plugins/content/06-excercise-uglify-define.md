@@ -63,7 +63,7 @@ plugins: [
 
 --
 
-**`webpack.config.production.js`**
+**`webpack.production.js`**
 ```js
 plugins: [
   new ExtractTextPlugin('[contenthash].css'),
@@ -77,5 +77,5 @@ plugins: [
 
 **`package.json`**
 ```json
-"build": "webpack --config webpack.config.production.js",
+"build": "webpack --config webpack.production.js",
 ```
